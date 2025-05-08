@@ -1,0 +1,41 @@
+<div class="article-page__content">
+	<div class="container">
+		<div class="article-page__text rte" itemprop="articleBody">
+			{{ article.content }}
+		</div>
+	</div>
+</div>
+
+{% render 'structured-data-article', article: article %}
+
+{% schema %}
+{
+  "name": "Article Recipe/Cooking",
+  "class": "js-section__article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sharing",
+      "label": "Show social sharing buttons",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Article Recipe/Cooking"
+    }
+  ]
+}
+{% endschema %}

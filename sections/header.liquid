@@ -1,0 +1,477 @@
+<style type="text/css">
+	.header, .nav__sub {
+		background-color: {{ section.settings.header_bg }};
+		color: {{ section.settings.header_text_color }};
+	}
+
+	.primary-nav__link, .secondary-nav__link {
+		color: {{ section.settings.header_text_color }};
+	}
+
+	{% if section.settings.style == 'sticky' or section.settings.style == 'scroll' %}
+	.shopify-section-header {
+		position: -webkit-sticky;
+		position: sticky;
+	}
+
+	{% endif %}
+
+	:root {
+	{% if section.settings.style == 'sticky' %} --header-is-sticky: 1;
+	{% else %} --header-is-sticky: 0;
+	{% endif %};
+	}
+
+
+	.header__logo-img {
+		max-height: {{ section.settings.logo_height }}px;
+	}
+
+
+	@media screen and (max-width: 767px) {
+		.header__logo-img {
+			max-height: {{ section.settings.logo_height_mobile }}px;
+		}
+	}
+
+	.header--mega .primary-nav .nav__sub {
+	{%- assign mega_nav_top = logo_size | divided_by: 2 | minus: 17 %}{%- if mega_nav_top < 12 -%}{%- assign mega_nav_top = 11 %}{%- endif -%} padding-top: {{ mega_nav_top }}px;
+	}
+</style>
+
+<header role="banner" id="top"
+        class="header header--{{ section.settings.header_style }} js-header{% if section.settings.style == 'sticky' %} header--sticky js-header-sticky{% elsif section.settings.style == 'scroll' %} header--sticky js-header-sticky header--scroll js-header-scroll{% else %} header--not-sticky{% endif %}{% if section.settings.layout == 'center' %} header--center{% else %} header--{{ section.settings.layout }} u-flex u-flex--middle u-flex--center{% endif %}{% if section.settings.show_border %} header--stripe{% endif %}{% if section.settings.mega_nav %} header--mega{% endif %}{% if settings.search_enable and settings.search_show_bar and template.name == 'index' %} header--search-bar{% endif %}{% unless section.settings.parent_links %} header--parent-disabled{% endunless %}"
+        data-section-id="{{ section.id }}" data-section-type="header-section">
+	<div class="container header__container">
+
+		<button data-js-cart-handle class="mobile-menu-button portable-show" aria-expanded="false" aria-controls="site-menu-sidebar">
+			<svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 22 18" fill="none">
+				<path d="M-0.00195312 1H21.998" stroke="white" stroke-width="2"/>
+				<path d="M-0.00195312 9H21.998" stroke="white" stroke-width="2"/>
+				<path d="M-0.00195312 17H21.998" stroke="white" stroke-width="2"/>
+			</svg>
+			<span class="icon-fallback__text">{{ 'layout.navigation.menu' | t }}</span>
+		</button>
+
+		<div class="header__logo {% unless section.settings.logo %} header__logo--text{% endunless %}">
+			<div class="header__logo-wrapper" itemscope itemtype="http://schema.org/Organization">
+				{% if section.settings.logo %}
+					<a href="{{ routes.root_url }}" itemprop="url" class="header__logo-link animsition-link">
+						<img src="{{ section.settings.logo | img_url: '300x' }}" class="header__logo-img" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo">
+					</a>
+				{% else %}
+					<a href="{{ routes.root_url }}" class="header__logo-link header__logo-link--text" itemprop="url">{{ shop.name }}</a>
+				{% endif %}
+			</div>
+		</div>
+
+		<nav class="primary-nav header-navs__items" role="navigation">
+			<ul class="primary-nav__items">
+				{% for link in linklists[section.settings.main_linklist].links %}
+					{% capture parentIndex %}{{ forloop.index }}{% endcapture %}
+					<li class="primary-nav__item{% if link.active %} primary-nav__item--active{% endif %}{% if link.links != blank %} primary-nav__item--sub js-header-sub-link{% endif %}">
+						<a href="{{ link.url }}" class="primary-nav__link animsition-link{% if link.links != blank %} nav__link--sub js-header-sub-link-a{% endif %}" {% if link.links != blank %} aria-expanded="false" aria-controls="sub-{{ forloop.index }}"{% endif %}>{{ link.title }}</a>
+
+						{% if link.links != blank %}
+							<div class="nav__sub{% if section.settings.mega_image or section.settings.mega_title != blank or section.settings.mega_text != blank or section.settings.mega_link != blank %} nav__sub--cta{% endif %}" id="sub-{{ forloop.index }}">
+								<ul class="nav__sub__items nav__sub__items--{{ link.links.size }}{% if link.levels == 1 %} nav__sub__items--single{% endif %} o-list-bare">
+
+									{% for sub_link in link.links %}
+										<li class="nav__sub__item{% if sub_link.active %} nav__sub__item--active{% endif %}{% if sub_link.links != blank %} nav__sub__item--sub js-header-sub-t-link{% endif %}">
+											<a href="{{ sub_link.url }}" class="nav__sub__link{% if sub_link.links != blank %} js-header-sub-t-a{% endif %}" {% if link.links != blank %} aria-expanded="false" aria-controls="sub-t-{{ parentIndex }}-{{ forloop.index }}"{% endif %}>{{ sub_link.title | escape }}</a>
+
+											{% if sub_link.links != blank %}
+												<div class="nav__sub-t js-nav-sub-t" id="sub-t-{{ parentIndex }}-{{ forloop.index }}">
+													<ul class="nav__sub-t__items o-list-bare">
+
+														{% for sub_sub_link in sub_link.links %}
+															<li class="nav__sub-t__item{% if sub_sub_link.active %} nav__sub-t__item--active{% endif %}">
+																<a href="{{ sub_sub_link.url }}" class="nav__sub-t__link">{{ sub_sub_link.title | escape }}</a>
+															</li>
+														{% endfor %}
+
+													</ul>
+												</div>
+											{% endif %}
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</nav>
+
+		<nav class="secondary-nav header-navs__items js-secondary-nav">
+			<ul class="secondary-nav__items">
+
+				{%- assign locale_selector = false -%}
+				{%- assign currency_selector = false -%}
+				{%- assign show_selectors = false -%}
+				{%- assign both_selectors = false -%}
+
+				{%- if section.settings.show_locale_selector and shop.published_locales.size > 1 -%}
+					{%- assign locale_selector = true -%}
+				{%- endif -%}
+
+				{%- if section.settings.show_currency_selector and shop.enabled_currencies.size > 1 -%}
+					{%- assign currency_selector = true -%}
+				{%- endif -%}
+
+				{%- if currency_selector or locale_selector -%}
+					{%- assign show_selectors = true -%}
+				{%- endif -%}
+
+				{%- if currency_selector and locale_selector -%}
+					{%- assign both_selectors = true -%}
+				{%- endif -%}
+
+				{%- if show_selectors -%}
+					<li class="secondary-nav__item">
+						{%- form 'localization', class: 'localize__form' -%}
+							{%- if show_selectors -%}
+								{%- if locale_selector -%}
+									<span class="secondary-nav__item secondary-nav__item--sub js-header-sub-link js-localize-wrapper">
+                                        <h2 class="u-hidden-visually" id="lang-heading">
+                                          {{ 'general.language.dropdown_label' | t }}
+                                        </h2>
+
+                                        <a href="#" class="secondary-nav__link nav__link--sub js-header-sub-link-a" aria-expanded="false" aria-controls="lang-list-header">{{ form.current_locale.endonym_name }}</a>
+
+                                        <div class="nav__sub">
+                                            <div class="nav__sub-wrap nav__sub-wrap--lang">
+                                                <ul id="lang-list-header" class="nav__sub__items o-list-bare">
+                                                    {% for locale in form.available_locales %}
+	                                                    <li class="nav__sub__item">
+                                                            <a href="#" class="nav__sub__link js-localize-item{% if locale.iso_code == form.current_locale.iso_code %} selected{% endif %}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}">{{ locale.endonym_name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
+                                    </span>
+								{%- endif -%}
+
+								{%- if currency_selector -%}
+									<span class="secondary-nav__item secondary-nav__item--sub js-header-sub-link js-localize-wrapper">
+                                        <h2 class="u-hidden-visually" id="currency-heading-footer">
+                                          {{ 'general.currency.dropdown_label' | t }}
+                                        </h2>
+
+                                        <a href="#" class="secondary-nav__link nav__link--sub js-header-sub-link-a" aria-expanded="false" aria-controls="currency-list-header">{{ form.current_currency.iso_code }} {%- if form.current_currency.symbol -%}{{ form.current_currency.symbol }}{%- endif -%}</a>
+
+                                        <div class="nav__sub">
+                                            <div class="nav__sub-wrap nav__sub-wrap--currency">
+                                                <ul id="currency-list-header" class="nav__sub__items o-list-bare">
+                                                    {% for currency in form.available_currencies %}
+	                                                    <li class="nav__sub__item">
+                                                            <a href="#" class="nav__sub__link js-localize-item{% if currency == cart.currency %} selected{% endif %}" {% if currency.iso_code == form.current_currency.iso_code %}aria-current="true"{% endif %} data-value="{{ currency.iso_code }}">{{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="currency_code" id="CurrencySelector" value="{{ form.current_currency.iso_code }}" data-disclosure-input/>
+                                    </span>
+								{%- endif -%}
+							{%- endif -%}
+						{%- endform -%}
+					</li>
+				{%- endif -%}
+
+				{% if shop.customer_accounts_enabled %}
+					{% if customer %}
+						<li class="secondary-nav__item secondary-nav__item--sub js-header-sub-link">
+							<a href="{{ routes.account_url }}" class="primary-nav__link nav__link--sub js-header-sub-link-a" aria-expanded="false" aria-controls="account-links-header">{{ 'layout.customer.account' | t }}</a>
+							<div class="nav__sub" id="sub-account">
+								<div class="nav__sub-wrap nav__sub-wrap--account">
+									<ul id="account-links-header" class="nav__sub__items o-list-bare">
+										<li class="nav__sub__item"><a href="{{ routes.account_url }}" class="nav__sub__link">{{ 'layout.customer.account' | t }}</a></li>
+										<li class="nav__sub__item"><a href="{{ routes.account_logout_url }}" class="nav__sub__link">{{ 'layout.customer.log_out' | t }}</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					{% else %}
+						<li class="secondary-nav__item secondary-nav__item--acc">
+							<a href="{{ routes.account_login_url }}" class="secondary-nav__link">
+								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+									<path fill-rule="evenodd" clip-rule="evenodd"
+									      d="M10.9162 21.1429C16.7546 21.1429 21.4876 16.4099 21.4876 10.5714C21.4876 4.73299 16.7546 0 10.9162 0C5.07772 0 0.344727 4.73299 0.344727 10.5714C0.344727 16.4099 5.07772 21.1429 10.9162 21.1429ZM11.5099 4.21591C11.4726 4.209 11.4353 4.20209 11.398 4.19503H10.5911C10.5577 4.20127 10.5243 4.2074 10.4909 4.21354C10.2237 4.26261 9.95615 4.31174 9.70183 4.41257C8.37327 4.9399 7.5402 5.8889 7.31029 7.28576C7.07155 8.73654 7.5923 9.92053 8.75223 10.8346C8.75957 10.8405 8.76705 10.8462 8.77453 10.8519C8.78699 10.8614 8.79944 10.8709 8.81128 10.8811C8.81527 10.8846 8.81724 10.8904 8.81926 10.8963C8.82012 10.8988 8.82098 10.9014 8.82202 10.9038C8.80979 10.9308 8.785 10.9378 8.76078 10.9447C8.7531 10.9469 8.74548 10.949 8.73833 10.9518C6.90323 11.6599 5.62962 12.9215 4.9216 14.7344C4.72138 15.2465 4.6039 15.781 4.55622 16.3289C4.55451 16.3482 4.55007 16.3672 4.54561 16.3862C4.54347 16.3953 4.54133 16.4044 4.53948 16.4136V16.9363C4.63037 16.9372 4.72126 16.9383 4.81214 16.9393C4.99411 16.9414 5.17607 16.9435 5.35803 16.9447C5.5614 16.946 5.56772 16.945 5.57151 16.7403C5.57814 16.3694 5.63151 16.0054 5.72341 15.647C6.04773 14.3838 6.74786 13.3672 7.81336 12.6027C9.09992 11.6799 10.5349 11.3925 12.0893 11.6889C13.0651 11.8749 13.9162 12.3169 14.6479 12.9795C15.4756 13.729 16.0279 14.64 16.284 15.7224C16.3677 16.0749 16.4151 16.4311 16.4195 16.7929C16.4208 16.9039 16.4605 16.9525 16.584 16.9475C16.8231 16.9379 17.0631 16.9391 17.3022 16.9469C17.4222 16.9506 17.4619 16.9151 17.4601 16.7933C17.4493 16.0942 17.3274 15.4138 17.0776 14.7625C16.3784 12.9399 15.1036 11.6721 13.2659 10.9565C13.2569 10.953 13.2464 10.9505 13.2358 10.948C13.2071 10.9411 13.1774 10.9341 13.1718 10.9054C13.1661 10.8748 13.1923 10.8602 13.2177 10.8461C13.2273 10.8407 13.2368 10.8354 13.2445 10.8293C14.399 9.91523 14.9166 8.73311 14.6788 7.28732C14.4483 5.88485 13.6117 4.93367 12.2756 4.40883C12.0282 4.31184 11.7693 4.26391 11.5099 4.21591ZM11.0001 5.20762C12.5285 5.21291 13.6796 6.39971 13.7065 7.87729C13.6787 9.38822 12.49 10.5535 10.989 10.5482C9.46056 10.5429 8.28769 9.35581 8.28864 7.87854C8.28927 6.36761 9.49909 5.20232 11.0001 5.20762Z"
+									      fill="white"/>
+								</svg>
+								<span class="hidden">{{ 'layout.customer.log_in' | t }}</span>
+							</a>
+						</li>
+					{% endif %}
+				{% endif %}
+
+				<li class="secondary-nav__item">
+					<a href="{{ routes.cart_url }}" class="secondary-nav__link{% if settings.cart_type == 'drawer' %} js-cart-trigger js-no-transition{% endif %}" aria-expanded="false" aria-controls="site-cart-sidebar" data-js-cart-handle>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22" fill="none">
+							<path d="M23.3454 6.11238C23.0534 7.40553 22.7601 8.69867 22.4687 9.99182C22.2214 11.0909 21.9824 12.1924 21.7291 13.2903C21.5067 14.2551 20.8923 14.7492 19.9363 14.7492C15.7511 14.7492 11.5653 14.7479 7.38017 14.7473C7.28362 14.7473 7.18647 14.7449 7.09051 14.7498C6.68701 14.7701 6.40928 15.0634 6.40153 15.4749C6.39378 15.8945 6.64708 16.1963 7.04998 16.2395C7.15309 16.2506 7.25799 16.2456 7.3617 16.2456C11.7108 16.2456 16.0598 16.2469 20.4089 16.2438C20.7403 16.2438 21.0109 16.3356 21.1688 16.6572C21.3184 16.9609 21.2344 17.3268 20.9531 17.5375C20.8428 17.6201 20.8195 17.6829 20.8666 17.8191C21.4287 19.4357 20.3809 21.0855 18.7222 21.1404C17.4557 21.1822 16.5265 20.236 16.3286 19.1184C16.2529 18.6902 16.2947 18.2762 16.4335 17.8715C16.4788 17.7396 16.4615 17.6909 16.3191 17.6916C15.0699 17.6946 13.8212 17.6953 12.572 17.6916C12.3384 17.6909 12.4146 17.8197 12.4522 17.9454C12.8682 19.3248 12.0785 20.7559 10.7244 21.08C9.32495 21.4151 7.95651 20.3709 7.84506 18.8898C7.81943 18.5467 7.85221 18.2146 7.96426 17.8936C8.01909 17.7365 7.98155 17.6897 7.8236 17.6903C7.44514 17.6909 7.06489 17.7211 6.69 17.6373C5.65354 17.4069 4.96992 16.4957 4.99614 15.38C5.01999 14.3703 5.7781 13.5035 6.79728 13.3414C7.01899 13.3063 6.96655 13.1899 6.93019 13.0494C6.14167 10.0325 5.35494 7.01493 4.56762 3.99739C4.37391 3.25625 4.17485 2.51634 3.99008 1.77273C3.93346 1.5454 3.81545 1.46223 3.59433 1.46408C2.80641 1.47147 2.01849 1.47024 1.23057 1.46531C0.771644 1.46223 0.470064 1.1468 0.489136 0.705686C0.504633 0.347129 0.75853 0.0409387 1.13163 0.0329297C2.06736 0.0138313 3.00667 -0.0428478 3.93823 0.059421C4.64212 0.136431 5.09925 0.585551 5.29355 1.28603C5.54566 2.19351 5.78168 3.10654 6.00816 4.02141C6.063 4.24382 6.15895 4.30851 6.3753 4.30789C7.92135 4.30296 9.46799 4.29742 11.014 4.3196C14.6044 4.37135 18.1947 4.335 21.7851 4.35841C22.5313 4.36334 23.0665 4.63872 23.3454 5.46673V6.11238ZM18.6656 17.6934C18.1113 17.6922 17.6917 18.1203 17.6899 18.6896C17.6875 19.2508 18.1178 19.7012 18.6578 19.7024C19.202 19.7043 19.6323 19.2607 19.6329 18.6982C19.6329 18.1265 19.2181 17.6953 18.6656 17.6934ZM11.1654 18.6896C11.1642 18.1136 10.7518 17.6909 10.1933 17.694C9.64679 17.6965 9.21707 18.1407 9.21886 18.7007C9.22005 19.2484 9.66825 19.7043 10.2041 19.7037C10.7488 19.7024 11.1666 19.2626 11.1654 18.6896Z"
+							      fill="white"/>
+						</svg>
+						{% comment %}(<span id="CartCount">{{ cart.item_count }}</span>){% endcomment %}
+					</a>
+				</li>
+
+				{% if settings.search_enable %}
+					<li class="secondary-nav__item secondary-nav__item--search">
+						<a href="{{ routes.search_url }}" class="secondary-nav__link secondary-nav__link--search icon-fallback js-search-trigger js-no-transition">
+							<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M9.92004 15.4052C13.2191 15.4052 15.8935 12.7308 15.8935 9.43176C15.8935 6.13271 13.2191 3.45831 9.92004 3.45831C6.621 3.45831 3.94659 6.13271 3.94659 9.43176C3.94659 12.7308 6.621 15.4052 9.92004 15.4052ZM9.92004 18.8635C15.1291 18.8635 19.3518 14.6408 19.3518 9.43176C19.3518 4.22274 15.1291 0 9.92004 0C4.71102 0 0.488281 4.22274 0.488281 9.43176C0.488281 14.6408 4.71102 18.8635 9.92004 18.8635Z" fill="white"/>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M17.8151 20.6364L13.4922 16.3136L15.9376 13.8682L20.2605 18.1911C20.9357 18.8663 20.9357 19.9612 20.2605 20.6364C19.5852 21.3117 18.4904 21.3117 17.8151 20.6364Z" fill="white"/>
+							</svg>
+							<span class="icon-fallback__text u-hidden-visually">{{ 'layout.navigation.search' | t }}</span>
+						</a>
+					</li>
+				{% endif %}
+
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<sidebar-drawer id="site-menu-sidebar" class="sidebar sidebar--left" tabindex="-1" role="dialog" aria-modal="true" style="display:none;">
+	<div class="sidebar__header">
+    <span class="sidebar__title h5">
+      Menu
+    </span>
+		<button class="sidebar__close" data-js-close>
+			<span class="visually-hidden">{{ 'general.accessibility_labels.close_sidebar' | t }}</span>
+			<span aria-hidden="true" aria-role="img">
+				<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+				  <path d="M1 1L10 10" stroke="white"/>
+				  <path d="M1 10L10 1" stroke="white"/>
+				</svg>
+			</span>
+		</button>
+	</div>
+
+	<div class="sidebar__body">
+		<div class="mobile-draw__search mobile-search">
+			<form action="{{ routes.search_url }}" method="get" class="mobile-search__form" role="search">
+				<input type="hidden" name="type" value="{{ settings.search_limit }}">
+				<input type="search" name="q" class="mobile-search__input" value="{{ search.terms | escape }}" aria-label="{{ 'general.search.placeholder' | t }}" placeholder="{{ 'general.search.placeholder' | t }}">
+				<button type="submit" class="mobile-search__submit">
+					<svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M9.43176 15.4052C12.7308 15.4052 15.4052 12.7308 15.4052 9.43176C15.4052 6.13271 12.7308 3.45831 9.43176 3.45831C6.13271 3.45831 3.45831 6.13271 3.45831 9.43176C3.45831 12.7308 6.13271 15.4052 9.43176 15.4052ZM9.43176 18.8635C14.6408 18.8635 18.8635 14.6408 18.8635 9.43176C18.8635 4.22274 14.6408 0 9.43176 0C4.22274 0 0 4.22274 0 9.43176C0 14.6408 4.22274 18.8635 9.43176 18.8635Z" fill="#2A2A2A"/>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M17.3258 20.6364L13.0029 16.3136L15.4483 13.8682L19.7712 18.1911C20.4465 18.8663 20.4465 19.9612 19.7712 20.6364C19.0959 21.3117 18.0011 21.3117 17.3258 20.6364Z" fill="#2A2A2A"/>
+					</svg>
+					<span class="icon-fallback__text">{{ 'general.search.submit' | t }}</span>
+				</button>
+			</form>
+		</div>
+
+		<nav class="mobile-draw__nav mobile-nav">
+			<ul class="mobile-nav__items o-list-bare">
+
+				{% for link in linklists[section.settings.main_linklist].links %}
+					{% capture parentIndex %}{{ forloop.index }}{% endcapture %}
+					<li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}{% if link.links != blank %} mobile-nav__item--sub{% endif %}"{% if link.links != blank %} aria-has-popup="true" aria-expanded="false" aria-controls="mobile-sub-{{ forloop.index }}"{% endif %}>
+						<a href="{% if link.links != blank %}#mobile-sub-{{ forloop.index }}{% else %}{{ link.url }}{% endif %}" class="mobile-nav__link{% if link.links != blank %} mobile-nav__link--sub js-toggle-trigger{% endif %}">{{ link.title }}</a>
+
+						{% if link.links != blank %}
+							<div class="mobile-nav__sub js-toggle-target" id="mobile-sub-{{ forloop.index }}">
+								<ul class="mobile-nav__sub__items o-list-bare">
+
+									{% for sub_link in link.links %}
+										<li class="mobile-nav__sub__item{% if sub_link.active %} mobile-nav__sub__item--active{% endif %}{% if sub_link.links != blank %} mobile-nav__sub__item--sub{% endif %}"{% if link.links != blank %} aria-has-popup="true" aria-expanded="false" aria-controls="mobile-sub-t-{{ parentIndex }}-{{ forloop.index }}"{% endif %}>
+											<a href="{% if sub_link.links != blank %}#mobile-sub-t-{{ parentIndex }}-{{ forloop.index }}{% else %}{{ sub_link.url }}{% endif %}" class="mobile-nav__sub__link{% if sub_link.links != blank %} mobile-nav__sub__link--t js-toggle-trigger{% endif %}">{{ sub_link.title | escape }}</a>
+
+											{% if sub_link.links != blank %}
+												<div class="mobile-nav__sub-t js-toggle-target" id="mobile-sub-t-{{ parentIndex }}-{{ forloop.index }}">
+													<ul class="mobile-nav__sub-t__items o-list-bare">
+
+														{% for sub_sub_link in sub_link.links %}
+															<li class="mobile-nav__sub-t__item{% if sub_sub_link.active %} mobile-nav__sub-t__item--active{% endif %}">
+																<a href="{{ sub_sub_link.url }}" class="mobile-nav__sub-t__link">{{ sub_sub_link.title | escape }}</a>
+															</li>
+														{% endfor %}
+
+													</ul>
+												</div>
+											{% endif %}
+
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</nav>
+
+		<nav class="additional-nav" role="navigation">
+			<ul class="additional-nav__items">
+				{% for link in linklists[section.settings.mobile_linklist].links %}
+					{% capture parentIndex %}{{ forloop.index }}{% endcapture %}
+					<li class="additional-nav__item{% if link.active %} primary-nav__item--active{% endif %}{% if link.links != blank %} primary-nav__item--sub js-header-sub-link{% endif %}">
+						<a href="{{ link.url }}" class="primary-nav__link animsition-link{% if link.links != blank %} nav__link--sub js-header-sub-link-a{% endif %}" {% if link.links != blank %} aria-expanded="false" aria-controls="sub-{{ forloop.index }}"{% endif %}>{{ link.title }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</nav>
+	</div>
+
+	<div class="sidebar__footer site-menu-sidebar-footer">
+		<div class="footer-nav__social-wrapper">
+			<div class="social__title">
+				Follow the Herd
+			</div>
+			{% render 'social-icons' %}
+		</div>
+	</div>
+</sidebar-drawer>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "shopify-section-header js-section__header",
+  "settings": [
+    {
+      "type": "color",
+      "id": "header_bg",
+      "label": "Background color",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height Desktop",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Logo height Mobile",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "link_list",
+      "id": "main_linklist",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Header Behavior on Scroll",
+      "options": [
+        {
+          "value": "static",
+          "label": "Default"
+        },
+        {
+          "value": "sticky",
+          "label": "Sticky"
+        },
+        {
+          "value": "scroll",
+          "label": "Scroll up"
+        }
+      ],
+      "default": "static"
+    },
+    {
+      "type": "checkbox",
+      "id": "parent_links",
+      "label": "Enable clickable parent links",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_linklist",
+      "label": "Mobile Extra Menu"
+    },
+    {
+      "type": "header",
+      "content": "Language Selector",
+      "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale_selector",
+      "label": "Show language selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Currency Selector",
+      "info": "To add a currency, go to your [currency settings.](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "label": "Show currency selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Announcement bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "message_show",
+      "label": "Enable announcement bar",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": "Home page only",
+      "default": false
+    },
+    {
+      "type": "textarea",
+      "id": "message_text",
+      "label": "Text",
+      "default": "Use this announcement bar to share some news and link to page or product."
+    },
+    {
+      "type": "url",
+      "id": "message_link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "message_color_bg",
+      "label": "Background color",
+      "default": "#222"
+    },
+    {
+      "type": "color",
+      "id": "message_color_text",
+      "label": "Text color",
+      "default": "#fff"
+    }
+  ]
+}
+{% endschema %}

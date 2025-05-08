@@ -1,0 +1,60 @@
+<div class="beef-guy">
+	<div class="container">
+		{% if section.settings.section_title != blank %}
+			<h2 class="section__title-text beef-guy__title">{{ section.settings.section_title }}</h2>
+		{% endif %}
+
+		<div class="beef-guy__item">
+			{% if section.settings.image != blank %}
+				<div class="beef-guy__item-image">
+					<img
+							src="{{ section.settings.image | img_url: 'master' }}"
+							alt="{{ section.settings.image.alt }}"
+							loading="lazy">
+				</div>
+			{% endif %}
+
+			<div class="beef-guy__item-content">
+				{% if section.settings.title != blank %}
+					<h2 class="beef-guy__item-title">{{ section.settings.title }}</h2>
+				{% endif %}
+				{% if section.settings.text != blank %}
+					<div class="beef-guy__item-text">{{ section.settings.text }}</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Beef Guy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beef Guy"
+    }
+  ]
+}
+{% endschema %}

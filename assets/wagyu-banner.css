@@ -1,0 +1,37 @@
+.wagyu-banner__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 120px;
+}
+
+.wagyu-banner__item {
+	display: grid;
+	grid-template-rows: 148px max-content;
+	gap: 32px;
+	justify-items: center;
+	text-align: center;
+}
+
+.wagyu-banner__item .title {
+	color: #2A2A2A;
+	text-align: center;
+	font-family: Mosafin;
+	font-size: 30px;
+	font-style: normal;
+	font-weight: 900;
+	line-height: .93;
+	text-transform: uppercase;
+}
+
+.wagyu-banner__item .title > * {
+	margin-bottom: 0;
+}
+
+.wagyu-banner__item.wagyu-banner__item .title > * + * {
+	margin-top: 12px;
+}
+
+.wagyu-banner__item .title .copy {
+	font-size: 20px;
+	display: inline-block;
+}

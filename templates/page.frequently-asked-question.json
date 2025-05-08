@@ -1,0 +1,321 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-sections-1": {
+      "type": "page-sections-1",
+      "disabled": true,
+      "settings": {
+        "container": "medium"
+      }
+    },
+    "image_banner_MCFF6Q": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/DSC05638.jpg",
+        "image_alignment": "center",
+        "mob_image_height": "257",
+        "show_logo_icon": true,
+        "enable_overlay": true,
+        "title": "frequently asked questions"
+      }
+    },
+    "hero_rich_text_k9jbbB": {
+      "type": "hero-rich-text",
+      "settings": {
+        "margin_top": 36,
+        "margin_bottom": 36,
+        "margin_top_mobile": 36,
+        "margin_bottom_mobile": 36,
+        "max_width": 1020,
+        "text": "<p>Here are our most frequently asked questions. Still need your question answered? Feel free to reach out to us by using the \"Chat\" button at the bottom right of your screen, we are happy to help!</p>",
+        "text_alignment": "center"
+      }
+    },
+    "faq_mhy7iB": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_maD3AF": {
+          "type": "faq_item",
+          "settings": {
+            "title": "How long will my Wagyu last?",
+            "text": "<p>Wagyu that is still raw can last 3-5 days in the fridge and cooked can last in the fridge for 3-4 days. For best quality, store in the coolest part of the fridge and use within 48 hours of purchase or arriving at your home. Wagyu can be frozen for up to 12 months, but ideally used within 4 months of purchase.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_CjKhGg": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where can I buy Booth Creek Wagyu in person?",
+            "text": "<p>We have currently have 4 retail locations in Manhattan, Overland Park, Prairie Village, and Wichita, Kansas where you can purchase Wagyu in person.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_XJUiyd": {
+          "type": "faq_item",
+          "settings": {
+            "title": "How do I defrost Wagyu?",
+            "text": "<p>We recommend moving your Wagyu from the freezer to the fridge at least 24 hours before cooking to defrost. If you are in a pinch, place your Wagyu, that is still packaged in its vacuum-sealed packaging or a leak-proof plastic bag, into a bowl of cold water. Be sure to change the water periodically, small cuts may be ready in an hour or two, larger cuts may take 3-4 hours. Avoid thawing in microwave or hot water as the fat in Wagyu has a low melting point and can be compromised or ruined.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_Px7bfL": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What do you feed your cattle?",
+            "text": "<p>Our cattle are grass-fed, grain-finished. All our cattle are tracked meticulously to ensure the best quality Wagyu before processing. The reason for grain-finished is because the grain we feed assists in bringing our cattle up in weight, resulting in a more marbled and tender taste.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_QWitiD": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Do you offer wholesale opportunities?",
+            "text": "<p>We do! For more information, head to our <a href=\"/pages/wholesale-opportunities\" title=\"Wholesale Opportunities\">Wholesale Opportunities</a> to read how to get started.</p>",
+            "table": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_maD3AF",
+        "faq_item_CjKhGg",
+        "faq_item_XJUiyd",
+        "faq_item_Px7bfL",
+        "faq_item_QWitiD"
+      ],
+      "settings": {
+        "title": "Products",
+        "padding_top": 20,
+        "padding_bottom": 50,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "faq_p6LERH": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_g9g44q": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Why is my promo code not working?",
+            "text": "<p>We are sorry to hear you are having technical issues. Make sure the code fits the current period of the promotion and that you have not already used this promo code before. Another reason could be stacking promo codes. Our codes allow for the use of only one code per order, so that may be an issue. If you have done all these things and are still having trouble, send us a message via the chat button on our website for assistance.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_DYWb8e": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What payment methods does BCW accept and when will I be charged?",
+            "text": "<p>At our online store, we accept ShopPay, PayPal, Google Pay, Venmo, Visa, Mastercard, Amex, Discover, and more.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_dk98A9": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Do you offer military discounts?",
+            "text": "<p>We do! If ordering online, use code MILITARY10 for your discount. If you are in one of our retail stores, just mention that you are military to your sales associate at checkout.</p>",
+            "table": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_g9g44q",
+        "faq_item_DYWb8e",
+        "faq_item_dk98A9"
+      ],
+      "settings": {
+        "title": "Ordering",
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10
+      }
+    },
+    "faq_ppmhU7": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_h6gnb7": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What is BCW Rewards?",
+            "text": "<p>BCW Rewards is our rewards program that anyone can join to earn points on every $1 spent as well as other ways.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_KApqEC": {
+          "type": "faq_item",
+          "settings": {
+            "title": "When will my points be available?",
+            "text": "<p>For points earned through purchases, points may take up to 24 hours to appear in your account. If it has been over this amount of time, please reach out to us via the chat box on the website. For points earned by other means, these points should appear instantly.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_XBBGX4": {
+          "type": "faq_item",
+          "settings": {
+            "title": "How do I check how many points I have?",
+            "text": "<p>You are able to check how many points you have by clicking the button that says “BCW Rewards” on the bottom, left hand side on our homepage.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_XpWtG9": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What if my points aren’t showing in my account?",
+            "text": "<p>If your points aren’t appearing in your account, please wait 24 hours for them to appear. If 24 hours have passed and you still do not see your points in your account, please reach out to us via the chat box on our website.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_bENkVn": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Do my points ever expire?",
+            "text": "<p>Your points don’t ever expire, but once you select a coupon to redeem, you must use that coupon. You cannot trade coupons out once you have pressed redeem on one.</p>",
+            "table": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_h6gnb7",
+        "faq_item_KApqEC",
+        "faq_item_XBBGX4",
+        "faq_item_XpWtG9",
+        "faq_item_bENkVn"
+      ],
+      "settings": {
+        "title": "BCW Rewards",
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10
+      }
+    },
+    "faq_YCQKmp": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_yYKMPc": {
+          "type": "faq_item",
+          "settings": {
+            "title": "How will my Wagyu be packaged for delivery?",
+            "text": "<p>Your package will come in a box labeled Temperature Sensitive Product so our delivery service knows they have precious product on board. Inside this box, your Wagyu is placed on dry ice inside foam padding that completely surrounds the meat to ensure the ultimate protection.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_nF6JgF": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where do you ship to and is there a minimum requirement for ordering?",
+            "text": "<p>We ship our frozen Wagyu products to the lower 48 of the United States, requiring a minimum order of $40.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_UHK7Qf": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can you ship to my P.O. box?",
+            "text": "<p>Unfortunately, we can only ship to a street address, guaranteeing a delivery. P.O. box addresses are not accepted.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_g3qyfX": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What should I do if there is an issue with my order?",
+            "text": "<p>If there is an issue with your order, please reach out to us via phone, email, or chat on our website.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_jDGaCa": {
+          "type": "faq_item",
+          "settings": {
+            "title": "How do I track my order?",
+            "text": "<p>Once you have placed your order and it ships, you will receive an email with tracking information.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_RfJJDX": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What if my Wagyu arrives thawed or partially thawed?",
+            "text": "<p>If your Wagyu is thawed or partially thawed, please reach out to us via phone, email, or chat on our website.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_KbiQxW": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I change or cancel my order? How do I do this?",
+            "text": "<p>Your order may be changed or canceled as long as it has not been shipped. One of our Wagyu experts can assist you with changing or canceling your order, just reach out to us via phone, email, or chat on our website.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_UaUQL6": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What happens if there is inclement weather on the forecast during the time of my delivery?",
+            "text": "<p>Inclement weather may cause delivery delays beyond our control. In extreme circumstances, we may contact you about holding a shipment at our facility if bad weather is expected in your area during transit.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_QbPt8L": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Is there a way to make sure my order is fully protected when it is on its way to me?",
+            "text": "<p>Shipping insurance through Shiptection is offered at checkout to protect lost, damaged, or stolen shipments. We are not liable for uninsured orders that are delayed or damaged while in the possession of UPS.</p>",
+            "table": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_yYKMPc",
+        "faq_item_nF6JgF",
+        "faq_item_UHK7Qf",
+        "faq_item_g3qyfX",
+        "faq_item_jDGaCa",
+        "faq_item_RfJJDX",
+        "faq_item_KbiQxW",
+        "faq_item_UaUQL6",
+        "faq_item_QbPt8L"
+      ],
+      "settings": {
+        "title": "Shipping Information",
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10
+      }
+    },
+    "text_info_N7XpiD": {
+      "type": "text-info",
+      "settings": {
+        "bg_color": "",
+        "text": "<h6>For questions regarding shipping, contact us at <a href=\"mailto:info@boothcreekwagyu.com\">info@boothcreekwagyu.com</a>.</h6>",
+        "text_color": "",
+        "font_size": 18,
+        "font_size_mobile": 10,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10
+      }
+    }
+  },
+  "order": [
+    "page-sections-1",
+    "image_banner_MCFF6Q",
+    "hero_rich_text_k9jbbB",
+    "faq_mhy7iB",
+    "faq_p6LERH",
+    "faq_ppmhU7",
+    "faq_YCQKmp",
+    "text_info_N7XpiD"
+  ]
+}

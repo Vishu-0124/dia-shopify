@@ -1,0 +1,88 @@
+<div class="bundle-facts">
+	<div class="container bundle-facts__wrapper">
+		{% if section.settings.title != blank %}
+			<h2 class="section__title-text bundle-facts__title">{{ section.settings.title }}</h2>
+		{% endif %}
+		{% if section.settings.copy != blank %}
+			<div class="bundle-facts__content u-text-center rte">
+				{{ section.settings.copy }}
+			</div>
+		{% endif %}
+		<div class="bundle-facts__list">
+			{% for block in section.blocks %}
+				<div class="bundle-facts__item" {{ block.shopify_attributes }}>
+					{% if block.settings.icon != blank %}
+						<div class="bundle-facts__item-img">
+							<img src="{{ block.settings.icon | img_url: 'master' }}" alt="{{ block.settings.icon.alt }}" loading="lazy">
+							{% if block.settings.icon_text != blank %}
+								<span class="bundle-facts__item-title">{{ block.settings.icon_text }}</span>
+							{% endif %}
+						</div>
+					{% endif %}
+					{% if block.settings.title != blank %}
+						<div class="bundle-facts__item-text">{{ block.settings.title }}</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Bundle Facts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Half wagyu bundle"
+    },
+    {
+      "type": "richtext",
+      "id": "copy",
+      "label": "Text",
+      "default": "<p>This bundle features 50 steaks, a whole brisket, 100 pounds of ground beef, <br>and some of our most popular cooked meats.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "icon_text",
+          "label": "Icon text"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Facts",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

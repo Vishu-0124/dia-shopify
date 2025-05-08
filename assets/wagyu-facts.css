@@ -1,0 +1,50 @@
+.wagyu-facts__img {
+	position: relative;
+}
+
+.wagyu-facts__img--desktop {
+}
+
+.wagyu-facts__img--mobile {
+	display: none;
+}
+
+.wagyu-facts__copy {
+	display: none;
+	color: #294029;
+	text-align: center;
+	font-family: Mosafin;
+	font-size: 15px;
+	font-style: normal;
+	line-height: .88;
+	font-weight: 500;
+	max-width: 315px;
+	margin: 0;
+	margin-inline: auto;
+}
+
+.wagyu-facts__copy strong {
+	font-weight: 800;
+}
+
+.wagyu-facts__copy + .wagyu-facts__copy {
+	margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+	.wagyu-facts__copy {
+		display: block;
+	}
+
+	.wagyu-facts__img--desktop {
+		display: none;
+	}
+
+	.wagyu-facts__img--mobile {
+		display: block;
+	}
+
+	.wagyu-facts__img {
+		margin-inline: auto;
+	}
+}

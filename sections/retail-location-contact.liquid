@@ -1,0 +1,91 @@
+{{ 'retail-location-contact.css' | asset_url | stylesheet_tag }}
+
+{%- capture styles -%}
+
+  --background-color: {{ section.settings.background_color }};
+
+  --padding-top-section: {{ section.settings.padding_top }}px;
+  --padding-bottom-section: {{ section.settings.padding_bottom }}px;
+
+  --padding-top-section-mob: {{ section.settings.padding_top | plus: 0 | divided_by: 2 }}px;
+  --padding-bottom-section-mob: {{ section.settings.padding_bottom | plus: 0 | divided_by: 2 }}px;
+{%- endcapture -%}
+
+<div class="retail-location-contact" style="{{ styles | strip_newlines }}">
+  <div class="retail-location-contact__wrapper">
+    <div class="retail-location-contact__time">
+      {% render 'icon-time' %}
+      <div class="retail-location-contact__time-item">{{ section.settings.time }}</div>
+    </div>
+    <div class="retail-location-contact__divider"></div>
+    <div class="retail-location-contact__phone">
+      {% render 'icon-phone' %}
+      <div class="retail-location-contact__phone-item">
+        <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">
+          {{- section.settings.phone -}}
+        </a>
+      </div>
+    </div>
+    <div class="retail-location-contact__divider"></div>
+    <div class="retail-location-contact__address">
+      {% render 'icon-location' %} 
+      <div class="retail-location-contact__address-item">
+        {{ section.settings.address }}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Retail Locations Contact",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#E0D3B4"
+    },
+    {
+      "type": "richtext",
+      "id": "time",
+      "label": "Time"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "123-456-7890"
+    },
+    {
+      "type": "richtext",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Retail Locations Contact"
+    }
+  ]
+}
+{% endschema %}

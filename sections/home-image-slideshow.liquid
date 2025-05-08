@@ -1,0 +1,122 @@
+{% if section.blocks.size > 0 %}
+<section class="section section--{{ section.id }}{% if section.settings.slideshow_width == 'full' %} section--full{% endif %}" data-section-id="{{ section.id }}" data-section-type="home-carousel">
+    {% if section.settings.slideshow_width == 'contained' %}<div class="container container--mob-0">{% endif %}
+        <div class="home-carousel home-carousel--image js-home-carousel {% if section.settings.slideshow_width == 'full' %}home-carousel--full{% endif %}" data-autoplay="{{ section.settings.autoplay }}" data-slick='{"autoplay": {{ section.settings.autoplay }}, "autoplaySpeed": {{ section.settings.autoplay_speed }}000}'>
+            {% for block in section.blocks %}
+                <div {{ block.shopify_attributes }}>
+                    <div class="home-carousel__item home-carousel__item--{{ block.id }}" data-slide-id="{{ forloop.index0 }}">
+                        {% unless block.settings.image == blank %}
+                            {% unless block.settings.link == blank %}
+                            <a href="{{ block.settings.link }}" class="home-carousel--image_link">
+                            {% endunless %}
+                                {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                                <img class="home-carousel--image_img lazyload js"
+                                    src="{{ block.settings.image | img_url: '300x' }}" 
+                                    data-src="{{ img_url }}"
+                                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                    data-sizes="auto"
+                                    alt="{{ block.settings.image.alt }}">
+                                <noscript>
+                                    <img class="home-carousel--image_img"
+                                        src="{{ block.settings.image | img_url: '1400x' }}"
+                                        alt="{{ block.settings.image.alt }}">
+                                </noscript>
+                            {% unless block.settings.link == blank %}
+                            </a>
+                            {% endunless %}
+                        {% else %}
+                            {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+                            {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                        {% endunless %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% if section.settings.slideshow_width == 'contained' %}</div>{% endif %}
+</section>
+{% endif %}
+
+{% if section.blocks.size == 0 %}
+    <div class="placeholder-noblocks">
+        {{ 'homepage.onboarding.no_content' | t }}
+    </div>
+{% endif %}
+
+{% schema %}
+{
+    "name": "Image slideshow",
+    "class": "js-section__home-slider",
+    "max_blocks": 5,
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Auto-rotate slides",
+            "default": true
+        },
+        {
+            "type": "range",
+            "id": "autoplay_speed",
+            "label": "Change slides every",
+            "unit": "sec",
+            "min": 5,
+            "max": 10,
+            "step": 1,
+            "default": 8
+        },
+        {
+            "type": "select",
+            "id": "slideshow_width",
+            "label": "Section width",
+            "default": "contained",
+            "options": [
+                {
+                    "label": "Contained",
+                    "value": "contained"
+                },
+                {
+                    "label": "Full",
+                    "value": "full"
+                }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image",
+            "name": "Image slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image",
+                    "info": "1400px width recommended."
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Image slideshow",
+            "category": "Image",
+            "settings": {
+                "autoplay": true,
+                "autoplay_speed": 8
+            },
+            "blocks": [
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

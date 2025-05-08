@@ -1,0 +1,74 @@
+<div class="about-us-content">
+  {% render 'about-us-content-bg' %}
+  <div class="container">
+    <div class="about-us-content__wrapper">
+      {% if section.settings.image != blank %}
+        <div class="about-us-content__image">
+          <img
+            src="{{ section.settings.image | img_url: 'master' }}"
+            alt="{{ section.settings.image.alt }}"
+            loading="lazy">
+        </div>
+      {% endif %}
+      <div class="about-us-content__content">
+        {% if section.settings.title != blank %}
+          <h2 class="section__title-text about-us-content__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="about-us-content__text">{{ section.settings.text }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.settings.title_2 != blank or section.settings.text_2 %}
+      <div class="about-us-content__bottom">
+        {% if section.settings.title_2 != blank %}
+          <h2 class="section__title-text about-us-content__title">{{ section.settings.title_2 }}</h2>
+        {% endif %}
+        {% if section.settings.text_2 != blank %}
+          <div class="about-us-content__text">{{ section.settings.text_2 }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About us content",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "Content bottom"
+      }, {
+        "type": "text",
+        "id": "title_2",
+        "label": "Title"
+      }, {
+        "type": "richtext",
+        "id": "text_2",
+        "label": "Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "About us content"
+      }
+    ]
+  }
+{% endschema %}

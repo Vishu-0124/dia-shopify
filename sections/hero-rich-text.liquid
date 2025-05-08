@@ -1,0 +1,125 @@
+<style>
+	#shopify-section-{{ section.id }} .hero-rich-text__content {
+		text-align: {{ section.settings.text_alignment}};
+		max-width: {{ section.settings.max_width }}px;
+		margin-inline: auto;
+	}
+
+	#shopify-section-{{ section.id }} .hero-rich-text {
+		margin-top: {{ section.settings.margin_top }}px;
+		margin-bottom: {{ section.settings.margin_bottom }}px;
+		padding-bottom: {{ section.settings.margin_bottom }}px;
+	}
+
+	@media screen and (max-width: 768px) {
+		#shopify-section-{{ section.id }} .hero-rich-text {
+			margin-top: {{ section.settings.margin_top_mobile }}px;
+			margin-bottom: {{ section.settings.margin_bottom_mobile }}px;
+			padding-bottom: {{ section.settings.margin_bottom_mobile }}px;
+		}
+	}
+</style>
+
+<div class="hero-rich-text">
+	<div class="container">
+		{% if section.settings.text != blank %}
+			<div class="hero-rich-text__content rte">
+				{{ section.settings.text }}
+			</div>
+		{% endif %}
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Rich text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section styles"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Section top margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Section bottom margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "label": "Section Mobile top margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "label": "Section Mobile bottom margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Rich text max-width",
+      "unit": "px",
+      "min": 600,
+      "max": 1020,
+      "step": 10,
+      "default": 1020
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Rich text",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

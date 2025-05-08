@@ -1,0 +1,209 @@
+{{ 'contact-section.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	padding-top: {{ section.settings.padding_top_mobile }}px;
+	padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+	background-color: {{ section.settings.bg_color }};
+	}
+
+	@media screen and (min-width: 768px) {
+	.section-{{ section.id }}-padding {
+	padding-top: {{ section.settings.padding_top }}px;
+	padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+	}
+{%- endstyle -%}
+
+<div class="contact-section section-{{ section.id }}-padding" {% if section.settings.background == true %}style="background: var(--color-gray-background)"{% endif %}>
+	<div class="container">
+		{% if section.settings.heading %}
+
+		{% endif %}
+
+		{%- for block in section.blocks -%}
+			{% case block.type %}
+				{%- when 'heading' -%}
+					<h2 class="contact-section__title section__title-text" {{ block.shopify_attributes }}>
+						{{ block.settings.title }}
+					</h2>
+
+				{%- when 'tel' -%}
+					<div class="contact-section__tel rte" {{ block.shopify_attributes }}>
+						{{ block.settings.tel }}
+					</div>
+
+				{%- when 'email' -%}
+					<div class="contact-section__mail rte" {{ block.shopify_attributes }}>
+						{{ block.settings.mail }}
+					</div>
+
+				{%- when 'button' -%}
+					<a href="{{ block.settings.button_url }}" class="contact-section__link button button--{{ block.settings.button_style | default: 'secondary' }}" {{ block.shopify_attributes }}>
+						{{ block.settings.button_label }}
+					</a>
+			{% endcase %}
+		{% endfor %}
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Section",
+  "tag": "section",
+  "class": "section section-contact",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section padding mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section Background Color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#E0D3B4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "CTA",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            }
+          ],
+          "default": "secondary"
+        }
+      ]
+    },
+    {
+      "type": "email",
+      "name": "Mail",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "mail",
+          "label": "Mail",
+          "default": "<p><a href='mailto:patrice.ezeigbo@boothcreekwagyu.com'>patrice.ezeigbo@boothcreekwagyu.com</a></p>"
+        }
+      ]
+    },
+    {
+      "type": "tel",
+      "name": "Phone number",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "tel",
+          "label": "Phone",
+          "default": "<p><a href='tel:785.775.1144'>785.775.1144</a></p>"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "limit": 1,
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Heading",
+          "default": "<p>To request pricing or ask questions, contact Patrice!</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Section",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "email"
+        },
+        {
+          "type": "tel"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

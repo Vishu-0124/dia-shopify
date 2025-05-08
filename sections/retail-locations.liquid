@@ -1,0 +1,184 @@
+{% style %}
+  .retail-locations__link-zoom {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    text-decoration: none;
+  }
+  .retail-locations__link-zoom--active-image{
+    width: 100%;
+    height: 100%;
+  }
+
+  .retail-locations__link-zoom:hover {
+    transform: scale(1.01);
+    opacity: 0.7;
+  }
+{% endstyle %}
+
+<div class="retail-locations">
+  {% render 'retail-locations-bg' %}
+  <div class="container">
+    {% if section.settings.text != blank %}
+      <div class="retail-locations__description">{{ section.settings.text }}</div>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="retail-locations__wrapper">
+        {% for block in section.blocks %}
+          <div class="retail-locations__item">
+            {% if block.settings.image != blank %}
+              <div class="retail-locations__item-image">
+                {% if block.settings.location_link != blank %}
+                  <a href="{{ block.settings.location_link }}" class="retail-locations__link-zoom retail-locations__link-zoom--active-image">
+                {% endif %}
+                <img
+                  src="{{ block.settings.image | img_url: 'master' }}"
+                  alt="{{ block.settings.image.alt }}"
+                  loading="lazy"
+                >
+                {% if block.settings.location_link != blank %}
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            <div class="retail-locations__item-content">
+              {% if block.settings.title != blank %}
+                {% if block.settings.location_link != blank %}
+                  <a href="{{ block.settings.location_link }}" class="retail-locations__link-zoom">
+                {% endif %}
+                <h2 class="retail-locations__item-title">{{ block.settings.title }}</h2>
+                {% if block.settings.location_link != blank %}
+                  </a>
+                {% endif %}
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <div class="retail-locations__item-text">{{ block.settings.text }}</div>
+              {% endif %}
+
+              <div class="retail-locations__item-info">
+                {% if block.settings.time != blank %}
+                  <div class="retail-locations__item-info-item">
+                    <svg
+                      width="27"
+                      height="28"
+                      viewBox="0 0 27 28"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M13.4847 27.2055C6.10529 27.2147 0.00920984 21.1508 1.05276e-05 13.7929C-0.00918879 6.26632 6.01176 0.211634 13.5123 0.207034C20.9147 0.202434 26.9969 6.27858 27 13.6794C27.0031 21.1539 20.9653 27.1963 13.4847 27.2055ZM13.5 2.70925C7.36713 2.78591 2.51449 7.58642 2.51909 13.7116C2.52369 19.8583 7.39933 24.6818 13.4831 24.6864C19.6344 24.691 24.4917 19.8 24.4794 13.6825C24.4687 7.57262 19.6206 2.78131 13.4985 2.70771L13.5 2.70925Z" fill="#2A2A2A" />
+                      <path d="M12.2317 10.0165C12.2317 8.8405 12.2286 7.66452 12.2332 6.49007C12.2363 5.81392 12.589 5.31409 13.1547 5.15617C13.9673 4.92925 14.7171 5.50268 14.7631 6.39348C14.7769 6.65106 14.7677 6.91017 14.7677 7.16775C14.7677 9.04135 14.7738 10.9149 14.7615 12.7885C14.76 13.0783 14.8382 13.2868 15.0482 13.4923C16.051 14.4766 17.046 15.4686 18.0303 16.4713C18.7142 17.1674 18.4244 18.3112 17.5075 18.5626C17.066 18.6838 16.6428 18.6117 16.3085 18.2805C15.0666 17.0494 13.8309 15.8105 12.5966 14.5701C12.3176 14.2896 12.2302 13.9308 12.2317 13.5444C12.2317 12.3684 12.2317 11.1925 12.2317 10.018V10.0165Z" fill="#2A2A2A" />
+                    </svg>
+                    {{ block.settings.time }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.address != blank %}
+                  <a target="_blank" href="{{ block.settings.address_url }}" class="retail-locations__item-info-item">
+                    <svg
+                      width="27"
+                      height="32"
+                      viewBox="0 0 27 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M23.1154 10.0668C23.1303 11.5128 22.7344 12.8659 22.2233 14.191C21.1211 17.0458 19.4949 19.6088 17.7608 22.1105C16.6103 23.7702 15.3781 25.3668 14.0919 26.9243C13.421 27.7383 12.6664 27.7458 12.0029 26.9391C9.65547 24.0862 7.47162 21.1199 5.64462 17.9045C4.54805 15.9734 3.56486 13.9847 3.14667 11.7823C2.62255 9.0167 3.26562 6.47786 4.89189 4.21038C6.61853 1.80722 8.99195 0.400262 11.9378 0.0694324C14.7778 -0.250246 17.3296 0.535939 19.506 2.3871C21.8646 4.39438 23.0281 6.98712 23.1136 10.0687L23.1154 10.0668ZM9.00868 10.0464C9.00496 12.2804 10.7948 14.0907 13.014 14.0962C15.2703 14.1018 17.049 12.3139 17.0824 10.0687C17.1103 8.16361 15.6253 6.04667 13.0344 6.01136C10.8152 5.98162 9.01054 7.82349 9.00682 10.0464H9.00868Z" fill="#2A2A2A" />
+                      <path d="M13.0545 29.6811C15.5116 29.6588 17.9426 29.4302 20.3049 28.7016C21.3066 28.3931 22.2768 28.0065 23.1095 27.3467C23.2637 27.2259 23.4087 27.0865 23.5314 26.936C23.8734 26.5122 23.8585 26.1498 23.4849 25.7558C22.8028 25.0384 21.9256 24.6406 21.0186 24.3023C20.7249 24.1927 20.422 24.1091 20.1283 24.0031C19.5112 23.7801 19.1934 23.1556 19.3849 22.5534C19.5726 21.9624 20.2157 21.6241 20.8383 21.8174C22.301 22.269 23.6949 22.8489 24.864 23.8804C26.4159 25.2521 26.5014 27.2018 25.061 28.6886C24.3008 29.473 23.366 29.9804 22.3735 30.3911C20.4498 31.1866 18.4295 31.5918 16.3646 31.8092C15.1175 31.9412 13.8667 32.0267 12.6121 31.9932C9.71088 31.917 6.84864 31.5843 4.11093 30.5472C2.96418 30.1123 1.8769 29.5715 1.00894 28.6719C-0.399874 27.2148 -0.327389 25.2707 1.18922 23.9139C2.39545 22.8341 3.84701 22.2319 5.37292 21.7895C5.92864 21.6278 6.54569 22.0219 6.70925 22.5794C6.88024 23.1612 6.58658 23.7726 6.00112 23.9901C5.46771 24.1871 4.92128 24.3432 4.40088 24.5774C3.78382 24.8543 3.19465 25.1777 2.70584 25.6535C2.18915 26.1554 2.17614 26.5736 2.68353 27.0902C3.22253 27.6385 3.89719 27.9805 4.59417 28.276C6.14609 28.9302 7.78166 29.2648 9.4451 29.4692C10.6439 29.6161 11.8464 29.7016 13.0563 29.6886L13.0545 29.6811Z" fill="#2A2A2A" />
+                    </svg>
+                    {{ block.settings.address }}
+                  </a>
+                {% endif %}
+
+                {% if block.settings.phone != blank %}
+                  <a href="{{ block.settings.phone_url }}" class="retail-locations__item-info-item">
+                    <svg
+                      width="26"
+                      height="26"
+                      viewBox="0 0 26 26"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M7.32737 0.00169472C7.61213 0.127101 7.90877 0.223698 8.16133 0.420282C8.76985 0.88971 8.99868 1.53369 9.00207 2.26579C9.01224 3.76559 9.2648 5.22302 9.70891 6.65164C9.96316 7.47017 9.7801 8.18025 9.24107 8.84965C8.52915 9.73088 7.86978 10.6528 7.18498 11.5561C7.1087 11.656 7.10192 11.7374 7.16125 11.8543C8.67154 14.7183 10.8192 16.957 13.638 18.5687C14.1584 18.8669 14.4771 18.85 14.9229 18.4704C15.7026 17.8095 16.5349 17.2112 17.3587 16.6045C17.8977 16.208 18.5113 16.0826 19.1622 16.2622C20.0097 16.4944 20.8555 16.7299 21.7268 16.8604C22.4387 16.9672 23.1557 16.9926 23.8727 17.0299C24.9423 17.0875 25.6152 17.5891 25.9559 18.606C25.9695 18.6466 25.9847 18.6856 26 18.7246V24.3069C25.9847 24.3459 25.9695 24.3848 25.9559 24.4255C25.6067 25.4779 24.8796 25.9965 23.7727 25.9999C22.9015 26.0033 22.0336 25.9439 21.1691 25.8456C19.6453 25.6745 18.1519 25.3525 16.6908 24.8898C13.8804 23.9984 11.3243 22.6257 9.01902 20.7887C6.7663 18.9957 4.89667 16.8638 3.41011 14.3997C1.91 11.9153 0.898053 9.24112 0.381064 6.38219C0.125112 4.9417 -0.0155768 3.49105 0.00137363 2.02515C0.00476372 1.71502 0.0810408 1.42354 0.220035 1.1473C0.528533 0.532131 1.04552 0.183026 1.69303 0H7.32737V0.00169472Z" fill="#2A2A2A" />
+                    </svg>
+                    {{ block.settings.phone }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Retail Locations",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "location",
+      "name": "Location",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "location_link",
+          "label": "Location Link"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "textarea",
+          "id": "time",
+          "label": "Working hours"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address"
+        },
+        {
+          "type": "url",
+          "id": "address_url",
+          "label": "Address Link"
+        },
+        {
+          "type": "textarea",
+          "id": "phone",
+          "label": "Phone"
+        },
+        {
+          "type": "url",
+          "id": "phone_url",
+          "label": "Phone Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Retail Locations"
+    }
+  ]
+}
+{% endschema %}

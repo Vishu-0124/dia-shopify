@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="{{ 'basics-list.css' | asset_url }}">
+
+<style>
+	#shopify-section-{{ section.id }} .basics {
+		padding-top: {{ section.settings.padding_top }}px;
+		padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+
+	@media (max-width: 767px) {
+		#shopify-section-{{ section.id }} .basics {
+			padding-top: {{ section.settings.padding_top_mobile }}px;
+			padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+		}
+	}
+</style>
+
+<div class="basics">
+	<div class="container basics__wrapper">
+		{% if section.settings.title != blank %}
+			<h2 class="section__title-text basics__title">{{ section.settings.title | escape }}</h2>
+		{% endif %}
+		<ul class="basics__list">
+			{% for block in section.blocks %}
+				<li class="basics__item" {{ block.shopify_attributes }}>
+					<svg xmlns="http://www.w3.org/2000/svg" width="60" height="58" viewBox="0 0 60 58" fill="none">
+						<path d="M6.33173 26.4323C7.85758 26.4446 9.223 26.9109 10.3603 27.9248C13.9931 31.1694 17.6081 34.4335 21.232 37.687C22.2605 38.6108 22.8701 38.5879 23.8149 37.5351C27.7257 33.1706 31.6277 28.7973 35.5333 24.4258C40.2035 19.1975 44.8738 13.9676 49.544 8.73758C51.7686 6.24711 53.9914 3.75488 56.216 1.26264C56.4228 1.03126 56.6242 0.794575 56.8453 0.580854C57.5797 -0.127428 58.5815 -0.19278 59.3176 0.41129C60.0734 1.03126 60.2214 1.96562 59.6795 2.82757C54.4157 11.2316 49.1501 19.6338 43.8844 28.036C38.3372 36.8887 32.7846 45.736 27.2516 54.5957C26.2373 56.2207 24.9414 57.4448 23.0056 57.8492C20.904 58.289 19.027 57.7751 17.6009 56.196C15.9414 54.3608 14.412 52.4073 12.8362 50.4979C9.11962 45.9957 5.46363 41.4457 1.68109 37C-1.44726 33.3243 0.0981962 28.4617 3.8647 26.9039C4.65436 26.5771 5.47433 26.404 6.33529 26.4305L6.33173 26.4323Z"
+						      fill="white"/>
+					</svg>
+					{% if block.settings.title != blank %}
+						<div class="basics__item-text">{{ block.settings.title }}</div>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "The Basics",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "THE BASICS"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section padding mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Basics",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

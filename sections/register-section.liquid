@@ -1,0 +1,51 @@
+<div class="container container--tiny" id="{{ section.settings.anchor }}">
+	<div class="section__title section__title--center">
+		<h2 class="section__title-text h2">{{ 'customer.register.title' | t }}</h2>
+	</div>
+
+	<div class="account__form">
+		{% form 'create_customer' %}
+
+			{{ form.errors | default_errors }}
+
+			<div class="o-layout">
+				<div class="o-layout__item u-1/1 u-1/2@tab">
+					<input placeholder="{{ 'customer.register.first_name' | t }}" type="text" name="customer[first_name]" id="FirstName" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autocapitalize="words">
+				</div>
+				<div class="o-layout__item u-1/1 u-1/2@tab">
+					<input placeholder="{{ 'customer.register.last_name' | t }}" type="text" name="customer[last_name]" id="LastName" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocapitalize="words">
+				</div>
+			</div>
+
+			<input placeholder="{{ 'customer.register.email' | t }}" type="email" name="customer[email]" id="Email" class="{% if form.errors contains 'email' %} error{% endif %}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
+
+			<input placeholder="{{ 'customer.register.password' | t }}" type="password" name="customer[password]" id="CreatePassword" class="{% if form.errors contains 'password' %} error{% endif %}">
+
+			<div class="account__form-buttons">
+				<input type="submit" class="button account__form-submit" value="{{ 'customer.register.submit' | t }}">
+				<a href="{{ shop.url }}" class="button--outline account__form-secondary-btn">{{ 'customer.register.cancel' | t }}</a>
+			</div>
+
+		{% endform %}
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Register section",
+  "class": "section section--account rewards account account--register",
+  "settings":[
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Section anchor"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Register section",
+      "category": "Form"
+    }
+  ]
+}
+{% endschema %}

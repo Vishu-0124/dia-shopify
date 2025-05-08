@@ -1,0 +1,51 @@
+{%- capture styles -%}
+  --main-banner-alignment: {{ section.settings.image_alignment }};
+{%- endcapture -%}
+
+<div
+   class="collection-banner-v2"
+   style="{{ styles | strip_newlines }}"
+>
+  {% if collection.metafields.custom.main_banner_desktop != blank %}
+    <img class="collection-banner-v2__banner collection-banner-v2__banner--desk"
+         src="{{ collection.metafields.custom.main_banner_desktop | img_url: "master" }}"
+         alt="{{ collection.title }}"
+    >
+  {% endif %}
+
+  {% if collection.metafields.custom.main_banner_mobile != blank %}
+    <img class="collection-banner-v2__banner collection-banner-v2__banner--mob"
+         src="{{ collection.metafields.custom.main_banner_mobile | img_url: "master" }}"
+         alt="{{ collection.title }}"
+    >
+  {% endif %}
+
+</div>
+
+{% schema %}
+{
+  "name": "Collection banner v2",
+  "settings": [
+    {
+      "type": "select",
+      "id": "image_alignment",
+      "label": "Image alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

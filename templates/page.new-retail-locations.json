@@ -1,0 +1,124 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-sections-1": {
+      "type": "page-sections-1",
+      "disabled": true,
+      "settings": {
+        "container": "medium"
+      }
+    },
+    "retail_location_banner_xDG9Pm": {
+      "type": "retail-location-banner",
+      "settings": {
+        "image": "{{ page.metafields.custom.retail_location_banner.value }}",
+        "opacity": 0.5,
+        "main_heading": "{{ page.metafields.custom.retail_location_heading.value }}",
+        "sub_heading": "{{ page.metafields.custom.retail_location_subheading.value }}",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "retail_location_map_UTFQLp": {
+      "type": "retail-location-map",
+      "settings": {
+        "background_top": "shopify://shop_images/Group_733_1.png",
+        "background_bottom": "shopify://shop_images/Group_767_1.png",
+        "description": "{{ page.metafields.custom.retail_location_description | metafield_tag }}",
+        "comment_item": "<p>The perfect place to taste the <strong>finest Wagyu cuts</strong> and experience the unparalleled taste first hand.</p>",
+        "button_label": "View Location",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "retail_location_contact_WtHMDy": {
+      "type": "retail-location-contact",
+      "settings": {
+        "background_color": "#e0d3b4",
+        "time": "{{ page.metafields.custom.retail_location_working_time | metafield_tag }}",
+        "phone": "{{ page.metafields.custom.retail_location_phone.value }}",
+        "address": "{{ page.metafields.custom.retail_location_address | metafield_tag }}",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "retail_locations_6H33Mg": {
+      "type": "retail-locations",
+      "blocks": {
+        "location_xr3UGQ": {
+          "type": "location",
+          "settings": {
+            "title": "",
+            "text": "",
+            "time": "",
+            "address": "",
+            "address_url": "",
+            "phone": "",
+            "phone_url": ""
+          }
+        },
+        "location_6iTRV4": {
+          "type": "location",
+          "settings": {
+            "title": "",
+            "text": "",
+            "time": "",
+            "address": "",
+            "address_url": "",
+            "phone": "",
+            "phone_url": ""
+          }
+        },
+        "location_aqwPzM": {
+          "type": "location",
+          "settings": {
+            "title": "",
+            "text": "",
+            "time": "",
+            "address": "",
+            "address_url": "",
+            "phone": "",
+            "phone_url": ""
+          }
+        },
+        "location_frVEp4": {
+          "type": "location",
+          "settings": {
+            "title": "",
+            "text": "",
+            "time": "",
+            "address": "",
+            "address_url": "",
+            "phone": "",
+            "phone_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "location_xr3UGQ",
+        "location_6iTRV4",
+        "location_aqwPzM",
+        "location_frVEp4"
+      ],
+      "disabled": true,
+      "settings": {
+        "text": ""
+      }
+    }
+  },
+  "order": [
+    "page-sections-1",
+    "retail_location_banner_xDG9Pm",
+    "retail_location_map_UTFQLp",
+    "retail_location_contact_WtHMDy",
+    "retail_locations_6H33Mg"
+  ]
+}

@@ -1,0 +1,138 @@
+<style>
+	#shopify-section-{{ section.id }} .faq {
+		padding-top: {{ section.settings.padding_top }}px;
+		padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+
+	@media (max-width: 767px) {
+		#shopify-section-{{ section.id }} .faq {
+			padding-top: {{ section.settings.padding_top_mobile }}px;
+			padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+		}
+	}
+</style>
+
+
+<div class="faq">
+	<div class="container">
+		{% if section.settings.title != blank %}
+			<h2 class="section__title-text">{{ section.settings.title }}</h2>
+		{% endif %}
+
+		<div class="faq__wrapper">
+			{% for block in section.blocks %}
+				<div class="faq__item">
+					<div class="faq__item-wrapper">
+						<button class="faq__item-btn">
+							{{ block.settings.title }}
+							<svg
+									width="32"
+									height="21"
+									viewBox="0 0 32 21"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+								<path
+										d="M3 3L16 16L29 3"
+										stroke="#2A2A2A"
+										stroke-width="6"/>
+							</svg>
+
+						</button>
+						<div class="faq__item-content">
+							{{ block.settings.text }}
+
+							{% if block.settings.table != '' %}
+								<div class="table">
+									{% assign table = block.settings.table | split: "/ " %}
+									{% for row in table %}
+										<div class="row">
+											{{ row }}
+										</div>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "step": 2,
+      "min": 0,
+      "max": 100,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "step": 2,
+      "min": 0,
+      "max": 100,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top mobile",
+      "step": 2,
+      "min": 0,
+      "max": 100,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom mobile",
+      "step": 2,
+      "min": 0,
+      "max": 100,
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Faq item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "textarea",
+          "id": "table",
+          "label": "Table",
+          "info": "In order to make this table work you need to separate column with a backslash - / Table can be only two columned"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ"
+    }
+  ]
+}
+{% endschema %}

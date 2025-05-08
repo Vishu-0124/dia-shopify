@@ -1,0 +1,72 @@
+@use "variables" as *;
+
+.retail-location-banner {
+  padding-top: var(--padding-top-section);
+  padding-bottom: var(--padding-bottom-section);
+  position: relative;
+  @media screen and (max-width: $ui-breakpoints-lg) {
+    padding-top: var(--padding-top-section-mob);
+    padding-bottom: var(--padding-bottom-section-mob);
+  }
+
+  .retail-location-banner__image-item {
+    background-image: linear-gradient(rgba(0, 0, 0, var(--overlay-opacity)), rgba(0, 0, 0, var(--overlay-opacity))),
+      var(--background-image);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 622px;
+    width: 100%;
+    @media screen and (max-width: $ui-breakpoints-lg) {
+      height: 500px;
+    }
+    @media screen and (max-width: $ui-breakpoints-md) {
+      height: 350px;
+    }
+  }
+  .retail-location-banner__headings {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    .retail-location-banner__main-heading {
+      font-family: Mosafin;
+      font-weight: 900;
+      font-size: 90px;
+      line-height: 106px;
+      letter-spacing: 0;
+      text-align: center;
+      vertical-align: middle;
+      text-transform: uppercase;
+      color: #ffffff;
+      @media screen and (max-width: $ui-breakpoints-lg) {
+        font-size: 60px;
+        line-height: 70px;
+      }
+      @media screen and (max-width: $ui-breakpoints-md) {
+        font-size: 32px;
+        line-height: 35px;
+      }
+    }
+    .retail-location-banner__subheading {
+      font-family: Hero New;
+      font-weight: 400;
+      font-size: 50px;
+      line-height: 100%;
+      letter-spacing: 0;
+      text-align: center;
+      vertical-align: middle;
+      color: #ffffff;
+      @media screen and (max-width: $ui-breakpoints-lg) {
+        font-size: 34px;
+      }
+      @media screen and (max-width: $ui-breakpoints-md) { 
+        font-size: 17px;
+      }
+    }
+  }
+}

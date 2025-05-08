@@ -1,0 +1,274 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title_prQh37": {
+          "type": "title",
+          "settings": {}
+        },
+        "text_bEdbHP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ product.metafields.custom.product_subtitle.value }}</p>",
+            "text_size": "text-size--large",
+            "text_align": "left",
+            "text_weight": "600",
+            "text_color": "#2a2a2a",
+            "background_color": "rgba(0,0,0,0)",
+            "text_transform": true
+          }
+        },
+        "text_ETRzrE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Buy 5 and receive $10 off!</p>",
+            "text_size": "text-size--regular",
+            "text_align": "center",
+            "text_weight": "400",
+            "text_color": "#294029",
+            "background_color": "#e0d3b4",
+            "text_transform": true
+          }
+        },
+        "variant_picker_76xKFk": {
+          "type": "variant_picker",
+          "settings": {
+            "variants_style": "radio",
+            "show_quantities": "no"
+          }
+        },
+        "buy_buttons_Xfj8zU": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_price": true,
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": false
+          }
+        },
+        "description_HnWCNe": {
+          "type": "description",
+          "settings": {}
+        },
+        "product_facts_DF3TQY": {
+          "type": "product_facts",
+          "settings": {
+            "copy_1": "<p>Place your <br/>order today</p>",
+            "image_1": "shopify://shop_images/order.svg",
+            "copy_2": "<p>Receive in as soon as 1-3 business days</p>",
+            "image_2": "shopify://shop_images/soon.svg",
+            "copy_3": "",
+            "copy_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "title_prQh37",
+        "text_bEdbHP",
+        "text_ETRzrE",
+        "variant_picker_76xKFk",
+        "buy_buttons_Xfj8zU",
+        "description_HnWCNe",
+        "product_facts_DF3TQY"
+      ],
+      "settings": {
+        "gallery_style": "slider",
+        "gallery_fit": false,
+        "enable_zoom": true,
+        "enable_video_looping": false,
+        "default_to_first_variant": true
+      }
+    },
+    "collection_grid_icons_rwpDWU": {
+      "type": "collection-grid-icons",
+      "blocks": {
+        "icon_8XG6Kt": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Group_2.svg",
+            "title": "Locally pasture-raised and processed."
+          }
+        },
+        "icon_dpUGyM": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Group_3.svg",
+            "title": "Ships in eco-friendly insulation."
+          }
+        },
+        "icon_qjd83D": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Group_4.svg",
+            "title": "Ships <br>frozen."
+          }
+        }
+      },
+      "block_order": [
+        "icon_8XG6Kt",
+        "icon_dpUGyM",
+        "icon_qjd83D"
+      ],
+      "settings": {
+        "show_collection_description": false,
+        "padding_top": 60,
+        "padding_bottom": 20,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "image_QkiYNC": {
+      "type": "image",
+      "settings": {
+        "title": "",
+        "image": "shopify://shop_images/flavoe_and_tenderness.png",
+        "image_mobile": "shopify://shop_images/flavor-and-tenderness-mobile.png",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    },
+    "best_sellers_Wte3B4": {
+      "type": "best-sellers",
+      "settings": {
+        "title": "you may also like",
+        "collection": "steak",
+        "products_limit": 16,
+        "link_title": "",
+        "link": "",
+        "bg_color": "",
+        "show_bg_image": false,
+        "minimize_mobile_version": true
+      }
+    },
+    "wagyu_facts_eBt8Th": {
+      "type": "wagyu-facts",
+      "blocks": {
+        "copy_top_h3zq8q": {
+          "type": "copy_top",
+          "settings": {
+            "title": "<p><strong>Top Quality:</strong> Exceeds USDA Prime grade</p>"
+          }
+        },
+        "copy_top_3ahajK": {
+          "type": "copy_top",
+          "settings": {
+            "title": "<p><strong>Prime Marbling:</strong> 90% of American Wagyu beef earns the USDA Prime grade, compared to just 3% of conventional U.S. beef</p>"
+          }
+        },
+        "copy_top_xJCEc3": {
+          "type": "copy_top",
+          "settings": {
+            "title": "<p><strong>Rare Luxury:</strong> Less than 1% of U.S. cattle population is Wagyu</p>"
+          }
+        },
+        "copy_top_qdAGGY": {
+          "type": "copy_top",
+          "settings": {
+            "title": "<p><strong>Omega-Rich:</strong> High in heart-healthy unsaturated fats, lower cholesterol than other red meats</p>"
+          }
+        },
+        "copy_bottom_RQKXc7": {
+          "type": "copy_bottom",
+          "settings": {
+            "title": "<p><strong>Versatile Use:</strong> Ideal for grilling, roasting, and gourmet burgers</p>"
+          }
+        },
+        "copy_bottom_BCwQWy": {
+          "type": "copy_bottom",
+          "settings": {
+            "title": "<p><strong>Ethically Raised: </strong>Raised locally without hormones or antibiotics, ensuring a natural, high-quality product</p>"
+          }
+        },
+        "copy_bottom_c9eKUw": {
+          "type": "copy_bottom",
+          "settings": {
+            "title": "<p><strong>Balanced Flavor:</strong> Rich, beefy taste with buttery tenderness.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "copy_top_h3zq8q",
+        "copy_top_3ahajK",
+        "copy_top_xJCEc3",
+        "copy_top_qdAGGY",
+        "copy_bottom_RQKXc7",
+        "copy_bottom_BCwQWy",
+        "copy_bottom_c9eKUw"
+      ],
+      "settings": {
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "image": "shopify://shop_images/Group_817.png",
+        "image_mobile": "shopify://shop_images/DSF3664.png",
+        "height_mobile": 240
+      }
+    },
+    "small_banner_erEWdm": {
+      "type": "small-banner",
+      "blocks": {
+        "stars_ednTFP": {
+          "type": "stars",
+          "settings": {}
+        },
+        "title_iN6jV4": {
+          "type": "title",
+          "settings": {
+            "title": "<p>Delivered to over 12k+<br/> happy customers</p>",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "stars_ednTFP",
+        "title_iN6jV4"
+      ],
+      "settings": {
+        "bg_color": "#e0d3b4",
+        "height": 240,
+        "mobile_height": 200,
+        "margin_top": 36,
+        "margin_bottom": 36
+      }
+    },
+    "home_blog_new_E6weGa": {
+      "type": "home-blog-new",
+      "settings": {
+        "title": "Recipes to make your mouth water",
+        "blog": "recipes",
+        "post_limit": 3,
+        "grid": 3,
+        "crop": true,
+        "blog_show_date": false,
+        "blog_show_author": false,
+        "blog_show_comments": false,
+        "blog_show_tags": false,
+        "link_title": "View all",
+        "link": "shopify://blogs/recipes",
+        "show_bg": true,
+        "minimize_mobile_version": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "collection_grid_icons_rwpDWU",
+    "image_QkiYNC",
+    "best_sellers_Wte3B4",
+    "wagyu_facts_eBt8Th",
+    "small_banner_erEWdm",
+    "home_blog_new_E6weGa"
+  ]
+}

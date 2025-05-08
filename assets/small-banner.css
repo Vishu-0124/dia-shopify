@@ -1,0 +1,45 @@
+.small-banner {
+	-webkit-background-size: cover;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+}
+
+.small-banner .container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-block: 20px;
+}
+
+.small-banner .title {
+	color: #2A2A2A;
+	text-align: center;
+	font-family: Mosafin;
+	font-size: 35px;
+	font-style: normal;
+	font-weight: 900;
+	line-height: 120%; /* 42px */
+	text-transform: uppercase;
+	margin-bottom: 0;
+}
+
+.small-banner .container > * + * {
+	margin-top: 22px;
+}
+
+.small-banner .title > * + * {
+	margin-top: 10px;
+}
+
+.small-banner .title p {
+	margin-bottom: 0;
+}
+
+@media screen and (max-width:767px) {
+	.small-banner .title {
+		font-size: 20px;
+	}
+}

@@ -1,0 +1,169 @@
+<link rel="stylesheet" href="{{ 'wagyu-facts.css' | asset_url }}">
+
+<style>
+	#shopify-section-{{ section.id }} {
+		padding-top: {{ section.settings.padding_top }}px;
+		padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+
+	@media (max-width: 767px) {
+		#shopify-section-{{ section.id }} {
+			padding-top: {{ section.settings.padding_top_mobile }}px;
+			padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+		}
+
+		#shopify-section-{{ section.id }} .wagyu-facts__img {
+			max-height: {{ section.settings.height_mobile }}px;
+			max-width: {{ section.settings.height_mobile }}px;
+		}
+	}
+</style>
+
+<div class="wagyu-facts">
+	<div class="container wagyu-facts__wrapper">
+		<div class="wagyu-facts__top">
+			{% for block in section.blocks %}
+				{% case block.type %}
+					{% when 'copy_top' %}
+						<div class="wagyu-facts__copy" {{ block.shopify_attributes }}>
+							{{ block.settings.title }}
+						</div>
+				{% endcase %}
+			{% endfor %}
+		</div>
+		<div class="wagyu-facts__img">
+			{%- liquid
+				assign sizes = 'sizes="100vw"'
+			-%}
+			{% if section.settings.image != blank %}
+				{% render 'lazy-image', image: section.settings.image, type: image_type, alt: section.settings.title, image_alignment: image_alignment, sizes: sizes, class: 'wagyu-facts__img--desktop', preload: false %}
+			{% endif %}
+			{% if section.settings.image_mobile != blank %}
+				{% render 'lazy-image', image: section.settings.image_mobile, type: image_type, alt: section.settings.title, image_alignment: image_alignment, sizes: sizes, class: 'wagyu-facts__img--mobile', preload: false %}
+			{% endif %}
+		</div>
+		<div class="wagyu-facts__bottom">
+			{% for block in section.blocks %}
+				{% case block.type %}
+					{% when 'copy_bottom' %}
+						<div class="wagyu-facts__copy" {{ block.shopify_attributes }}>
+							{{ block.settings.title }}
+						</div>
+				{% endcase %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Wagyu Facts",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section padding mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 120,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Image Height",
+      "default": 240
+    }
+  ],
+  "blocks": [
+    {
+      "type": "copy_top",
+      "name": "Text on Top",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "copy_bottom",
+      "name": "Text on Bottom",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wagyu Facts"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,147 @@
+{{ 'retail-location-map.css' | asset_url | stylesheet_tag }}
+
+{%- capture styles -%}
+
+  --padding-top-section: {{ section.settings.padding_top }}px;
+  --padding-bottom-section: {{ section.settings.padding_bottom }}px;
+
+  --padding-top-section-mob: {{ section.settings.padding_top | plus: 0 | divided_by: 2 }}px;
+  --padding-bottom-section-mob: {{ section.settings.padding_bottom | plus: 0 | divided_by: 2 }}px;
+
+  --background-image-top: url({{ section.settings.background_top | img_url: 'master' }});
+  --background-image-bottom: url({{ section.settings.background_bottom | img_url: 'master' }});
+{%- endcapture -%}
+
+<div class="retail-location-map" style="{{ styles | strip_newlines }}">
+  <div class="retail-location-map__background-top"></div>
+  <div class="retail-location-map__background-bottom"></div>
+  <div class="retail-location-map__description">
+    {% if section.settings.description != blank %}
+      <div class="retail-location-map__description-item">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="retail-location-map__container">
+    <div
+      class="retail-location-map__map"
+      id="retail-location-map--{{ section.id }}"
+    ></div>
+    <div class="retail-location-map__comment">
+      <div class="retail-location-map__comment-item">
+        {{ section.settings.comment_item }}
+      </div>
+      <div class="retail-location-map__button">
+        <a
+          href="https://www.google.com/maps/search/?api=1&query={{ page.metafields.custom.latitude }},{{ page.metafields.custom.longitude }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{- section.settings.button_label -}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.initMap = function() {
+  var mapContainer = document.getElementById('retail-location-map--{{ section.id }}');
+
+  if (mapContainer) {
+    mapContainer.innerHTML = '';
+  }
+
+  var location1 = { lat: {{ page.metafields.custom.latitude }}, lng: {{ page.metafields.custom.longitude }} };
+
+  var map = new google.maps.Map(mapContainer, {
+    zoom: 17,
+    center: location1,
+  });
+
+  var marker1 = new google.maps.Marker({
+    position: location1,
+    map: map,
+    title: 'Store--{{ section.id }}',
+  });
+}
+
+
+document.addEventListener('shopify:section:load', function (event) {
+  
+  if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+    initMap();
+  } else {
+    
+    setTimeout(initMap, 500);
+  }
+});
+document.addEventListener('shopify:section:select', function (event) {
+ 
+  if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
+    initMap();
+  } else {
+    setTimeout(initMap, 500);
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Retail Locations Map",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_top",
+      "label": "Background top"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_bottom",
+      "label": "Background bottom"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "richtext",
+      "id": "comment_item",
+      "label": "Comment item"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View Location"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Retail Locations Map"
+    }
+  ]
+}
+{% endschema %}

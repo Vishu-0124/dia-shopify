@@ -1,0 +1,59 @@
+<div class="image-width-text-vertical">
+  {% render 'image-width-text-bg' %}
+  <div class="image-width-text-vertical__wrapper">
+    <div class="image-width-text-vertical__content">
+      <div class="container">
+        {% if section.settings.title != blank %}
+          <h2 class="section__title-text image-width-text-vertical__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="image-width-text-vertical__text">{{ section.settings.text }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.settings.image != blank %}
+      <div class="image-width-text-vertical__image" style="margin-top: {{ section.settings.image_margin_top }}%;">
+        <img
+          src="{{ section.settings.image | img_url: 'master' }}"
+          alt="{{ section.settings.image.alt }}"
+          loading="lazy">
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image + text(vertical)",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }, {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      }, {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }, {
+        "type": "range",
+        "id": "image_margin_top",
+        "label": "Image margin top",
+        "min": -50,
+        "max": 50,
+        "step": 5,
+        "unit": "%",
+        "default": 0
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image + text(vertical)"
+      }
+    ]
+  }
+{% endschema %}

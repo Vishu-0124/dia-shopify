@@ -1,0 +1,279 @@
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let menu = document.querySelectorAll(".article__share-items");
+        let btn = document.querySelectorAll(".article-hero__meta-share-btn");
+
+        btn.forEach(btns => {
+            btns.addEventListener("click", (e) => {
+                btns.parentNode.querySelector('.article__share-items').classList.toggle("show")
+            })
+        })
+
+        window.onclick = (event) => {
+            menu.forEach(item => {
+                if (!event.target.matches('.article-hero__meta-share-btn')) {
+                    if (item.classList.contains("show")) {
+                        item.classList.remove("show")
+                    }
+                }
+            })
+
+        };
+
+        menu.forEach(item => {
+            item.addEventListener('click', event => event.stopPropagation());
+        })
+    })
+</script>
+
+<div class="article-hero">
+	<div class="container article-hero__wrapper">
+		{% if section.settings.title != blank %}
+			<h1 class="section__title-text article-hero__title">{{ section.settings.title }}</h1>
+		{% endif %}
+		<div class="article-hero__meta-buttons article-hero__meta-buttons--mobile">
+			<div class="article-hero__meta-print" onclick="window.print()">
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+					<path d="M24.0076 31.755H7.77261C6.08296 31.149 5.51754 30.3426 5.51754 28.5388C5.51754 27.4029 5.51174 26.2671 5.52168 25.1321C5.52416 24.8631 5.4331 24.7522 5.16239 24.7745C4.97778 24.7894 4.79068 24.7778 4.60524 24.777C2.0894 24.7654 0.00900884 22.6908 0.00404173 20.1766C-0.00175323 17.6575 -0.000925381 15.1383 0.00404173 12.6192C0.00735314 11.1646 0.600923 9.97831 1.70611 9.0536C2.66973 8.24727 3.79809 7.93103 5.04732 7.99395C5.51588 8.01713 5.51754 7.99726 5.51754 7.54194C5.51754 6.5303 5.51257 5.51867 5.52002 4.50621C5.53658 2.11289 7.63353 0.0126247 10.031 0.00682978C13.9335 -0.00227659 17.836 -0.00227659 21.7385 0.00682978C24.1533 0.0117969 26.2445 2.11123 26.261 4.5269C26.2668 5.42512 26.2585 6.32334 26.2635 7.22156C26.2685 8.1115 26.1501 7.99809 27.0326 7.9956C28.6982 7.98981 29.9979 8.6852 30.9657 10.0222C31.3788 10.5926 31.5949 11.2482 31.7538 11.9262V20.8497C31.7232 20.9589 31.6901 21.0674 31.6636 21.1767C31.402 22.2595 30.8299 23.1436 29.9491 23.8225C28.9822 24.5675 27.877 24.8457 26.6692 24.7811C26.2751 24.7604 26.2643 24.7878 26.2635 25.1735C26.2619 26.4625 26.2602 27.7515 26.2635 29.0404C26.2643 29.4411 26.1683 29.8161 25.9986 30.1746C25.5938 31.0264 24.8951 31.5107 24.0084 31.7566L24.0076 31.755ZM15.8897 9.90463C12.2132 9.90463 8.53671 9.90132 4.86022 9.90629C3.13912 9.90877 1.93128 11.057 1.91555 12.7491C1.8932 15.1756 1.89817 17.6028 1.91472 20.0301C1.92383 21.3075 2.6631 22.3282 3.79726 22.7082C4.2443 22.858 4.7079 22.868 5.17398 22.8738C5.42564 22.8771 5.52499 22.7918 5.52085 22.5335C5.50926 21.8414 5.51671 21.1493 5.51671 20.4581C5.51671 20.0563 5.3172 19.8427 4.91817 19.8173C4.45126 19.7875 4.07459 19.4274 4.03403 18.9729C3.98932 18.4729 4.2948 18.0308 4.76833 17.9356C4.91817 17.9058 5.07629 17.9133 5.2311 17.9133C12.3366 17.9124 19.442 17.9133 26.5475 17.9133C26.6509 17.9133 26.7544 17.91 26.8571 17.9166C27.3248 17.9439 27.7015 18.3024 27.7445 18.7569C27.7909 19.256 27.4862 19.6981 27.0135 19.7966C26.8745 19.8256 26.7254 19.8264 26.5822 19.8173C26.3364 19.8024 26.2569 19.9125 26.2602 20.1485C26.2693 20.8199 26.2602 21.4912 26.2643 22.1626C26.2685 22.9499 26.1658 22.8762 26.9788 22.868C28.656 22.8498 29.8481 21.7007 29.8647 20.0301C29.8895 17.6037 29.8829 15.1764 29.8655 12.7491C29.8572 11.6423 29.3688 10.7846 28.3853 10.2374C27.9109 9.97334 27.3902 9.90629 26.8587 9.90629C23.2029 9.90463 19.5471 9.90546 15.8905 9.90629L15.8897 9.90463ZM15.8905 19.8198C13.2174 19.8198 10.5434 19.8198 7.87029 19.8198C7.57392 19.8198 7.42546 19.9697 7.42491 20.2693C7.42491 23.0766 7.42491 25.8847 7.42491 28.6919C7.42491 29.5355 7.7635 29.8716 8.61205 29.8716C13.4633 29.8716 18.3153 29.8716 23.1665 29.8716C24.0159 29.8716 24.3553 29.5347 24.3553 28.6936C24.3553 25.8863 24.3553 23.0782 24.3553 20.271C24.3553 19.9708 24.2071 19.8204 23.9108 19.8198C21.2376 19.8198 18.5637 19.8198 15.8905 19.8198ZM15.8897 7.99726C18.5852 7.99726 21.2807 7.99395 23.9762 8.00222C24.251 8.00222 24.3652 7.93103 24.3611 7.63631C24.3462 6.68677 24.3669 5.73639 24.3528 4.78602C24.3288 3.12369 23.1847 1.92993 21.529 1.91917C17.7697 1.89599 14.0105 1.89764 10.252 1.91917C8.7296 1.92745 7.63932 2.91673 7.46713 4.41763C7.34957 5.44416 7.44229 6.48063 7.42574 7.51296C7.41828 7.99809 7.42491 7.99891 7.89678 7.99891C10.5608 7.99891 13.2257 7.99891 15.8897 7.99891V7.99726Z"
+					      fill="#FFFCF4"/>
+					<path d="M6.47177 11.9631C6.95606 11.9631 7.44036 11.9581 7.92465 11.9639C8.50994 11.9705 8.91311 12.3679 8.90897 12.925C8.90483 13.4665 8.50497 13.863 7.93624 13.8671C6.95772 13.8738 5.97837 13.8738 4.99985 13.8671C4.43443 13.863 4.03375 13.4632 4.03126 12.9217C4.02878 12.3778 4.42697 11.9738 4.98826 11.9647C5.48249 11.9573 5.97754 11.9631 6.47177 11.9631Z" fill="#FFFCF4"/>
+					<path d="M15.8949 21.8763C16.6987 21.8763 17.5034 21.8729 18.3072 21.8771C18.9182 21.8804 19.3272 22.272 19.3222 22.8399C19.318 23.3929 18.9116 23.7803 18.3172 23.782C16.6987 23.7853 15.0794 23.7861 13.461 23.782C12.8699 23.7803 12.4634 23.3887 12.4609 22.8349C12.4585 22.2794 12.8633 21.882 13.4502 21.8787C14.2648 21.8738 15.0794 21.8771 15.8941 21.8771L15.8949 21.8763Z" fill="#FFFCF4"/>
+					<path d="M15.8867 25.8446C16.6905 25.8446 17.4952 25.8422 18.299 25.8455C18.9141 25.848 19.3231 26.2337 19.3222 26.8C19.3214 27.3662 18.9124 27.7487 18.294 27.7504C16.6963 27.7528 15.0977 27.7528 13.5 27.7504C12.8782 27.7495 12.4668 27.3729 12.461 26.8107C12.4552 26.2321 12.8675 25.8471 13.5041 25.8455C14.298 25.843 15.0919 25.8455 15.8858 25.8455L15.8867 25.8446Z" fill="#FFFCF4"/>
+				</svg>
+			</div>
+			<div class="article-hero__meta-share">
+				<svg class="article-hero__meta-share-btn" xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+					<path d="M0.768329 24.1134C0.87197 23.3081 0.953043 22.5012 1.12271 21.7051C2.64222 14.6021 8.35834 9.0478 15.4744 7.77672C16.0888 7.66717 16.7106 7.59023 17.3324 7.54257C17.6618 7.51748 17.7102 7.37783 17.7094 7.09016C17.6994 4.88919 17.7035 2.68821 17.7035 0.487235C17.7035 0.403611 17.6994 0.319988 17.7052 0.2372C17.7111 0.158594 17.6718 0.0549004 17.7637 0.0114161C17.854 -0.031232 17.9167 0.0557367 17.9785 0.105911C18.546 0.565005 19.1111 1.02744 19.6769 1.48821C23.9446 4.96612 28.2122 8.44403 32.4799 11.9228C32.52 11.9554 32.5568 11.9947 32.6002 12.0223C32.8067 12.1536 32.8017 12.2631 32.6061 12.4195C31.8405 13.0316 31.0866 13.658 30.3276 14.2785C26.2522 17.6125 22.176 20.9466 18.1006 24.2807C18.0847 24.2941 18.0696 24.3091 18.0529 24.3208C17.9601 24.381 17.8832 24.5249 17.7687 24.478C17.6442 24.427 17.7061 24.2732 17.7061 24.167C17.7027 21.9133 17.7035 19.6605 17.7035 17.4068C17.7035 16.9829 17.691 16.9628 17.2597 17.0021C13.5387 17.3424 10.2289 18.6821 7.37876 21.1139C5.63526 22.6015 4.20937 24.356 3.23397 26.429C2.37392 28.2578 1.62754 30.141 0.831852 32C0.702301 31.944 0.773344 31.8311 0.773344 31.75C0.768329 29.2045 0.769166 26.659 0.769166 24.1134H0.768329Z"
+					      fill="#FFFCF4"/>
+				</svg>
+				{% capture share_link %}{{ shop.url }}{{ article.url }}{% endcapture %}
+				{% capture share_title %}{{ article.title | url_param_escape }}{% endcapture %}
+				{% capture share_img %}{{ article.image | img_url: '1024x1024' }}{% endcapture %}
+				<ul class="article__share-items">
+					{% if settings.share_facebook %}
+						<li class="article__share-item">
+							<a href="//www.facebook.com/sharer.php?u={{ share_link }}" class="article__share-link icon-fallback" target="_blank">
+								<i class="icon icon--facebook" aria-hidden="true"></i>
+								<span class="icon-fallback__text">Facebook</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if settings.share_twitter %}
+						<li class="article__share-item">
+							<a href="//twitter.com/share?text={{ share_title }}&amp;url={{ share_link }}" class="article__share-link icon-fallback" target="_blank">
+								<i class="icon icon--twitter" aria-hidden="true"></i>
+								<span class="icon-fallback__text">Twitter</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if settings.share_pinterest %}
+						<li class="article__share-item">
+							<a href="http://pinterest.com/pin/create/button/?url={{ share_link }}&amp;media={{ share_img }}&amp;description={{ share_title }}" class="article__share-link icon-fallback" target="_blank">
+								<i class="icon icon--pinterest" aria-hidden="true"></i>
+								<span class="icon-fallback__text">Pinterest</span>
+							</a>
+						</li>
+					{% endif %}
+					{% if settings.share_mail %}
+						<li class="article__share-item">
+							<a href="mailto:?body={{ share_title }} - {{ share_link }}" class="article__share-link icon-fallback">
+								<i class="icon icon--mail" aria-hidden="true"></i>
+								<span class="icon-fallback__text">Email</span>
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		<div class="article-hero__meta">
+			<div class="article-hero__meta-content">
+				{% comment %}{% if section.settings.show_author != blank %}{% endcomment %}
+				<div class="article-hero__meta-item">
+					<h3 class="article-hero__meta-item-title">{{ section.settings.author_title | default: 'Author' }}</h3>
+					<p class="article-hero__meta-item-text">{{ article.author }}</p>
+				</div>
+				{% comment %}{% endif %}{% endcomment %}
+				{% comment %}{% if section.settings.category != blank %}{% endcomment %}
+				<div class="article-hero__meta-item">
+					<h3 class="article-hero__meta-item-title">{{ section.settings.category_title | default: 'Category' }}</h3>
+					<p class="article-hero__meta-item-text">{{ section.settings.category_text | default: 'Lorem Ipsun' }}</p>
+				</div>
+				{% comment %}{% endif %}{% endcomment %}
+				{% comment %}{% if section.settings.difficulty != blank %}{% endcomment %}
+				<div class="article-hero__meta-item">
+					<h3 class="article-hero__meta-item-title">{{ section.settings.difficulty_title | default: 'Difficulty' }}</h3>
+					<p class="article-hero__meta-item-text">{{ section.settings.difficulty_text | default: 'Easy' }}</p>
+				</div>
+				{% comment %}{% endif %}{% endcomment %}
+			</div>
+			<div class="article-hero__meta-buttons article-hero__meta-buttons--desktop">
+				<div class="article-hero__meta-print" onclick="window.print()">
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+						<path d="M24.0076 31.755H7.77261C6.08296 31.149 5.51754 30.3426 5.51754 28.5388C5.51754 27.4029 5.51174 26.2671 5.52168 25.1321C5.52416 24.8631 5.4331 24.7522 5.16239 24.7745C4.97778 24.7894 4.79068 24.7778 4.60524 24.777C2.0894 24.7654 0.00900884 22.6908 0.00404173 20.1766C-0.00175323 17.6575 -0.000925381 15.1383 0.00404173 12.6192C0.00735314 11.1646 0.600923 9.97831 1.70611 9.0536C2.66973 8.24727 3.79809 7.93103 5.04732 7.99395C5.51588 8.01713 5.51754 7.99726 5.51754 7.54194C5.51754 6.5303 5.51257 5.51867 5.52002 4.50621C5.53658 2.11289 7.63353 0.0126247 10.031 0.00682978C13.9335 -0.00227659 17.836 -0.00227659 21.7385 0.00682978C24.1533 0.0117969 26.2445 2.11123 26.261 4.5269C26.2668 5.42512 26.2585 6.32334 26.2635 7.22156C26.2685 8.1115 26.1501 7.99809 27.0326 7.9956C28.6982 7.98981 29.9979 8.6852 30.9657 10.0222C31.3788 10.5926 31.5949 11.2482 31.7538 11.9262V20.8497C31.7232 20.9589 31.6901 21.0674 31.6636 21.1767C31.402 22.2595 30.8299 23.1436 29.9491 23.8225C28.9822 24.5675 27.877 24.8457 26.6692 24.7811C26.2751 24.7604 26.2643 24.7878 26.2635 25.1735C26.2619 26.4625 26.2602 27.7515 26.2635 29.0404C26.2643 29.4411 26.1683 29.8161 25.9986 30.1746C25.5938 31.0264 24.8951 31.5107 24.0084 31.7566L24.0076 31.755ZM15.8897 9.90463C12.2132 9.90463 8.53671 9.90132 4.86022 9.90629C3.13912 9.90877 1.93128 11.057 1.91555 12.7491C1.8932 15.1756 1.89817 17.6028 1.91472 20.0301C1.92383 21.3075 2.6631 22.3282 3.79726 22.7082C4.2443 22.858 4.7079 22.868 5.17398 22.8738C5.42564 22.8771 5.52499 22.7918 5.52085 22.5335C5.50926 21.8414 5.51671 21.1493 5.51671 20.4581C5.51671 20.0563 5.3172 19.8427 4.91817 19.8173C4.45126 19.7875 4.07459 19.4274 4.03403 18.9729C3.98932 18.4729 4.2948 18.0308 4.76833 17.9356C4.91817 17.9058 5.07629 17.9133 5.2311 17.9133C12.3366 17.9124 19.442 17.9133 26.5475 17.9133C26.6509 17.9133 26.7544 17.91 26.8571 17.9166C27.3248 17.9439 27.7015 18.3024 27.7445 18.7569C27.7909 19.256 27.4862 19.6981 27.0135 19.7966C26.8745 19.8256 26.7254 19.8264 26.5822 19.8173C26.3364 19.8024 26.2569 19.9125 26.2602 20.1485C26.2693 20.8199 26.2602 21.4912 26.2643 22.1626C26.2685 22.9499 26.1658 22.8762 26.9788 22.868C28.656 22.8498 29.8481 21.7007 29.8647 20.0301C29.8895 17.6037 29.8829 15.1764 29.8655 12.7491C29.8572 11.6423 29.3688 10.7846 28.3853 10.2374C27.9109 9.97334 27.3902 9.90629 26.8587 9.90629C23.2029 9.90463 19.5471 9.90546 15.8905 9.90629L15.8897 9.90463ZM15.8905 19.8198C13.2174 19.8198 10.5434 19.8198 7.87029 19.8198C7.57392 19.8198 7.42546 19.9697 7.42491 20.2693C7.42491 23.0766 7.42491 25.8847 7.42491 28.6919C7.42491 29.5355 7.7635 29.8716 8.61205 29.8716C13.4633 29.8716 18.3153 29.8716 23.1665 29.8716C24.0159 29.8716 24.3553 29.5347 24.3553 28.6936C24.3553 25.8863 24.3553 23.0782 24.3553 20.271C24.3553 19.9708 24.2071 19.8204 23.9108 19.8198C21.2376 19.8198 18.5637 19.8198 15.8905 19.8198ZM15.8897 7.99726C18.5852 7.99726 21.2807 7.99395 23.9762 8.00222C24.251 8.00222 24.3652 7.93103 24.3611 7.63631C24.3462 6.68677 24.3669 5.73639 24.3528 4.78602C24.3288 3.12369 23.1847 1.92993 21.529 1.91917C17.7697 1.89599 14.0105 1.89764 10.252 1.91917C8.7296 1.92745 7.63932 2.91673 7.46713 4.41763C7.34957 5.44416 7.44229 6.48063 7.42574 7.51296C7.41828 7.99809 7.42491 7.99891 7.89678 7.99891C10.5608 7.99891 13.2257 7.99891 15.8897 7.99891V7.99726Z"
+						      fill="#FFFCF4"/>
+						<path d="M6.47177 11.9631C6.95606 11.9631 7.44036 11.9581 7.92465 11.9639C8.50994 11.9705 8.91311 12.3679 8.90897 12.925C8.90483 13.4665 8.50497 13.863 7.93624 13.8671C6.95772 13.8738 5.97837 13.8738 4.99985 13.8671C4.43443 13.863 4.03375 13.4632 4.03126 12.9217C4.02878 12.3778 4.42697 11.9738 4.98826 11.9647C5.48249 11.9573 5.97754 11.9631 6.47177 11.9631Z" fill="#FFFCF4"/>
+						<path d="M15.8949 21.8763C16.6987 21.8763 17.5034 21.8729 18.3072 21.8771C18.9182 21.8804 19.3272 22.272 19.3222 22.8399C19.318 23.3929 18.9116 23.7803 18.3172 23.782C16.6987 23.7853 15.0794 23.7861 13.461 23.782C12.8699 23.7803 12.4634 23.3887 12.4609 22.8349C12.4585 22.2794 12.8633 21.882 13.4502 21.8787C14.2648 21.8738 15.0794 21.8771 15.8941 21.8771L15.8949 21.8763Z" fill="#FFFCF4"/>
+						<path d="M15.8867 25.8446C16.6905 25.8446 17.4952 25.8422 18.299 25.8455C18.9141 25.848 19.3231 26.2337 19.3222 26.8C19.3214 27.3662 18.9124 27.7487 18.294 27.7504C16.6963 27.7528 15.0977 27.7528 13.5 27.7504C12.8782 27.7495 12.4668 27.3729 12.461 26.8107C12.4552 26.2321 12.8675 25.8471 13.5041 25.8455C14.298 25.843 15.0919 25.8455 15.8858 25.8455L15.8867 25.8446Z" fill="#FFFCF4"/>
+					</svg>
+				</div>
+				<div class="article-hero__meta-share">
+					<svg class="article-hero__meta-share-btn" xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+						<path d="M0.768329 24.1134C0.87197 23.3081 0.953043 22.5012 1.12271 21.7051C2.64222 14.6021 8.35834 9.0478 15.4744 7.77672C16.0888 7.66717 16.7106 7.59023 17.3324 7.54257C17.6618 7.51748 17.7102 7.37783 17.7094 7.09016C17.6994 4.88919 17.7035 2.68821 17.7035 0.487235C17.7035 0.403611 17.6994 0.319988 17.7052 0.2372C17.7111 0.158594 17.6718 0.0549004 17.7637 0.0114161C17.854 -0.031232 17.9167 0.0557367 17.9785 0.105911C18.546 0.565005 19.1111 1.02744 19.6769 1.48821C23.9446 4.96612 28.2122 8.44403 32.4799 11.9228C32.52 11.9554 32.5568 11.9947 32.6002 12.0223C32.8067 12.1536 32.8017 12.2631 32.6061 12.4195C31.8405 13.0316 31.0866 13.658 30.3276 14.2785C26.2522 17.6125 22.176 20.9466 18.1006 24.2807C18.0847 24.2941 18.0696 24.3091 18.0529 24.3208C17.9601 24.381 17.8832 24.5249 17.7687 24.478C17.6442 24.427 17.7061 24.2732 17.7061 24.167C17.7027 21.9133 17.7035 19.6605 17.7035 17.4068C17.7035 16.9829 17.691 16.9628 17.2597 17.0021C13.5387 17.3424 10.2289 18.6821 7.37876 21.1139C5.63526 22.6015 4.20937 24.356 3.23397 26.429C2.37392 28.2578 1.62754 30.141 0.831852 32C0.702301 31.944 0.773344 31.8311 0.773344 31.75C0.768329 29.2045 0.769166 26.659 0.769166 24.1134H0.768329Z"
+						      fill="#FFFCF4"/>
+					</svg>
+					{% capture share_link %}{{ shop.url }}{{ article.url }}{% endcapture %}
+					{% capture share_title %}{{ article.title | url_param_escape }}{% endcapture %}
+					{% capture share_img %}{{ article.image | img_url: '1024x1024' }}{% endcapture %}
+					<ul class="article__share-items">
+						{% if settings.share_facebook %}
+							<li class="article__share-item">
+								<a href="//www.facebook.com/sharer.php?u={{ share_link }}" class="article__share-link icon-fallback" target="_blank">
+									<i class="icon icon--facebook" aria-hidden="true"></i>
+									<span class="icon-fallback__text">Facebook</span>
+								</a>
+							</li>
+						{% endif %}
+						{% if settings.share_twitter %}
+							<li class="article__share-item">
+								<a href="//twitter.com/share?text={{ share_title }}&amp;url={{ share_link }}" class="article__share-link icon-fallback" target="_blank">
+									<i class="icon icon--twitter" aria-hidden="true"></i>
+									<span class="icon-fallback__text">Twitter</span>
+								</a>
+							</li>
+						{% endif %}
+						{% if settings.share_pinterest %}
+							<li class="article__share-item">
+								<a href="http://pinterest.com/pin/create/button/?url={{ share_link }}&amp;media={{ share_img }}&amp;description={{ share_title }}" class="article__share-link icon-fallback" target="_blank">
+									<i class="icon icon--pinterest" aria-hidden="true"></i>
+									<span class="icon-fallback__text">Pinterest</span>
+								</a>
+							</li>
+						{% endif %}
+						{% if settings.share_mail %}
+							<li class="article__share-item">
+								<a href="mailto:?body={{ share_title }} - {{ share_link }}" class="article__share-link icon-fallback">
+									<i class="icon icon--mail" aria-hidden="true"></i>
+									<span class="icon-fallback__text">Email</span>
+								</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+			{% comment %}{% if section.settings.show_sharing %}{% endcomment %}
+
+			{% comment %}{% endif %}{% endcomment %}
+		</div>
+
+		<div class="article-hero__list">
+			{% for block in section.blocks %}
+				<div class="article-hero__item" {{ block.shopify_attributes }}>
+					{% if block.settings.icon != blank %}
+						<div class="article-hero__item-img">
+							<img src="{{ block.settings.icon | img_url: 'master' }}" alt="{{ block.settings.icon.alt }}" loading="lazy">
+							<div class="article-hero__item-content">
+								{% if block.settings.icon_text != blank %}
+									<span class="article-hero__item-title">{{ block.settings.icon_text }}</span>
+								{% endif %}
+								{% if block.settings.title != blank %}
+									<div class="article-hero__item-text">{{ block.settings.title }}</div>
+								{% endif %}
+							</div>
+						</div>
+					{% endif %}
+
+				</div>
+			{% endfor %}
+		</div>
+		{% if section.settings.copy != blank %}
+			<div class="article-hero__content u-text-center rte">
+				{{ section.settings.copy }}
+			</div>
+		{% endif %}
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Recipe Article Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "author_title",
+      "label": "Author Heading"
+    },
+    {
+      "type": "text",
+      "id": "category_title",
+      "label": "Category Heading"
+    },
+    {
+      "type": "text",
+      "id": "category_text",
+      "label": "Category Text"
+    },
+    {
+      "type": "text",
+      "id": "difficulty_title",
+      "label": "Difficulty Heading"
+    },
+    {
+      "type": "text",
+      "id": "difficulty_text",
+      "label": "Difficulty Text"
+    },
+    {
+      "type": "richtext",
+      "id": "copy",
+      "label": "Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "icon_text",
+          "label": "Icon text"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recipe Article Hero",
+      "blocks": [
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        },
+        {
+          "type": "icon"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

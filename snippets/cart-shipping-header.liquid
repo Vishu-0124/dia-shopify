@@ -1,0 +1,9 @@
+<shipping-notice
+        class="cart-notice hide-if-empty-cart"
+        data-free-shipping="{{ settings.cart_free_shipping_amount | times: 100 }}"
+        data-cart-total-amount="{{ cart.total_price }}"
+        data-money-format="{{ shop.money_format }}"
+>
+
+</shipping-notice>
+<script src="{{ 'component-shipping-notice.js' | asset_url }}" defer></script>

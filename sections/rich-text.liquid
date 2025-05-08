@@ -1,0 +1,164 @@
+<style>
+	#shopify-section-{{ section.id }} .section__title {
+		text-align: {{ section.settings.title_alignment}};
+	}
+
+	#shopify-section-{{ section.id }} .rewards-rich-text__content {
+		text-align: {{ section.settings.text_alignment}};
+	}
+
+	#shopify-section-{{ section.id }} {
+		margin-top: {{ section.settings.margin_top }}px;
+		margin-bottom: {{ section.settings.margin_bottom }}px;
+	}
+
+	@media screen and (max-width: 768px) {
+		#shopify-section-{{ section.id }} {
+			margin-top: calc({{ section.settings.margin_top }}px * 0.6);
+			margin-bottom: calc({{ section.settings.margin_bottom }}px * 0.6);
+		}
+	}
+</style>
+
+<div class="rich-text">
+	<div class="container{% if section.settings.full_width %} container--medium{% else %} container--tiny{% endif %}">
+		{% if section.settings.section_title != blank %}
+			<div class="section__title section__title--desc rewards-rich-text__title">
+				<h2 class="section__title-text">{{ section.settings.section_title | escape }}</h2>
+			</div>
+		{% endif %}
+		{% if section.settings.text != blank %}
+			<div class="rewards-rich-text__content u-text-center rte">
+				{{ section.settings.text }}
+			</div>
+		{% endif %}
+		{% if section.settings.btn_url != blank and section.settings.btn_text != blank %}
+			<div class="rewards-rich-text__btn rewards-rich-text__btn--{{ section.settings.btn_alignment }}">
+				<a href="{{ section.settings.btn_url }}" class=" button account__form-submit">
+					{{ section.settings.btn_text }}
+				</a>
+			</div>
+		{% endif %}
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Rich text - Rewards page",
+  "class": "js-section__rich-text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section styles"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Section top margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Section bottom margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button url"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button label"
+    },
+    {
+      "type": "select",
+      "id": "btn_alignment",
+      "label": "Button alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "Rich text - Rewards page",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

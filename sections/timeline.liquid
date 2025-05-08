@@ -1,0 +1,176 @@
+<link rel="stylesheet" href="{{ 'timeline.css' | asset_url }}">
+
+<style>
+	#shopify-section-{{ section.id }} {
+		padding-top: {{ section.settings.padding_top }}px;
+		padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+
+	@media (max-width: 767px) {
+		#shopify-section-{{ section.id }} {
+			padding-top: {{ section.settings.padding_top_mobile }}px;
+			padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+		}
+	}
+</style>
+
+<ul class="timeline">
+	{% for block in section.blocks %}
+		{% case block.type %}
+			{% when 'content_left' %}
+				<div class="container left" {{ block.shopify_attributes }}>
+					<div class="content">
+						<h2 class="title">{{ block.settings.date }}</h2>
+						<div class="copy">
+							{{ block.settings.title }}
+						</div>
+						{% if block.settings.table != '' %}
+							<div class="table">
+								{% assign table = block.settings.table | split: "/ " %}
+								{% for row in table %}
+									{{ row }}
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			{% when 'content_right' %}
+				<div class="container right" {{ block.shopify_attributes }}>
+					<div class="content">
+						<h2 class="title">{{ block.settings.date }}</h2>
+						<div class="copy">
+							{{ block.settings.title }}
+						</div>
+						{% if block.settings.table != '' %}
+							<div class="table">
+								{% assign table = block.settings.table | split: "/ " %}
+								{% for row in table %}
+									<div class="row">
+										{{ row }}
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+		{% endcase %}
+	{% endfor %}
+</ul>
+
+{% schema %}
+{
+  "name": "Timeline",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Section padding mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content_left",
+      "name": "Content left",
+      "settings": [
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Content"
+        },
+        {
+          "type": "textarea",
+          "id": "table",
+          "label": "Table",
+          "info": "In order to make this table work you need to separate column with a backslash - / Table can be only two columned"
+        }
+      ]
+    },
+    {
+      "type": "content_right",
+      "name": "Content right",
+      "settings": [
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Content"
+        },
+        {
+          "type": "textarea",
+          "id": "table",
+          "label": "Table",
+          "info": "In order to make this table work you need to separate column with a backslash - / Table can be only two columned"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timeline",
+      "blocks": [
+        {
+          "type": "content_left"
+        },
+        {
+          "type": "content_right"
+        },
+        {
+          "type": "content_left"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

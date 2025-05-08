@@ -1,0 +1,112 @@
+.how-it-works .how-it-works__title {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.how-it-works .how-it-works__title > * {
+  margin-bottom: 0;
+}
+
+.how-it-works__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  row-gap: 48px;
+}
+
+.how-it-works__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.how-it-works__item .title {
+  position: relative;
+}
+
+.how-it-works__item .title {
+  color: #e0d3b4;
+  text-align: center;
+  font-family: "new-hero";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+.how-it-works__item .copy {
+  color: #4b5058;
+  text-align: center;
+  font-family: "new-hero";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.how-it-works__item .copy a {
+  word-break: keep-all;
+}
+
+.how-it-works__item .title > * {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .how-it-works__item:nth-child(3n + 1) .title::after,
+  .how-it-works__item:nth-child(2) .title::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: #4b5058;
+    width: min(173px, 13vw);
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(100% + 32px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .how-it-works__grid {
+    grid-template-columns: 100%;
+    gap: 20px;
+  }
+
+  .how-it-works__item {
+    gap: 5px;
+  }
+
+  .how-it-works__item .title:after,
+  .how-it-works__item .title:before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background-color: #4b5058;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+  }
+
+  .how-it-works__item .title:after {
+    left: calc(100% + 13px);
+  }
+
+  .how-it-works__item .title:before {
+    right: calc(100% + 13px);
+  }
+
+  .how-it-works__item .title {
+    font-size: 16px;
+  }
+
+  .how-it-works .how-it-works__title {
+    margin-bottom: 12px;
+  }
+
+  .how-it-works__item .copy {
+    font-size: 12px;
+  }
+}

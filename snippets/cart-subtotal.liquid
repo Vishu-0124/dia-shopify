@@ -1,0 +1,41 @@
+<div id="AjaxCartSubtotal">
+	{%- liquid
+		if settings.show_currency_codes
+			assign iso_code = localization.country.currency.iso_code | prepend: ' '
+		endif
+	-%}
+
+	<div class="cart__details 
+		{% if type == 'page' %} cart__subtotal-widget element--has-border--body element--border-radius {% endif %}
+		{% if cart.item_count == 0 %} cart--empty {% endif %}
+	">
+
+		<div class="cart__total">
+			<strong>{{ 'cart.general.subtotal' | t }}:&nbsp;</strong>
+			<span class="text-size--heading">{{ cart.total_price | money | append: iso_code }}</span>
+		</div>
+
+
+
+		<div class="flex-buttons" >
+			<a id="ViewCart" href="{{ routes.cart_url }}" class="button">{{ 'cart.general.view_cart' | t }}</a>
+
+			<a href="/collections" class="button">
+				{{ 'cart.general.continue_shopping' | t }}
+			</a>
+			<button id="CheckOut" class="button button--regular {% if type == 'page' %} button--regular-mobile {% endif %} button--solid" type="submit" form="cart">
+				{{ 'cart.general.checkout' | t }} - {{ cart.total_price | money | append: iso_code }}
+			</button>
+		</div>
+
+		{%- unless template contains 'order' -%}
+			{%- if settings.cart_drawer_actions contains 'show-checkout' or type == 'page' -%}
+				{%- if additional_checkout_buttons and settings.cart_additional_buttons -%}
+					<div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
+				{%- endif -%}
+			{%- endif -%}
+		{%- endunless -%}
+
+	</div>
+
+</div>

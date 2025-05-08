@@ -1,0 +1,70 @@
+<style>
+    #shopify-section-{{ section.id }} .collection-benefits{
+        background-color: {{ section.settings.bg_color }};
+        color: {{ section.settings.text_color }};
+    }
+</style>
+
+<div class="collection-benefits">
+  <div class="container">
+    <span class="collection-benefits__content">
+        {% if section.settings.title != blank %}
+            <div class="collection-benefits__title">{{ section.settings.title }}</div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+            <div class="collection-benefits__list">
+                {% for block in section.blocks %}
+                    <div class="collection-benefits__list-item">
+                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.47649 5.92447C1.83252 5.92724 2.15112 6.03176 2.41648 6.259C3.26414 6.98626 4.10764 7.71786 4.95321 8.4471C5.1932 8.65415 5.33545 8.649 5.55589 8.41305C6.46843 7.4348 7.37889 6.45457 8.29018 5.47474C9.37991 4.3029 10.4696 3.13066 11.5594 1.95842C12.0784 1.40021 12.5971 0.84161 13.1162 0.283006C13.1644 0.231144 13.2114 0.178094 13.263 0.130191C13.4343 -0.0285614 13.6681 -0.0432094 13.8399 0.0921858C14.0162 0.231144 14.0507 0.440571 13.9243 0.633766C12.6961 2.51742 11.4674 4.40068 10.2388 6.28394C8.94443 8.26815 7.64882 10.2512 6.35779 12.237C6.12113 12.6012 5.81875 12.8755 5.36706 12.9662C4.87668 13.0648 4.43871 12.9496 4.10597 12.5957C3.71875 12.1843 3.36188 11.7465 2.9942 11.3185C2.127 10.3094 1.27394 9.28956 0.391343 8.2931C-0.338606 7.46924 0.022001 6.37935 0.900851 6.03018C1.08511 5.95693 1.27643 5.91814 1.47732 5.92408L1.47649 5.92447Z" fill="white"/>
+                        </svg>
+                        <span>{{ block.settings.title }}</span>                 
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </span>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection benefits",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color"
+      }
+    ],
+    "blocks": [
+        {
+            "type": "item",
+            "name": "item",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "Collection benefits"
+      }
+    ]
+  }
+{% endschema %}

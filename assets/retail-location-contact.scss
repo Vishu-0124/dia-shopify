@@ -1,0 +1,73 @@
+@use "variables" as *;
+
+.retail-location-contact {
+  padding-top: var(--padding-top-section);
+  padding-bottom: var(--padding-bottom-section);
+  position: relative;
+  background: var(--background-color);
+
+  @media screen and (max-width: $ui-breakpoints-lg) {
+    padding-top: var(--padding-top-section-mob);
+    padding-bottom: var(--padding-bottom-section-mob);
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 24px 0;
+
+    @media screen and (max-width: $ui-breakpoints-lg) {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  &__time,
+  &__phone,
+  &__address {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__phone {
+    gap: 28px;
+  }
+
+  &__time-item,
+  &__phone-item,
+  &__address-item {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    p {
+      margin: 0;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 100%;
+      letter-spacing: 0;
+      text-align: center;
+      padding: 5px;
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    background-color: #333;
+
+    @media screen and (max-width: $ui-breakpoints-lg) {
+      width: 80%;
+      height: 1px;
+      align-self: anchor-center;
+    }
+  }
+}

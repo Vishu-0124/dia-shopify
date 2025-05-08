@@ -1,0 +1,181 @@
+@use "variables" as *;
+
+.retail-location-map {
+  padding-top: var(--padding-top-section);
+  padding-bottom: var(--padding-bottom-section);
+  position: relative;
+  height: 830px;
+  @media screen and (max-width: $ui-breakpoints-lg) {
+    padding-top: var(--padding-top-section-mob);
+    padding-bottom: var(--padding-bottom-section-mob);
+  }
+  @media screen and (min-width: $ui-breakpoints-md--min) and (max-width: $ui-breakpoints-xl) {
+    height: 850px;
+  }
+  @media screen and (min-width: $ui-breakpoints-sm--min) and (max-width: $ui-breakpoints-md) {
+    height: 740px;
+  }
+  @media screen and (max-width: $ui-breakpoints-sm) {
+    height: 675px;
+  }
+
+  &__background-top,
+  &__background-bottom {
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+  }
+  &__background-top {
+    background-image: var(--background-image-top);
+    top: 0;
+    left: 0;
+    height: 1500px;
+    transform: translate(-70%, -50%);
+    @media screen and (min-width: $ui-breakpoints-md--min) and (max-width: $ui-breakpoints-xl) {
+      height: 966px;
+    }
+    @media screen and (max-width: $ui-breakpoints-md) {
+      height: 450px;
+      transform: translate(-70%, -33%);
+    }
+  }
+  &__background-bottom {
+    background-image: var(--background-image-bottom);
+    transform: translate(67%, 30%);
+    bottom: 0;
+    right: 0;
+  }
+  &__description {
+    position: absolute;
+    background: #e0d3b4;
+    transform: translate(5%, -20%);
+    top: 0;
+    left: 0;
+    width: 90%;
+  }
+  &__description-item {
+    text-align: center;
+    padding: 50px 40px;
+    p {
+      margin: 0;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 100%;
+      letter-spacing: 0;
+      text-align: center;
+      color: #2a2a2a;
+    }
+    @media screen and (min-width: $ui-breakpoints-md--min) and (max-width: $ui-breakpoints-xl) {
+      padding: 25px 20px;
+      p {
+        font-size: 18px;
+      }
+    }
+    @media screen and (max-width: $ui-breakpoints-md) {
+      padding: 15px 10px;
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+  &__container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    @media screen and (min-width: $ui-breakpoints-md--min) and (max-width: $ui-breakpoints-xl) {
+      flex-direction: column;
+    }
+    @media screen and (max-width: $ui-breakpoints-md) {
+      flex-direction: column;
+    }
+
+
+  }
+  &__map {
+    width: 567px;
+    aspect-ratio: 567 / 482;
+    @media screen and (max-width: $ui-breakpoints-md) {
+      width: 85%;
+    }
+  }
+  &__comment {
+    background: #294029;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 604px;
+    position: relative;
+    left: -36px;
+    &-item {
+      p {
+        margin: 0;
+        font-weight: 400;
+        font-size: 25px;
+        line-height: 100%;
+        letter-spacing: 0;
+        color: #ffffff;
+      }
+    }
+    @media screen and (min-width: $ui-breakpoints-md--min) and (max-width: $ui-breakpoints-xl) {
+      left: 0;
+      top: 0;
+      padding: 30px;
+      gap: 20px;
+      p {
+        font-size: 18px;
+      }
+    }
+    @media screen and (max-width: $ui-breakpoints-md) {
+      left: 0;
+      top: 0;
+      padding: 30px;
+      width: 80%;
+      gap: 10px;
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+  &__button {
+    background: #e0d3b4;
+    width: fit-content;
+    a {
+      font-family: sans-serif;
+      padding: 7px 24px;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 100%;
+      letter-spacing: 0;
+      vertical-align: middle;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media screen and (min-width: $ui-breakpoints-md--min) and (max-width: $ui-breakpoints-xl) {
+      a {
+        font-size: 20px;
+      }
+    }
+    @media screen and (max-width: $ui-breakpoints-md) {
+      a {
+        font-size: 16px;
+      }
+    }
+  }
+  .gm-style-cc, .gmnoprint {
+    visibility: visible;
+  }
+  .gm-bundled-control{
+    left: 0;
+    right: unset;
+  }
+}

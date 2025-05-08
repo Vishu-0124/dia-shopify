@@ -1,0 +1,79 @@
+<div class="vacancies" style="background-color: {{ section.settings.bg_color }};">
+	<div class="container">
+		{% if section.settings.title != blank %}
+			<div class="vacancies__title">
+				{{ section.settings.title }}
+			</div>
+		{% endif %}
+		<div class="vacancies__grid">
+			{% for block in section.blocks %}
+				<a href="{{ block.settings.url }}" class="vacancies__item" style="background-color: {{ block.settings.bg_color }};" {{ block.shopify_attributes }}>
+					{% if block.settings.title != blank %}
+						{{ block.settings.title }}
+					{% endif %}
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Vacancies Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Vacancies Section Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vacancy",
+      "name": "Vacancy",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Vacancy Color",
+          "default": "#294029"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Vacancy Link"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Vacancy Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vacancies Section",
+      "blocks": [
+        {
+          "type": "vacancy"
+        },
+        {
+          "type": "vacancy"
+        },
+        {
+          "type": "vacancy"
+        },
+        {
+          "type": "vacancy"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

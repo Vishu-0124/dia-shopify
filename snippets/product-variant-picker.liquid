@@ -1,0 +1,190 @@
+{% comment %}
+  Renders product variant picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} block object (to access block settings).
+  - default_to_first_variant: {Boolean} default to first available variant if true.
+  - id: {String} unique id (can be id).
+  - no_history: {Boolean} if true, variant picker will not update URL.
+  Usage:
+  {% render 'product-variant-options', type: 'select', option: option, product: product, current_variant: current_variant, default_to_first_variant: true, handle_unavailable_variants: 'show' %}
+{% endcomment %}
+<product-variants
+        data-variants="{{ product.options_with_values.size }}"
+        data-type="{{ block.settings.variants_style }}"
+        data-hide-variants="true"
+        data-url="{{ product.url }}" data-id="{{ id }}"
+        data-style="{{ block.settings.variants_style }}"
+        {% if no_history %} data-no-history {% endif %}
+        {% unless default_to_first_variant %} data-variant-required {% endunless %}
+        {% unless product.has_only_default_variant %} data-has-variants {% elsif product.available == false %} data-unavailable {% endunless %}
+        {{ block.shopify_attributes }}
+>
+
+    {%- if block.settings.variants_style == 'select' -%}
+
+        <div class="product-variants product-variants--select buttons-holder no-js-hidden"
+                {% if product.has_only_default_variant %} style="display:none" {% endif %}
+        >
+            {%- for option in product.options_with_values -%}
+                <div class="product-variant" data-js-product-variant>
+                    <label class="product-variant__name text-size--large"
+                           for="product-{{ option.name | escape | downcase | strip }}-{{ id }}">{{ option.name }}</label>
+                    <select class="product-variant-container" id="product-{{ option.name | escape | downcase | strip }}-{{ id }}"
+                            data-js-product-variant-container="select">
+                        {%- unless default_to_first_variant -%}
+                            <option class="product-variant-value" default selected
+                                    disabled>{{ 'products.grid.select_variant' | t: variant: option.name }}</option>
+                        {%- endunless -%}
+                        {%- for value in option.values -%}
+                            <option class="product-variant-value" value="{{ value | escape }}"
+                                    {% if default_to_first_variant and option.selected_value == value %}selected{% endif %}>
+                                {{ value | escape }}
+                            </option>
+                        {%- endfor -%}
+                    </select>
+                </div>
+            {%- endfor -%}
+        </div>
+
+    {%- else -%}
+
+        <div class="product-variants product-variants--radio no-js-hidden"
+                {% if product.has_only_default_variant %} style="display:none" {% endif %}
+        >
+
+            {%- for option in product.options_with_values -%}
+                <div class="product-variant" data-name="product-{{ option.name | escape | downcase | strip }}-{{ id }}" data-js-product-variant>
+
+                    <span class="product-variant__name text-size--large">{{ option.name }}</span>
+
+                    <div class="product-variant__container" data-js-product-variant-container="radio">
+                        {%- for value in option.values -%}
+                            {% comment %}{{ value.variant.metafields.custom.hide_from_website.value }}{% endcomment %}
+                            {% comment %}{% unless value.variant.metafields.custom.hide_from_website.value == true %}{% endcomment %}
+                                <div class="product-variant__item"
+                                        {% if value.variant.metafields.custom.hide_from_website.value == true %}style="display: none;" {% endif %}
+                                >
+
+                                    <input type="radio" name="product-{{ option.name | escape | downcase | strip }}-{{ id }}"
+                                           id="{{ product.handle }}-option-{{ option.name | escape | downcase | strip }}-{{ forloop.index }}-{{ id }}"
+                                           value="{{ value | escape }}" {% if default_to_first_variant and option.selected_value == value %}checked{% endif %}
+                                           class="product-variant__input product-variant-value">
+
+                                    <label for="{{ product.handle }}-option-{{ option.name | escape | downcase | strip }}-{{ forloop.index }}-{{ id }}"
+                                           class="product-variant__label">
+
+                                        {%- if value.swatch.image -%}
+                                            {%- assign color_swatch_image = value.swatch.image -%}
+                                            <img class="product-variant__item-swatch product-variant__item-swatch--color"
+                                                 src="{{ color_swatch_image | image_url: width: 28, height: 28, crop: 'center' }}"
+                                                 srcset="
+                        {{ color_swatch_image | image_url: width: 28, height: 28, crop: 'center' }} 28w,
+                        {{ color_swatch_image | image_url: width: 56, height: 56, crop: 'center' }} 56w,
+                        {{ color_swatch_image | image_url: width: 84, height: 84, crop: 'center' }} 84w
+                      "
+                                                 sizes="30px" width="30" height="30"
+                                                 loading="lazy"
+                                                 alt="{{ color_swatch_image.alt | escape }}"
+                                            />
+
+                                        {%- elsif value.swatch.color -%}
+                                            {%- assign color_swatch_background = 'rgb(' | append: value.swatch.color.rgb | append: ')' -%}
+                                            <span class="product-variant__item-swatch product-variant__item-swatch--image"
+                                                  style="background-color:{{ color_swatch_background }}"></span>
+
+                                        {%- endif -%}
+
+                                        {{ value }}
+                                    </label>
+
+                                </div>
+                            {% comment %}{% endunless %}{% endcomment %}
+                        {%- endfor -%}
+                    </div>
+
+                </div>
+
+            {%- endfor -%}
+
+        </div>
+
+    {%- endif -%}
+
+    {%- if block.settings.show_quantities != "no" -%}
+        <span class="product-variant__quantity text-size--small text-color--secondary"
+              data-js-variant-quantity
+              data-type="{{ block.settings.show_quantities }}"
+              data-low-stock="5"
+        ></span>
+        {%- capture variant_inventory -%}
+            [{%- for variant in product.variants -%}
+            {% unless variant.metafields.custom.hide_from_website.value %}
+                {
+                "id": {{ variant.id }}{%- if variant.inventory_management != null -%},
+                "quantity": {{ variant.inventory_quantity }},
+                "inventory": "{{ variant.inventory_policy }}"{%- endif -%}
+                {%- if variant.available == false -%},"unavailable": true{%- endif -%}
+                }{%- unless forloop.last -%},{%- endunless -%}
+            {% endunless %}
+        {%- endfor -%}]
+        {%- endcapture -%}
+        <span data-js-variant-quantity-data data-inventory='{{ variant_inventory }}'></span>
+    {%- endif -%}
+
+    <script type="application/json">
+        [
+        {% for variant in product.variants %}
+        {
+          "id": {{ variant.id }},
+          "title": "{{ variant.title | escape }}",
+          "option1": "{{ variant.option1 | escape }}",
+          "option2": {{ variant.option2 | json }},
+          "option3": {{ variant.option3 | json }},
+          "sku": "{{ variant.sku | escape }}",
+          "requires_shipping": {{ variant.requires_shipping }},
+          "taxable": {{ variant.taxable }},
+          "featured_image": {% if variant.featured_image %}{
+            "id": {{ variant.featured_image.id }},
+            "product_id": {{ variant.featured_image.product_id }},
+            "position": {{ variant.featured_image.position }},
+            "created_at": "{{ variant.featured_image.created_at }}",
+            "updated_at": "{{ variant.featured_image.updated_at }}",
+            "alt": {{ variant.featured_image.alt | json }},
+            "width": {{ variant.featured_image.width }},
+            "height": {{ variant.featured_image.height }},
+            "src": "{{ variant.featured_image.src | escape }}",
+            "variant_ids": {{ variant.featured_image.variant_ids | json }}
+          }{% else %}null{% endif %},
+          "available": {{ variant.available }},
+          "name": "{{ variant.name | escape }}",
+          "public_title": {{ variant.public_title | json }},
+          "options": {{ variant.options | json }},
+          "price": {{ variant.price }},
+          "weight": {{ variant.weight }},
+          "compare_at_price": {{ variant.compare_at_price | json }},
+          "inventory_management": {{ variant.inventory_management | json }},
+          "barcode": {{ variant.barcode | json }},
+          "requires_selling_plan": {{ variant.requires_selling_plan }},
+          "selling_plan_allocations": {{ variant.selling_plan_allocations | json }},
+          "quantity_rule": {
+            "min": {{ variant.quantity_rule.min }},
+            "max": {{ variant.quantity_rule.max | json }},
+            "increment": {{ variant.quantity_rule.increment }}
+          },
+           "metafields": {
+                  "custom": {
+                    "hide_from_website": {
+                      "value": {{ variant.metafields.custom.hide_from_website.value | json }}
+                    }
+                  }
+                }
+        }
+        {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+        ]
+    </script>
+
+
+</product-variants>

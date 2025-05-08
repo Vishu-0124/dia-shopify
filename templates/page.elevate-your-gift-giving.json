@@ -1,0 +1,294 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-sections-1": {
+      "type": "page-sections-1",
+      "disabled": true,
+      "settings": {
+        "container": "medium"
+      }
+    },
+    "image_banner_MCFF6Q": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/Elevate_your_gift_giving.png",
+        "image_alignment": "center",
+        "mob_image_height": "257",
+        "show_logo_icon": true,
+        "enable_overlay": true,
+        "title": "Elevate your gift giving"
+      }
+    },
+    "hero_rich_text_k9jbbB": {
+      "type": "hero-rich-text",
+      "settings": {
+        "margin_top": 40,
+        "margin_bottom": 70,
+        "margin_top_mobile": 36,
+        "margin_bottom_mobile": 36,
+        "max_width": 1020,
+        "text": "<p>A gift box from Booth Creek Wagyu is a quick yet unforgettable way to let employees, clients, or anyone special know how valued they truly are.</p>",
+        "text_alignment": "center"
+      }
+    },
+    "bundle_facts_bdqnfX": {
+      "type": "bundle-facts",
+      "blocks": {
+        "icon_zcAPCA": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Calendar_-_icon_8d80efa6-e2ed-4630-8d4b-716cf14b7b7c.svg",
+            "icon_text": "<p>Anniversary <br/>gifts</p>",
+            "title": ""
+          }
+        },
+        "icon_yEADNh": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Cake_-_icon_2e2e6b57-5369-46ff-a62c-1562840f6218.svg",
+            "icon_text": "<p>Birthday<br/>gifts</p>",
+            "title": ""
+          }
+        },
+        "icon_6tUwUP": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/Gift_-_icon_7e10333c-7cbb-4ccd-a926-bcdbd516b6f0.svg",
+            "icon_text": "<p>Holiday<br/>gifts</p>",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_zcAPCA",
+        "icon_yEADNh",
+        "icon_6tUwUP"
+      ],
+      "settings": {
+        "title": "WAGYU IS PERFECT FOR",
+        "copy": ""
+      }
+    },
+    "how_it_works_4kkzRC": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_JUYFEX": {
+          "type": "step",
+          "settings": {
+            "title": "<p>STEP 1</p>",
+            "copy": "<p>Choose your gifts from our most popular gift boxes, put together by our Wagyu experts.</p>"
+          }
+        },
+        "step_fw9x9L": {
+          "type": "step",
+          "settings": {
+            "title": "<p>STEP 2</p>",
+            "copy": "<p>Download and complete the <a href=\"https://cdn.shopify.com/s/files/1/0475/4984/1560/files/BCW_2023_GiftBox_OrderForm_02e4fbec-e56d-4823-ac99-b35ed45f8290.xlsx?v=1734466364\" target=\"_blank\" title=\"https://cdn.shopify.com/s/files/1/0475/4984/1560/files/BCW_2023_GiftBox_OrderForm_02e4fbec-e56d-4823-ac99-b35ed45f8290.xlsx?v=1734466364\"><strong>order form </strong></a>with the required information.</p>"
+          }
+        },
+        "step_jTatLD": {
+          "type": "step",
+          "settings": {
+            "title": "<p>STEP 3</p>",
+            "copy": "<p>Submit your order form by email to <a href=\"mailto:thebeefguy@boothcreekwagyu.com \" title=\"mailto:thebeefguy@boothcreekwagyu.com \">thebeefguy@boothcreekwagyu.com</a>  and our Wagyu expert will contact you to finalize your order and secure payment.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_JUYFEX",
+        "step_fw9x9L",
+        "step_jTatLD"
+      ],
+      "settings": {
+        "bg_color": "",
+        "title": "<p>HOW IT WORKS</p>",
+        "margin_top": 100,
+        "margin_bottom": 80
+      }
+    },
+    "small_banner_bmafkX": {
+      "type": "small-banner",
+      "blocks": {
+        "title_FeG93z": {
+          "type": "title",
+          "settings": {
+            "title": "<p>ORDERING LESS THAN 20? <br/>SHOP NOW!</p>",
+            "text_color": ""
+          }
+        },
+        "button_4EQefg": {
+          "type": "button",
+          "settings": {
+            "title": "Shop Now",
+            "url": "shopify://collections/gift-boxes",
+            "text_color": "",
+            "bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "title_FeG93z",
+        "button_4EQefg"
+      ],
+      "settings": {
+        "img": "shopify://shop_images/Mask_group.png",
+        "img_mob": "shopify://shop_images/mob.png",
+        "bg_color": "#e0d3b4",
+        "height": 240,
+        "mobile_height": 240,
+        "margin_top": 36,
+        "margin_bottom": 36
+      }
+    },
+    "faq_Q3bwKY": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_Lkwait": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Where can I ship a gift to?",
+            "text": "<p>We ship to the lower 48 states. We cannot ship to PO Boxes, APOs, FPOs, or addresses outside the continental United States.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_k4frtA": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I choose a different gift for each recipient?",
+            "text": "<p>Yes, you can choose a different box for each of your recipients, if you shall choose. You will need to note the box chosen for each recipient in the order form.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_JfNLBY": {
+          "type": "faq_item",
+          "settings": {
+            "title": "What days of the week can my gift arrive to my recipient?",
+            "text": "<p>Packages may arrive Tuesday through Friday, depending on where your recipient lives.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_M6iJew": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Can I include a gift message?",
+            "text": "<p>Yes, please include a short message so your recipient knows who the gift is from. Keep your text to 150 characters.</p>",
+            "table": ""
+          }
+        },
+        "faq_item_WCpQKC": {
+          "type": "faq_item",
+          "settings": {
+            "title": "Will my recipient receive fresh or frozen Wagyu?",
+            "text": "<p>All perishable items are shipped frozen, with dry ice and within an insulated package. Rest assured, gifts arrive fresh and ready to enjoy.</p>",
+            "table": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_Lkwait",
+        "faq_item_k4frtA",
+        "faq_item_JfNLBY",
+        "faq_item_M6iJew",
+        "faq_item_WCpQKC"
+      ],
+      "settings": {
+        "title": "FAQs",
+        "padding_top": 20,
+        "padding_bottom": 50,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "small_banner_YHKAyU": {
+      "type": "small-banner",
+      "blocks": {
+        "title_qDaBJh": {
+          "type": "title",
+          "settings": {
+            "title": "<p>READY TO GET STARTED? <br/>VIEW OUR CATALOG</p>",
+            "text_color": "#ffffff"
+          }
+        },
+        "button_FHUDAg": {
+          "type": "button",
+          "settings": {
+            "title": "View gift guide",
+            "url": "https://cdn.shopify.com/s/files/1/0475/4984/1560/files/BCW_2024_CorporateGiftingGuide_TheBeefGuy_8.5x11_FLY_50fbe4d0-560c-4a93-a6dd-f0a1d1e2f3f2.pdf?v=1734466369",
+            "text_color": "#2a2a2a",
+            "bg_color": "#e0d3b4"
+          }
+        }
+      },
+      "block_order": [
+        "title_qDaBJh",
+        "button_FHUDAg"
+      ],
+      "settings": {
+        "img": "shopify://shop_images/View_gift_guide.png",
+        "bg_color": "",
+        "height": 240,
+        "mobile_height": 240,
+        "margin_top": 36,
+        "margin_bottom": 36
+      }
+    },
+    "card_section_pCQPGe": {
+      "type": "card-section",
+      "blocks": {
+        "title_fQtEAr": {
+          "type": "title",
+          "settings": {
+            "title": "<p>Can't decide?</p>",
+            "text_color": ""
+          }
+        },
+        "copy_RAbBhX": {
+          "type": "copy",
+          "settings": {
+            "title": "<p>Give the ulimate gift of choice with<br/>a <strong>Booth Creek Wagyu</strong> gift card.</p>",
+            "text_color": ""
+          }
+        },
+        "button_iWCPNV": {
+          "type": "button",
+          "settings": {
+            "title": "Order now",
+            "url": "shopify://products/booth-creek-wagyu-gift-card",
+            "text_color": "",
+            "bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "title_fQtEAr",
+        "copy_RAbBhX",
+        "button_iWCPNV"
+      ],
+      "settings": {
+        "bg_color": "",
+        "margin_top": 80,
+        "margin_bottom": 80,
+        "card_image": "shopify://shop_images/Gift_card.png"
+      }
+    }
+  },
+  "order": [
+    "page-sections-1",
+    "image_banner_MCFF6Q",
+    "hero_rich_text_k9jbbB",
+    "bundle_facts_bdqnfX",
+    "how_it_works_4kkzRC",
+    "small_banner_bmafkX",
+    "faq_Q3bwKY",
+    "small_banner_YHKAyU",
+    "card_section_pCQPGe"
+  ]
+}

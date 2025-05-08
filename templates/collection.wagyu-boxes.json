@@ -1,0 +1,121 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_GMpeYi": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/72a45d721459d008e1697f665023e5e9.jpg",
+        "image_alignment": "center",
+        "mob_image_height": "257",
+        "show_logo_icon": true,
+        "enable_overlay": true,
+        "title": "Wagyu Boxes"
+      }
+    },
+    "collection_benefits_kgNFFN": {
+      "type": "collection-benefits",
+      "blocks": {
+        "item_7pgMJN": {
+          "type": "item",
+          "settings": {
+            "title": "Client Gifts"
+          }
+        },
+        "item_L4hUTX": {
+          "type": "item",
+          "settings": {
+            "title": "Employees"
+          }
+        },
+        "item_NpQkih": {
+          "type": "item",
+          "settings": {
+            "title": "Anniversaries"
+          }
+        },
+        "item_k4kpxR": {
+          "type": "item",
+          "settings": {
+            "title": "Birthdays"
+          }
+        },
+        "item_FTchLN": {
+          "type": "item",
+          "settings": {
+            "title": "Big Life Events"
+          }
+        }
+      },
+      "block_order": [
+        "item_7pgMJN",
+        "item_L4hUTX",
+        "item_NpQkih",
+        "item_k4kpxR",
+        "item_FTchLN"
+      ],
+      "settings": {
+        "bg_color": "#294029",
+        "title": "Our boxes are perfect for",
+        "text_color": "#ffffff"
+      }
+    },
+    "text_info_ELHTyi": {
+      "type": "text-info",
+      "settings": {
+        "bg_color": "#d9d9d9",
+        "text": "<p>For orders of twenty boxes or more, <strong>connect with us directly at (785) 775-2293<\/strong><\/p>",
+        "text_color": "#202020",
+        "font_size": 14,
+        "font_size_mobile": 14,
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10
+      }
+    },
+    "collection-template": {
+      "type": "collection-template",
+      "settings": {
+        "grid": 3,
+        "grid_mobile": "1",
+        "rows": 7,
+        "center_title": false,
+        "sort_enable": false,
+        "show_collection_image": false,
+        "collection_image_height": "4:1",
+        "image_alignment": "center",
+        "show_sidebar": false,
+        "sidebar_layout": "drawer"
+      }
+    },
+    "text_info_LwJTMH": {
+      "type": "text-info",
+      "settings": {
+        "bg_color": "#294029",
+        "text": "<p>Looking to ship to multiple people? During the checkout process, select <strong>\"Ship to Multiple Addresses\".<\/strong><\/p>",
+        "text_color": "#ffffff",
+        "font_size": 18,
+        "font_size_mobile": 18,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "padding_top_mobile": 18,
+        "padding_bottom_mobile": 18
+      }
+    }
+  },
+  "order": [
+    "image_banner_GMpeYi",
+    "collection_benefits_kgNFFN",
+    "text_info_ELHTyi",
+    "collection-template",
+    "text_info_LwJTMH"
+  ]
+}

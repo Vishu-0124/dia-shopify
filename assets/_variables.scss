@@ -1,0 +1,44 @@
+/* Color*/
+$ui-color-text: rgb(var(--color-foreground));
+$ui-color-bg: rgb(var(--color-background));
+
+$ui-color-button: rgb(var(--color-button));
+$ui-color-button-text: rgb(var(--color-button-text));
+
+$ui-color-button-secondary: rgb(var(--color-secondary-button));
+$ui-color-button-secondary-text: rgb(var(--color-secondary-button-text));
+
+/* Fonts */
+
+$ui-font-base-heading: var(--font-heading-family); // 'Helvetica Neue', sans-serif;
+$ui-font-base-body: var(--font-body-family); // 'Helvetica Neue', sans-serif;
+$ui-font-clash_display: 'Clash Display', sans-serif;
+$ui-font-creato_display: 'Creato Display', sans-serif;
+$ui-font-swear_display: 'Swear Display', sans-serif;
+$ui-font-halyard_display: 'Halyard Display', sans-serif;
+$ui-font-romana_bt: 'Romana BT', sans-serif;
+
+
+/* Breakpoints */
+$ui-breakpoints-xl: "1200px";
+$ui-breakpoints-xl--min: "1201px";
+
+$ui-breakpoints-lg: "989px";
+$ui-breakpoints-lg--min: "990px";
+
+$ui-breakpoints-md: "749px";
+$ui-breakpoints-md--min: "750px";
+
+$ui-breakpoints-sm: "576px";
+$ui-breakpoints-sm--min: "577px";
+
+
+/* Mixins */
+@mixin line-text-hidden($col: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $col;
+}

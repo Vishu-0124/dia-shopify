@@ -1,0 +1,93 @@
+{{ 'retail-location-section.css' | asset_url | stylesheet_tag }}
+{% liquid
+  if page.metafields.custom.retail_locations_image_opacity != blank
+    assign opacity = page.metafields.custom.retail_locations_image_opacity
+    else 
+    assign opacity = section.settings.opacity
+  endif
+%}
+
+{%- capture styles -%}
+  
+  --background-image: url({{ section.settings.image | img_url: 'master' }});
+  --overlay-opacity: {{ opacity }};
+
+  --padding-top-section: {{ section.settings.padding_top }}px;
+  --padding-bottom-section: {{ section.settings.padding_bottom }}px;
+
+  --padding-top-section-mob: {{ section.settings.padding_top | plus: 0 | divided_by: 2 }}px;
+  --padding-bottom-section-mob: {{ section.settings.padding_bottom | plus: 0 | divided_by: 2 }}px;
+{%- endcapture -%}
+
+<div class="retail-location-banner" style="{{ styles | strip_newlines }}">
+  <div class="retail-location-banner__image-item"></div>
+  <div class="retail-location-banner__headings">
+    {% if section.settings.main_heading != blank %}
+      <div class="retail-location-banner__main-heading">{{ section.settings.main_heading }}</div>
+    {% endif %}
+    {% if section.settings.sub_heading %}
+      <div class="retail-location-banner__subheading">
+        {{ section.settings.sub_heading }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Retail Locations Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5,
+      "id": "opacity",
+      "label": "Image opacity",
+      "info": "For pages use metafields definition"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "main_heading",
+      "label": "Main heading",
+      "default": "Main heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "sub_heading",
+      "label": "Subheading",
+      "default": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Retail Locations Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,186 @@
+<style>
+  @media (max-width: 767px) {
+    .image-banner.image-banner {
+      height: {{ section.settings.mob_image_height }}px;
+    }
+  }
+</style>
+
+<div class="image-banner section--full swiper js-image-banner--{{ section.id }}"
+     data-speed-autoplay="{{ section.settings.speed_smooth_scrolling }}"
+     data-delay-autoplay="{{ section.settings.delay_smooth_scrolling }}"
+>
+  <div class="image-banner__wrapper swiper-wrapper">
+    {%- for block in section.blocks -%}
+      <style>
+        .image-banner__image--{{ forloop.index }} {
+          background-position: center {{ block.settings.image_alignment }};
+          background-image: url({{ block.settings.image_desktop | image_url: width: 1440 }});
+
+          {% if block.settings.image_mobile %}
+            @media screen and (max-width: 767px) {
+              background-image: url({{ block.settings.image_mobile | image_url: width: 800 }});
+            }
+          {% endif %}
+        }
+      </style>
+
+      <div class="image-banner__content-item swiper-slide">
+        <div
+           class="image-banner__image image-banner__image--{{ forloop.index }}">
+
+        </div>
+
+        {% if block.settings.enable_overlay %}
+          <div class="image-banner__overlay"></div>
+        {% endif %}
+
+        <div class="image-banner__content container">
+          {% if block.settings.show_logo_icon %}
+            <div class="image-banner__logo">
+              <img src="{{ 'svg-logo.svg' | asset_url }}" alt="">
+            </div>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h1 class="h0">{{ block.settings.title }}</h1>
+          {% endif %}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+
+<script>
+  {% if section.settings.enable_smooth_scrolling %}
+  const speedAutoplay = +document
+    .querySelector('.js-image-banner--{{ section.id }}')
+    ?.getAttribute('data-speed-autoplay');
+
+  const delayAutoplay = +document
+    .querySelector('.js-image-banner--{{ section.id }}')
+    ?.getAttribute('data-delay-autoplay');
+
+  new Swiper('.js-image-banner--{{ section.id }}', {
+    spaceBetween: 0,
+    speed: speedAutoplay,
+    simulateTouch: false,
+    loop: true,
+    slidesPerView: 'auto',
+    autoplay: {
+      delay: delayAutoplay,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: false,
+    },
+  });
+  {%- else -%}
+  new Swiper('.js-image-banner--{{ section.id }}', {
+    spaceBetween: 0,
+    slidesPerView: 1,
+    loop: true,
+  });
+  {% endif %}
+
+</script>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_smooth_scrolling",
+      "label": "Enable smooth scrolling",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "speed_smooth_scrolling",
+      "label": "Speed smooth scrolling (ms)",
+      "default": 3000
+    },
+    {
+      "type": "number",
+      "id": "delay_smooth_scrolling",
+      "label": "Delay smooth scrolling (ms)",
+      "default": 5000
+    },
+    {
+      "type": "select",
+      "id": "mob_image_height",
+      "label": "Mobile Image Height",
+      "default": "257",
+      "options": [
+        {
+          "value": "257",
+          "label": "Small"
+        },
+        {
+          "value": "295",
+          "label": "Big"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Slide",
+      "type": "slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "Banner (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Banner (Mobile)"
+        },
+        {
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Image alignment",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "center",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_logo_icon",
+          "label": "Show logo icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_overlay",
+          "label": "Enable overlay",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image banner"
+    }
+  ]
+}
+{% endschema %}

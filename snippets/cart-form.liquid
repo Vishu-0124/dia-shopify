@@ -1,0 +1,93 @@
+<cart-form id="AjaxCartForm">
+
+	{%- liquid
+		if settings.show_currency_codes
+			assign iso_code = localization.country.currency.iso_code | prepend: ' '
+		endif
+	-%}
+	<form action="{{ routes.cart_url }}" method="post" novalidate class="cart__form {% if cart.item_count == 0 %} cart--empty {% endif %}" id="cart">
+
+		<div class="cart-holder" data-items="{{ cart.items.size }}">
+
+			<div class="cart__items">
+
+				{%- if cart.item_count > 0 -%}
+
+					{%- for item in cart.items -%}
+
+						<div id="item-{{ item.id }}" class="cart-item" data-title="{{ item.product.title | escape }} {%- unless item.product.has_only_default_variant -%} ({{ item.variant.title | escape }}) {%- endunless -%}" data-id="{{ item.key }}" data-line="{{ forloop.index }}" data-product-id="{{ item.product.id }}" data-qty="{{ item.quantity }}" data-js-cart-item>
+
+							<a href="{{ item.url }}" class="cart-item__thumbnail element--border-width-clamped element--border-radius">
+								{%- render 'lazy-image-small', image: item.image, aspect_ratio: 1, fit: fit -%}
+							</a>
+
+							<div class="cart-item__content">
+
+								<div>
+
+									{%- if item.unit_price_measurement -%}
+										<span class="cart-item__unit-price text-size--small text-color--opacity">
+											{{ item.unit_price | money | append: iso_code }} / 
+											{% if item.unit_price_measurement.reference_value != 1 %}
+												{{ item.unit_price_measurement.reference_value }}
+											{% endif %}
+											{{ item.unit_price_measurement.reference_unit }}
+										</span>
+									{%- endif -%}
+
+									<a href="{{ item.url }}" class="cart-item__title">
+										<span class="text-animation--underline-thin">{{ item.product.title }}</span>
+									</a>
+
+									{%- unless item.product.has_only_default_variant -%}
+										{%- for option in item.options_with_values -%}
+											<span class="cart-item__variant text-size--small text-color--opacity">
+													{{ option.value }}
+											</span>
+										{%- endfor -%}
+									{%- endunless -%}
+
+									<div class="cart-item__content-row">
+										<div class="cart-item__prices">
+											<div class="cart-item__prices-row flex">
+												<div class="quantity">
+													{{ item.quantity }} X
+												</div>
+												<div class="unit-price">
+													&nbsp;{{ item.final_price | money | append: iso_code }} =
+												</div>
+											</div>
+											<div>{{ item.final_line_price | money | append: iso_code }}</div>
+										</div>
+
+										<div class="cart-item__actions">
+											<a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="remove text-link text-size--xsmall text-color--opacity" title="{{ 'cart.general.remove' | t }}">
+												<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+													<path d="M11.7951 16.9997H5.20326C4.18277 16.9997 3.32593 16.2314 3.2151 15.2169L2.04498 4.50726C1.91567 3.32375 2.84259 2.29004 4.03315 2.29004H12.9652C14.1557 2.29004 15.0827 3.32375 14.9533 4.50726L13.7832 15.2169C13.6724 16.2314 12.8156 16.9997 11.7951 16.9997Z" stroke="#2A2A2A"/>
+													<path d="M1 5H16" stroke="#2A2A2A" stroke-linecap="round"/>
+													<path d="M6 2V1.5C6 1.22386 6.22386 1 6.5 1H10.5C10.7761 1 11 1.22386 11 1.5V2" stroke="#2A2A2A" stroke-linecap="round"/>
+												</svg>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{%- endfor -%}
+
+				{%- else -%}
+
+					{{ 'cart.general.empty' | t }}
+
+				{%- endif -%}
+
+			</div>
+
+		</div>
+
+	</form>
+
+	<span class="cart__count hidden" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
+	<span class="cart__total hidden" aria-hidden="true" data-cart-total>{{ cart.total_price | money | append: iso_code }}</span>
+
+</cart-form>

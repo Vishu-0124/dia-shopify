@@ -1,0 +1,438 @@
+<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="{{ shop.locale }}" dir="ltr"> <!--<![endif]-->
+<head>	{%- comment -%}smartseo_integration_begin{%- endcomment -%}{% include 'smartseo' %}{%- comment -%}smartseo_integration_end{%- endcomment -%}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+	<meta name="theme-color" content="{{ settings.color_brand }}">
+	<link rel="canonical" href="{{ canonical_url }}">
+	{{ 'header.css' | asset_url | stylesheet_tag }}
+
+	{% render 'network' %}
+
+	{% if settings.favicon != blank %}
+		<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+	{% endif %}
+
+	<link rel="stylesheet" href="https://use.typekit.net/yjo8azw.css">
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX7GF1-RleILfisGTovZfG31ymH9rXyOA&callback=initMap&loading=async"></script>
+
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-MN9JRP8');</script>
+	<!-- End Google Tag Manager -->
+	<!-- Title and description ================================================== -->
+	{%- comment smartseo_integration_begin_meta_data -%}<title>
+		{{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+	</title>{%- endcomment smartseo_integration_end_meta_data -%}
+	{% if page_description %}
+		{%- comment smartseo_integration_begin_meta_data -%}<meta name="description" content="{{ page_description | escape }}">{%- endcomment smartseo_integration_end_meta_data -%}
+	{% endif %}
+
+	{% render 'social-meta-tags' %}
+
+	<!-- JS before CSSOM =================================================== -->
+	<script type="text/javascript">
+        theme = {};
+        theme.t = {};
+        theme.map = {};
+        theme.cart_type = '{{ settings.cart_type }}';
+        theme.cart_ajax = {% if settings.cart_type == 'modal' or settings.cart_type == 'notification' %}true{% else %}false{% endif %};
+	</script>
+	<script src="{{ 'lazysizes.min.js' | asset_url }}"></script>
+	<script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+	<script src="{{ 'ajax-cart.min.js' | asset_url }}" defer="defer"></script>
+
+	<!-- CSS ================================================== -->
+	{% render 'css-include' %}
+
+	<!-- JS after CSSOM=================================================== -->
+	<script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
+	<script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+
+	<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+	/>
+
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+	{% if settings.anim_load %}
+		<script src="{{ 'scrollreveal.min.js' | asset_url }}"></script>
+	{% endif %}
+
+	{% if template contains 'customers' %}
+		<script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+	{% endif %}
+
+
+	<!-- Header hook for plugins ================================================== -->
+	{% render 'treedify' %}
+	{{ content_for_header }}
+	{{ shop.metafields.fontify.stylesheets }}
+
+	{% include "loyaltylion" %}
+
+	{% render 'multiship' %}
+
+
+	<script id='fm-source-script'>let FreshMarketerSourceMap = {}; // This wil be single source of truth for all the operations from MAS TO SHOPIFY
+
+        // For Loading the customer information
+		{% if customer %}
+        FreshMarketerSourceMap.currentCustomer = {
+            id: '{{ customer.id }}',
+            'name': '{{ customer.name }}',
+            'email': '{{ customer.email }}',
+            'mobile': '{{ customer.phone }}',
+            'first_name': '{{ customer.first_name }}',
+            'last_name': '{{ customer.last_name }}',
+            'total_orders': {{ customer.orders_count }},
+            'last_order': '{{ customer.last_order }}',
+            'total_spent': {{ customer.total_spent }},
+            'address_list': {{ customer.addresses | json }},
+            'accepts_marketing': {{ customer.accepts_marketing }}
+        }
+		{% endif %}
+
+        // For Loading the Current Product  information
+		{% if product %}
+        let FMproduct = {{ product | json }};
+        FMproduct.url = "{{ shop.secure_url }}{{ product.url }}";
+        FMproduct.price = {{ product.price }}/100;
+        FreshMarketerSourceMap.currentProduct = FMproduct
+		{% endif %}
+
+        // For Loading the Shopify CART Product  information
+        let shopifyCartEventData = {{ cart | json }};
+
+        //For Getting Collection associated with Product
+
+		{% for cartItem in cart.items %}
+		{%- assign FMmyProduct = cartItem.product -%}
+        var FMmyProductRef ={{ FMmyProduct | json }}
+		{%- assign FMmyProductCollections = FMmyProduct.collections -%}
+        var FMmyProductCollectionsRef ={{ FMmyProductCollections | json }}
+
+        for (let i = 0; i < shopifyCartEventData.items.length; i++) {
+            if (shopifyCartEventData.items[i].product_id === FMmyProductRef.id) {
+
+                let FMcollList = []
+                for (let j = 0; j < FMmyProductCollectionsRef.length; j++) {
+                    FMcollList.push(FMmyProductCollectionsRef[j].title)
+                }
+                shopifyCartEventData.items[i].collections = FMcollList
+
+            }
+        }
+		{% endfor %}
+        FreshMarketerSourceMap.shopifyCartEventData = shopifyCartEventData;
+        FreshMarketerSourceMap.shopName = "{{ shop.name }}"</script>
+	<script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=94e47b46"></script>
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %} template-{{ template.suffix }} template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} sidebar-has-scrollbars" data-anim-fade="{{ settings.anim_fade }}" data-anim-load="{{ settings.anim_load }}" data-anim-interval-style="{{ settings.anim_interval_style }}" data-anim-zoom="{{ settings.anim_zoom }}"
+      data-anim-interval="{% if settings.anim_load_style == 'interval' %}true{% else %}false{% endif %}">
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+	<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN9JRP8"
+	        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script type="text/javascript">
+    //loading class for animations
+    document.body.className += ' ' + 'js-theme-loading';
+    setTimeout(function () {
+        document.body.className = document.body.className.replace('js-theme-loading', 'js-theme-loaded');
+    }, 300);
+</script>
+
+<sidebar-drawer id="site-cart-sidebar" class="sidebar sidebar--right {% if cart.item_count == 0 %} cart-is-empty {% endif %}" tabindex="-1" role="dialog" aria-modal="true" data-cart-items="{{ cart.item_count }}" style="display:none" data-js-site-cart-sidebar>
+	{%- if settings.cart_free_shipping -%}
+		{% render 'cart-shipping-header' %}
+	{%- endif -%}
+
+	<div class="sidebar__header">
+        <span class="sidebar__title h5">
+          {{ 'cart.general.title' | t }}
+        </span>
+		<button class="sidebar__close" data-js-close>
+			<span class="visually-hidden">Close Sidebar</span>
+			<span aria-hidden="true" aria-role="img">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+				  <line x1="1.46967" y1="19.1474" x2="19.1473" y2="1.46974" stroke="#4B5058" stroke-width="1.5"/>
+				  <line x1="0.53033" y1="1.46967" x2="18.208" y2="19.1473" stroke="#4B5058" stroke-width="1.5"/>
+				</svg>
+			</span>
+		</button>
+	</div>
+
+	<div class="sidebar__body">
+
+		<div class="cart-form sidebar-large-padding">
+			{%- render 'cart-form', type: 'sidebar' -%}
+			<a href="{{ routes.all_products_collection_url }}" class="cart-continue button button--fullwidth button--solid button--regular">
+				{{ 'cart.general.continue_shopping' | t }}
+			</a>
+		</div>
+
+		{%- if settings.cart_notes_enable -%}
+			<div class="cart-instructions hide-if-empty-cart">
+				<div class="form-field">
+					<label for="cartSpecialInstructions">{{ 'cart.global.note' | t }}</label>
+					<textarea name="note" id="cartSpecialInstructions" form="cart">{{ cart.note }}</textarea>
+				</div>
+			</div>
+		{%- endif -%}
+
+	</div>
+
+	<div class="sidebar__footer hide-if-empty-cart"
+			{% if settings.sticky_cart_actions %} style="position: sticky;" {% endif %}
+	>
+		{%- render 'cart-subtotal', type: 'sidebar' -%}
+		{%- render 'cart-bg' -%}
+	</div>
+
+</sidebar-drawer>
+
+<script>
+    new MutationObserver((mutations, observer) => {
+        if (document.getElementById('cart').classList.contains('cart--empty')) {
+            document.getElementById('site-cart-sidebar').classList.add('cart-is-empty');
+        } else {
+            document.getElementById('site-cart-sidebar').classList.remove('cart-is-empty');
+        }
+    }).observe(document.querySelector('.cart-form'), {
+        attributes: false, childList: true, subtree: true
+    })
+</script>
+
+<link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-sidebar.css' | asset_url }}" media="print" onload="this.media='all';">
+<script src="{{ 'section-header.js' | asset_url }}" defer></script>
+
+<script src="{{ 'component-quantity-selector.js' | asset_url }}" defer></script>
+<script src="{{ 'component-cart.js' | asset_url }}" defer></script>
+
+<div class="page-transition"></div>
+
+<div class="page-container">
+	{% section 'mobile-drawer' %}
+	{% section 'announcement' %}
+	{% section 'header' %}
+
+	<div class="main">
+		{% case template.suffix %}
+			{% when 'shipping' %}
+				{% render 'shipping-bg' %}
+			{% when 'rewards' %}
+				{% render 'rewards-bg' %}
+			{% when 'find-your-taste' %}
+				{% render 'find-your-taste-bg-left' %}
+				{% render 'find-your-taste-bg-right' %}
+			{% when 'bulk-beef-bundles' %}
+				{% render 'find-your-taste-bg-left', left_bottom: true %}
+				{% render 'find-your-taste-bg-right' %}
+			{% when 'recipes-and-cooking-tips' %}
+				{% render 'recipe-bg-svg' %}
+			{% when 'wholesale-opportunities' %}
+				{% render 'wholesale-bg-top' %}
+				{% render 'wholesale-bg-bottom' %}
+			{% when 'must-love-beef' %}
+				{% render 'must-love-beef-bg' %}
+			{% when 'elevate-your-gift-giving' %}
+				{% render 'card-bg' %}
+			{% when 'about-wagyu' %}
+				{% render 'about-wagyu-bg-top' %}
+				{% render 'about-wagyu-bg-bottom' %}
+		{% endcase %}
+
+		{% if template == 'product' %}
+			{% render 'product-bg-top' %}
+			{% render 'product-bg-bottom' %}
+		{% elsif template contains 'gift-card' %}
+			{% render 'gift-card-bg' %}
+		{% endif %}
+		{{ content_for_layout }}
+		<noscript class="endOfLayoutContentX" type="text/mark"></noscript>{% render 'treedify_script' %}
+	</div>
+
+	{% section 'footer-new' %}
+	{% section 'promo-pop' %}
+	{% section 'age-checker' %}
+	<div class="site-overlay" style="display:none"></div>
+</div>
+
+{% if settings.search_enable %}
+	<div class="search-draw js-search-draw mfp-hide">
+		<div class="search-draw__wrapper">
+			<div class="search__head">
+				<div class="search__label">
+					<h3 class="search__label-title">{{ 'general.search.label' | t }}</h3>
+				</div>
+			</div>
+			<div class="search__inner">
+				<form action="{{ routes.search_url }}" method="get" class="search__form" role="search">
+					<input type="hidden" name="type" value="{{ settings.search_limit }}">
+					<input type="search" name="q" class="search__form-input js-search-input" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+					<button type="submit" class="search__form-submit">
+						<i class="icon icon--search" aria-hidden="true"></i>
+						<span class="icon-fallback__text">{{ 'general.search.submit' | t }}</span>
+					</button>
+				</form>
+				{% assign search_nav = settings.search_linklist %}
+				{% if linklists[search_nav].links.size > 0 %}
+					<div class="search__nav">
+						<h4 class="search__nav-title h5">{{ linklists[search_nav].title }}</h4>
+						<ul class="search__nav-items o-list-bare">
+							{% for link in linklists[search_nav].links %}
+								<li class="search__nav-item">
+									<a href="{{ link.url }}" class="search__nav-link">{{ link.title }}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+<div class="ajaxcart-draw js-cart-draw mfp-hide{% if settings.cart_type == 'notification' %} ajaxcart-draw--notification{% endif %}">
+	<div class="ajaxcart-draw__wrapper js-cart-draw-inner">
+		<div class="ajaxcart-draw__scroll">
+			<div class="ajaxcart__head">
+				<div class="ajaxcart__label">
+					{% if settings.cart_type == 'modal' %}
+						<h3 class="ajaxcart__label-title">{{ 'cart.general.title' | t }}</h3>
+					{% endif %}
+					{% if settings.cart_type == 'notification' %}
+						<h3 class="ajaxcart__label-title">{{ 'cart.general.added_to_cart' | t }}</h3>
+					{% endif %}
+				</div>
+			</div>
+			<div id="CartContainer"></div>
+			{% unless settings.cart_type == 'notification' %}
+				<div id="EmptyCart">
+					<div class="ajaxcart-empty">
+						<h5 class="ajaxcart-empty__title">{{ 'cart.general.empty' | t }}</h5>
+						<span class="emoji ajaxcart-empty__emoji">
+		       					<i class="icon icon--sad"></i>
+		       				</span>
+						<a href="{{ routes.root_url }}" class="c-btn c-btn--primary c-btn--full">{{ 'cart.general.empty_link' | t }}</a>
+					</div>
+				</div>
+			{% endunless %}
+		</div>
+	</div>
+</div>
+
+{% render 'ajax-cart-template' %}
+<script src="{{ 'component-product-form.js' | asset_url }}" defer></script>
+<script>
+    //cart functions
+    theme.ajaxCartInit = function () {
+        ajaxCart.init({
+            cartContainer: '#CartContainer',
+            cartCountSelector: '#CartCount',
+            cartCostSelector: '#CartCost',
+            emptySelector: '#EmptyCart',
+            moneyFormat: {{ shop.money_format | json }}
+        });
+    };
+    const debounce = (fn, wait) => {
+        let t;
+        return (...args) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, args), wait);
+        };
+    }
+    window.KEYCODES = {
+        TAB: 9,
+        ESC: 27,
+        DOWN: 40,
+        RIGHT: 39,
+        UP: 38,
+        LEFT: 37,
+        RETURN: 13
+    };
+
+    theme_custom_data = {
+        "settings": {
+            shop_money_format: '{{ shop.money_format }}',
+            iso_code: '{% if settings.show_currency_codes %} {{ localization.country.currency.iso_code }}{% endif %}',
+            cart_action: "{{ settings.cart_action }}",
+            google_maps_api_key: "{{ settings.google_maps_api_key }}",
+            routes: {
+                cart_url: "{{ routes.cart_url }}",
+                cart_add_url: "{{ routes.cart_add_url }}",
+                cart_change_url: "{{ routes.cart_change_url }}",
+                predictive_search_url: "{{ routes.predictive_search_url }}",
+                product_recommendations_url: "{{ routes.product_recommendations_url }}"
+            },
+            locales: {
+                products_add_to_cart_button: `{{ 'products.product.add_to_cart' | t }}`,
+                products_preorder_button: `{{ 'products.product.preorder_button' | t }}`,
+                products_sold_out_variant: `{{ 'products.product.sold_out' | t }}`,
+                products_unavailable_variant: `{{ 'products.product.inventory.unavailable_variant' | t }}`,
+                products_variant_required: `{{ 'products.product.choose_variant_first' | t }}`,
+                products_one_product: `{{ 'products.product.inventory.one_product' | t }}`,
+                products_few_products: `{{ 'products.product.inventory.few_products' | t }}`,
+                products_many_products: `{{ 'products.product.inventory.many_products' | t }}`,
+                products_no_products: `{{ 'products.product.sold_out' | t }}`,
+                products_preorder: `{{ 'products.product.inventory.preorder' | t }}`,
+                products_enough_products: ``,
+                product_sku: `{{ 'products.product.sku' | t }}`,
+                product_barcode: `{{ 'products.product.barcode' | t }}`,
+                product_compare_price: `{{ 'products.product.sales_amount_html' | t: amount: '$SAVE_PRICE' }}`,
+                cart_add_error: `<span class="alert__icon">{%- render 'theme-symbols', icon: 'alert-error' -%}</span>{{ 'cart.add_error' | t }}`,
+                cart_general_error: `{{ 'cart.general_error' | t }}`,
+                cart_announcement: `{{ 'general.accessibility_labels.item_added' | t }}`,
+            },
+        }
+    }
+</script>
+<!-- Venue theme by Safe As Milk - http://safeasmilk.co/ -->
+<!-- Theme version 4.6.3 -->
+
+
+<!-- Back in Stock helper snippet -->
+{% render 'back-in-stock-helper' %}
+<!-- End Back in Stock helper snippet -->
+
+
+<!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
+{% if content_for_header contains 'pickystory' %}
+	<script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
+{% endif %}
+<!-- PickyStory end snippet "main_widget_script" -->
+<!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
+{% if content_for_header contains 'pickystory' %}
+	{% render 'pickystory-combos-prerender' %}
+{% endif %}
+<!-- PickyStory code end -->
+
+
+{% include 'smile-initializer' %}
+
+
+<!-- **BEGIN** Hextom CTB Integration // Main Include - DO NOT MODIFY -->
+{% render 'hextom_ctb_main', product: product, customer: customer %}
+<!-- **END** Hextom CTB Integration // Main Include - DO NOT MODIFY -->
+</body>
+</html>

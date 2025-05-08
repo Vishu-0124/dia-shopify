@@ -1,0 +1,101 @@
+<style>
+  #shopify-section-{{ section.id }} .image-section{
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media (max-width: 767px){
+      #shopify-section-{{ section.id }} .image-section{
+          padding-top: {{ section.settings.padding_top_mobile }}px;
+          padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      }
+  }
+</style>
+
+
+<div class="image-section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="section__title-text">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.image != blank %}
+      <div class="image-section__image-wrapper">
+        <img
+          class="desktop-img{% if section.settings.image_mobile != blank %} desktop-img--hide-on-small{% endif %}"
+          src="{{ section.settings.image | img_url: 'master' }}"
+          alt="{{ section.settings.image.alt }}"
+          loading="lazy">
+
+        {% if section.settings.image_mobile != blank %}
+          <img
+            class="mobile-img"
+            src="{{ section.settings.image_mobile | img_url: 'master' }}"
+            alt="{{ section.settings.image_mobile.alt }}"
+            loading="lazy">
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image mobile"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding top",
+        "step": 2,
+        "min": 0,
+        "max": 50,
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding bottom",
+        "step": 2,
+        "min": 0,
+        "max": 50,
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "label": "Padding top mobile",
+        "step": 2,
+        "min": 0,
+        "max": 50,
+        "default": 10
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "label": "Padding bottom mobile",
+        "step": 2,
+        "min": 0,
+        "max": 50,
+        "default": 10
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image"
+      }
+    ]
+  }
+{% endschema %}

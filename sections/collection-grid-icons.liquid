@@ -1,0 +1,114 @@
+<style>
+  #shopify-section-{{ section.id }} .collection-grid-icons{
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media (max-width: 767px){
+      #shopify-section-{{ section.id }} .collection-grid-icons{
+          padding-top: {{ section.settings.padding_top_mobile }}px;
+          padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      }
+  }
+</style>
+
+
+
+<div class="collection-grid-icons">
+    <div class="container">
+      {% if section.settings.show_collection_description and collection.metafields.custom.short_description != blank %}
+        <div class="collection__description">
+          <div class="collection__description-icons__wrapper">
+            <div class="collection__description-divider"></div>
+            <div class="collection__description-text">{{ collection.metafields.custom.short_description }}</div>
+          </div>
+        </div>
+      {% endif %}
+      <div class="collection-grid-icons__wrapper">
+        {% for block in section.blocks %}
+          <div class="collection-grid-icons__item">
+            {% if block.settings.icon != blank %}
+              <div class="collection-grid-icons__item-img">
+                <img
+                  src="{{ block.settings.icon | img_url: 'master' }}"
+                  alt="{{ block.settings.icon.alt }}"
+                  loading="lazy">
+              </div>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <div class="collection-grid-icons__item-title">{{ block.settings.title }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Collection grid icons",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_collection_description",
+          "label": "Show collection description",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "step": 2,
+          "min": 0,
+          "max": 100,
+          "default": 10
+        }, {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "step": 2,
+          "min": 0,
+          "max": 100,
+          "default": 10
+        }, {
+          "type": "range",
+          "id": "padding_top_mobile",
+          "label": "Padding top mobile",
+          "step": 2,
+          "min": 0,
+          "max": 100,
+          "default": 10
+        }, {
+          "type": "range",
+          "id": "padding_bottom_mobile",
+          "label": "Padding bottom mobile",
+          "step": 2,
+          "min": 0,
+          "max": 100,
+          "default": 10
+        }
+      ],
+      "blocks": [
+        {
+          "type": "icon",
+          "name": "Icon",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "icon",
+              "label": "Icon"
+            }, {
+              "type": "text",
+              "id": "title",
+              "label": "Title"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Collection grid icons"
+        }
+      ]
+    }
+  {% endschema %}

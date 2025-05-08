@@ -1,0 +1,104 @@
+.card-section {
+	-webkit-background-size: cover;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+}
+
+.card-section .container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-block: 20px;
+}
+
+.card-section .title {
+	color: #2A2A2A;
+	text-align: center;
+	font-family: Mosafin;
+	font-size: 35px;
+	font-style: normal;
+	font-weight: 900;
+	line-height: 120%;
+	text-transform: uppercase;
+	margin-bottom: 0;
+}
+
+.card-section .copy {
+	color: #2A2A2A;
+	text-align: center;
+	font-family: "new-hero";
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 140%;
+	text-transform: uppercase;
+}
+
+.card-section .copy strong {
+	font-weight: 700;
+}
+
+.card-section .container > * + * {
+	margin-top: 22px;
+}
+
+.card-section .title > * + * {
+	margin-top: 10px;
+}
+
+.card-section .title p {
+	margin-bottom: 0;
+}
+
+.card-section .copy > * + * {
+	margin-top: 10px;
+}
+
+.card-section .copy p {
+	margin-bottom: 0;
+}
+
+.card-section__card {
+	position: absolute;
+	left: 70%;
+}
+
+.card-section__bg {
+	position: absolute;
+	top: 500px;
+	left: 0;
+}
+
+@media screen and (max-width: 992px) {
+	.card-section__card {
+		left: unset;
+		position: relative;
+		margin-bottom: -15px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.card-section__card {
+		max-height: 230px;
+	}
+
+	.card-section .title {
+		font-size: 20px;
+	}
+
+	.card-section .copy {
+		font-size: 16px;
+	}
+
+	.card-section .container > * + * {
+		margin-top: 15px;
+	}
+
+	.card-section__bg {
+		top: 260px;
+		left: -90px;
+	}
+}

@@ -1,0 +1,52 @@
+<div class="image-banner section--full">
+    <div class="image-banner__wrapper">
+      <div
+        class="image-banner__image"
+        style="background-size: cover;background-position: center {{ section.settings.image_alignment }}; background-image: url({{ collection.image | image_url: width: 1440 }});"></div>
+      <div class="image-banner__overlay"></div>
+      <div class="image-banner__content container">
+        {% if section.settings.show_logo_icon %}
+          <div class="image-banner__logo">
+            <img src="{{ 'svg-logo.svg' | asset_url }}" alt="">
+          </div>
+        {% endif %}
+  
+        <h1 class="h0">{{ collection.title }}</h1>
+      </div>
+    </div>
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Collection banner",
+      "settings": [
+        {
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Image alignment",
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            }, {
+              "value": "center",
+              "label": "Middle"
+            }, {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ]
+        }, {
+          "type": "checkbox",
+          "id": "show_logo_icon",
+          "label": "Show logo icon"
+        }
+      ],
+      "presets": [
+        {
+          "name": "Collection banner"
+        }
+      ]
+    }
+  {% endschema %}

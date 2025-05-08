@@ -1,0 +1,103 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_JX3EAG": {
+      "type": "image-banner",
+      "settings": {
+        "image": "{{ article.image }}",
+        "image_alignment": "center",
+        "mob_image_height": "257",
+        "show_logo_icon": false,
+        "enable_overlay": false,
+        "title": ""
+      }
+    },
+    "recipe_article_hero_fHHNVC": {
+      "type": "recipe-article-hero",
+      "blocks": {
+        "icon_pzGUEB": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/cook.svg",
+            "icon_text": "<p>Yields<\/p>",
+            "title": "{{ article.metafields.custom.servings_size | metafield_tag }}"
+          }
+        },
+        "icon_3xAtMf": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Time_-_icon_ae416c55-0ced-4a0c-b0a7-ff331479085a.svg",
+            "icon_text": "<p>Prep Time<\/p>",
+            "title": "{{ article.metafields.custom.prep_time | metafield_tag }}"
+          }
+        },
+        "icon_LGaMdp": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Time_-_icon_ae416c55-0ced-4a0c-b0a7-ff331479085a.svg",
+            "icon_text": "<p>Cook Time<\/p>",
+            "title": "{{ article.metafields.custom.cook_time | metafield_tag }}"
+          }
+        },
+        "icon_Yrbjmm": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Time_-_icon_ae416c55-0ced-4a0c-b0a7-ff331479085a.svg",
+            "icon_text": "<p>Total Time<\/p>",
+            "title": "{{ article.metafields.custom.total_time | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "icon_pzGUEB",
+        "icon_3xAtMf",
+        "icon_LGaMdp",
+        "icon_Yrbjmm"
+      ],
+      "settings": {
+        "title": "{{ article.title }}",
+        "author_title": "",
+        "category_title": "",
+        "category_text": "{{ article.metafields.custom.recipe_category.value }}",
+        "difficulty_title": "",
+        "difficulty_text": "{{ article.metafields.custom.recipe_difficulty.value }}",
+        "copy": "{{ article.metafields.custom.article_excerpt | metafield_tag }}"
+      }
+    },
+    "recipe_article_dgc4UF": {
+      "type": "recipe-article",
+      "settings": {
+        "show_author": true,
+        "show_tags": true,
+        "show_sharing": true
+      }
+    },
+    "best_sellers_CN3jjt": {
+      "type": "best-sellers",
+      "settings": {
+        "title": "Hungry? Shop Now",
+        "collection": "fresh-ribeye",
+        "products_limit": 16,
+        "link_title": "View all",
+        "link": "",
+        "bg_color": "",
+        "show_bg_image": false,
+        "minimize_mobile_version": true
+      }
+    }
+  },
+  "order": [
+    "image_banner_JX3EAG",
+    "recipe_article_hero_fHHNVC",
+    "recipe_article_dgc4UF",
+    "best_sellers_CN3jjt"
+  ]
+}

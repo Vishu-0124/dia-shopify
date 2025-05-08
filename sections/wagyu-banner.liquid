@@ -1,0 +1,53 @@
+<style>
+	#shopify-section-{{ section.id }} {
+		padding-top: {{ section.settings.padding_top }}px;
+		padding-bottom: {{ section.settings.padding_bottom }}px;
+	}
+
+	@media (max-width: 767px) {
+		#shopify-section-{{ section.id }} {
+			padding-top: {{ section.settings.padding_top_mobile }}px;
+			padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+		}
+	}
+
+    .wagyu-banner__img{
+      position: relative;
+    }
+</style>
+
+<link rel="stylesheet" href="{{ 'wagyu-banner.css' | asset_url }}">
+
+<div class="wagyu-banner">
+	{% if section.settings.image != blank %}
+		{% render 'lazy-image',
+				image: section.settings.image,
+				image: section.settings.image,
+				type: image_type,
+				alt: section.settings.title,
+				image_alignment: image_alignment,
+				sizes: sizes,
+				class: 'wagyu-banner__img',
+				preload: false
+		%}
+	{% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Wagyu Banner",
+  "settings": [
+
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wagyu Banner"
+    }
+  ]
+}
+{% endschema %}

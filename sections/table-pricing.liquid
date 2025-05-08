@@ -1,0 +1,162 @@
+<section class="table-pricing-{{ section.id }}">
+	<div class="container">
+		<div class="table-pricing__wrapper">
+			<table>
+				{% if section.settings.title != blank %}
+					<caption class="section__title-text table-pricing__title">
+						{{ section.settings.title }}
+					</caption>
+				{% endif %}
+				<thead>
+				{% if section.blocks.size > 0 %}
+					{% for block in section.blocks limit: 1 %}
+						<tr id="table-pricing__row--{{ block.id }}" class="table-pricing__row" {{ block.shopify_attributes }}>
+							<th>{{ block.settings.col1 }}</th>
+							<th>{{ block.settings.col2 }}</th>
+							<th>{{ block.settings.col3 }}</th>
+							{% if block.settings.col4 != blank %}
+								<th>{{ block.settings.col4 }}</th>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				{% endif %}
+				</thead>
+				<tbody>
+				{% if section.blocks.size > 0 %}
+					{% liquid assign blocks_size = section.blocks.size %}
+					{% for block in section.blocks offset: 1 %}
+						<tr id="table-pricing__row--{{ block.id }}" class="table-pricing__row" {{ block.shopify_attributes }}>
+							<td>{{ block.settings.col1 }}</td>
+							<td>{{ block.settings.col2 }}</td>
+							<td>{{ block.settings.col3 }}</td>
+							{% if block.settings.col4 != blank %}
+								<td>{{ block.settings.col4 }}</td>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				{% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+<style>
+	.table-pricing-{{  section.id }} {
+		--table-background-color: {{- section.settings.table_bg -}};
+		--table-text-color: {{- section.settings.table_text -}};
+		--table-bold-text-color: {{- section.settings.table_bold_text -}};
+	}
+
+	#shopify-section-{{ section.id }} {
+		margin-top: {{ section.settings.margin_top }}px;
+		margin-bottom: {{ section.settings.margin_bottom }}px;
+	}
+
+	@media screen and (max-width: 768px) {
+		#shopify-section-{{ section.id }} {
+			margin-top: calc({{ section.settings.margin_top }}px * 0.6);
+			margin-bottom: calc({{ section.settings.margin_bottom }}px * 0.6);
+		}
+	}
+</style>
+{% schema %}
+{
+  "name": "Table Pricing",
+  "class": "table-pricing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "quarter Pricing"
+    },
+    {
+      "type": "header",
+      "content": "Table styles"
+    },
+    {
+      "type": "color",
+      "id": "table_bg",
+      "label": "Table background color",
+      "default": "#2A2A2A"
+    },
+    {
+      "type": "color",
+      "id": "table_text",
+      "label": "Table text color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "table_bold_text",
+      "label": "Bold text color",
+      "default": "#E0D3B4"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Section top margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Section bottom margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "rows",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "col1",
+          "label": "Column 1"
+        },
+        {
+          "type": "richtext",
+          "id": "col2",
+          "label": "Column 2"
+        },
+        {
+          "type": "richtext",
+          "id": "col3",
+          "label": "Column 3"
+        },
+        {
+          "type": "richtext",
+          "id": "col4",
+          "label": "Column 4",
+          "info": "Optional Cell"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Table Pricing",
+      "blocks": [
+        {
+          "type": "rows"
+        },
+        {
+          "type": "rows"
+        },
+        {
+          "type": "rows"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

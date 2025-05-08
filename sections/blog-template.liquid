@@ -1,0 +1,284 @@
+{% assign show_blog_tags = section.settings.show_tags %}
+{% assign show_blog_rss = section.settings.show_rss %}
+{% assign show_comments = section.settings.show_blog_comments %}
+{% assign show_author = section.settings.show_blog_author %}
+{% assign show_tags = section.settings.show_blog_tags %}
+{% assign show_date = section.settings.show_blog_date %}
+{% assign crop = section.settings.crop %}
+
+{% assign paginate_number = 6 %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const loadMoreButton = document.getElementById("load-more-btn");
+
+        if (loadMoreButton) {
+            loadMoreButton.addEventListener("click", function () {
+                const nextPageUrl = loadMoreButton.getAttribute("data-next-page");
+
+                fetch(nextPageUrl)
+                    .then(response => response.text())
+                    .then(html => {
+                        // Parse the HTML to extract only the new articles and next page URL
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, "text/html");
+
+                        const newArticles = doc.querySelectorAll(".blog-posts .blog__item");
+                        const blogPostsContainer = document.querySelector(".blog__grid");
+
+                        // Append new articles to the blog post container
+                        newArticles.forEach(article => blogPostsContainer.appendChild(article));
+
+                        // Update the "Load More" button with the next page URL, or hide it if there are no more pages
+                        const newNextPage = doc.querySelector("#load-more-btn");
+                        console.log(newNextPage)
+                        if (newNextPage) {
+                            loadMoreButton.setAttribute("data-next-page", newNextPage.getAttribute("data-next-page"));
+                        } else {
+                            loadMoreButton.style.display = "none";
+                        }
+                    })
+                    .catch(error => console.error("Error loading more articles:", error));
+            });
+        }
+    });
+</script>
+
+<style>
+	.blog__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 18px;
+		row-gap: 40px;
+	}
+
+	.blog__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 10px;
+	}
+
+	.blog__item .blog__image {
+		height: 295px;
+	}
+
+	.blog__item .blog__image img {
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.blog__item .blog__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+
+	.blog__item .title {
+		margin-bottom: auto;
+	}
+
+	.blog__item .title,
+	.blog__item .title h3 {
+		color: #4B5058;
+		text-align: center;
+		font-family: "new-hero", sans-serif;
+		font-size: 25px;
+		font-style: normal;
+		font-weight: 700;
+		line-height: normal;
+	}
+
+	.blog__item .blog__text {
+		color: #4B5058;
+		text-align: center;
+		font-family: "new-hero";
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.blog__item .link {
+		color: #4B5058;
+		text-align: right;
+		font-family: "new-hero";
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 700;
+		margin-left: auto;
+		line-height: normal;
+		margin-top: 25px;
+		text-decoration-line: underline;
+		text-decoration-style: solid;
+		text-decoration-skip-ink: none;
+		text-decoration-thickness: auto;
+		text-underline-offset: auto;
+		text-underline-position: from-font;
+	}
+
+	.blog-posts {
+		margin-bottom: 40px;
+	}
+
+	#load-more-btn {
+		cursor: pointer;
+		display: block;
+		margin-top: 70px;
+		margin-inline: auto;
+		border: none;
+		background-color: transparent;
+		color: #C0C0C0;
+		text-align: center;
+		font-family: "new-hero";
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 700;
+		line-height: normal;
+		text-decoration-line: underline;
+		text-decoration-style: solid;
+		text-decoration-skip-ink: none;
+		text-decoration-thickness: auto;
+		text-underline-offset: auto;
+		text-underline-position: from-font;
+	}
+
+	@media screen and (max-width: 992px) {
+		.blog__grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 18px;
+			row-gap: 40px;
+		}
+	}
+
+	@media screen and (max-width: 620px) {
+		.blog__grid {
+			grid-template-columns: 1fr;
+			row-gap: 20px;
+		}
+	}
+</style>
+
+<section class="section section--blog blog-page section--{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="blog">
+	{% if blog.all_tags.size > 0 %}
+		<div class="tags__wrapper container">
+			<div class="blog-page__tags">
+				{% if blog.all_tags.size > 8 %}
+					<div class="blog-page__tags-btn">
+						<a href="#blog-tags" class="link link--arrow-down blog-page__tags-btn-link u-large js-toggle-trigger">{{ 'blogs.blog.tags' | t }}</a>
+					</div>
+				{% endif %}
+				<ul class="blog-page__tags-items o-list-bare{% if blog.all_tags.size > 8 %} blog-page__tags-items--box js-toggle-target{% endif %}" id="blog-tags">
+					<li class="blog-page__tags-item"><a href="{{ blog.url }}">{{ 'blogs.blog.all' | t }}</a></li>
+					{% for tag in blog.all_tags %}
+						{% if current_tags contains tag %}
+							<li class="blog-page__tags-item blog-page__tags-item--active">{{ tag }}</li>
+						{% else %}
+							<li class="blog-page__tags-item">{{ tag | link_to_tag: tag }}</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% endif %}
+	{% paginate blog.articles by paginate_number %}
+		<div class="blog-posts container{% if section.settings.grid == 1 %} container--tiny{% endif %}">
+			<div class="blog-page__list{% unless section.settings.show_bg %} blog-page__list--no-bg{% endunless %}">
+
+				{% case section.settings.grid %}
+					{% when 1 %}
+						{%- assign grid_item_width = 'u-1/1@tab' -%}
+					{% when 2 %}
+						{%- assign grid_item_width = 'u-1/2@tab' -%}
+					{% when 3 %}
+						{%- assign grid_item_width = 'u-1/2@tab u-1/3@desk' -%}
+				{% endcase %}
+
+				<div class="blog__grid">
+					{% for article in blog.articles limit: 6 %}
+						<div class="blog__item">
+							{% if article.image %}
+								<div class="blog__media-wrapper">
+									<a href="{{ article.url }}" class="home-blog__link blog-link">
+										<div class="blog__image">
+											<img class="home-blog__media-img blog__img lazyload js" alt="{{ article.title }}"
+											     src="{{ article.image | img_url: '360x200', crop: 'center' }}"
+											     data-sizes="auto"
+											     data-src="{{ article.image | img_url: '900x500', crop: 'center' }}"
+											     data-srcset="{{ article.image | img_url: '360x200', crop: 'center' }} 360w,
+									                            {{ article.image | img_url: '540x300', crop: 'center' }} 540w,
+									                            {{ article.image | img_url: '720x400', crop: 'center' }} 720w,
+									                            {{ article.image | img_url: '900x500', crop: 'center' }} 900w,
+									                            {{ article.image | img_url: '1080x600', crop: 'center' }} 1080w,
+									                            {{ article.image | img_url: '1296x720', crop: 'center' }} 1296w"
+											>
+											<noscript>
+												<img class="home-blog__media-img blog__img"
+												     src="{{ article.image | img_url: '900x500', crop: 'center' }}">
+											</noscript>
+										</div>
+									</a>
+								</div>
+							{% endif %}
+
+							<div class="blog__content">
+								<a href="{{ article.url }}" class="title">
+									<h3>{{ article.title }}</h3>
+								</a>
+								<div class="blog__text rte">
+									{% if article.excerpt.size > 0 %}
+										{{ article.excerpt | strip_html }}
+									{% else %}
+										{{ article.content | strip_html }}
+									{% endif %}
+								</div>
+								<a href="{{ article.url }}" class="link">
+									Read More
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+			{% if paginate.pages > 1 %}
+				{% if section.settings.load_more != true %}
+					<div class="blog-pagination">
+						<div class="container">
+							<div class="pagination">
+								<div class="pagination__items">
+									{{ paginate | default_pagination: next: '<i class="icon icon--right-t"></i>', previous: '<i class="icon icon--left-t"></i>' }}
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<button id="load-more-btn" data-next-page="{{ paginate.next.url }}">Load More</button>
+				{% endif %}
+			{% endif %}
+		</div>
+	{% endpaginate %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "class": "js-section__blog",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "load_more",
+      "label": "Use load more as pagination",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

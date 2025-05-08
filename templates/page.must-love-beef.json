@@ -1,0 +1,147 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page-sections-1": {
+      "type": "page-sections-1",
+      "disabled": true,
+      "settings": {
+        "container": "medium"
+      }
+    },
+    "image_banner_MCFF6Q": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/BCW_BC30_Filet_4x3-11-2.jpg",
+        "image_alignment": "center",
+        "mob_image_height": "257",
+        "show_logo_icon": true,
+        "enable_overlay": true,
+        "title": "MUST LOVE BEEF"
+      }
+    },
+    "hero_rich_text_bCXNXA": {
+      "type": "hero-rich-text",
+      "settings": {
+        "margin_top": 50,
+        "margin_bottom": 50,
+        "margin_top_mobile": 18,
+        "margin_bottom_mobile": 18,
+        "max_width": 850,
+        "text": "<p><strong>Do you have a passion to work with a premium,<br\/>locally owned and operated organization?<\/strong><\/p><p>Come work for us! Booth Creek Wagyu is a state of the art, one-of-a-kind vertically integrated beef company that owns the entire process, from raising our cattle, to processing, to distributing and selling in our retail stores.<\/p><p>Who wouldn’t want to be part of such an innovative practice? <\/p>",
+        "text_alignment": "center"
+      }
+    },
+    "vacancies_J8ij7j": {
+      "type": "vacancies",
+      "blocks": {
+        "vacancy_Kk6Wge": {
+          "type": "vacancy",
+          "settings": {
+            "bg_color": "#294029",
+            "url": "https:\/\/careers.smartrecruiters.com\/HCIHospitality\/booth-creek-wagyu",
+            "title": "<p>Home<br\/>Office<\/p>"
+          }
+        },
+        "vacancy_KzCNie": {
+          "type": "vacancy",
+          "settings": {
+            "bg_color": "#294029",
+            "url": "https:\/\/careers.smartrecruiters.com\/HCIHospitality\/booth-creek-wagyu",
+            "title": "<p>Ranch<\/p>"
+          }
+        },
+        "vacancy_HB4L3W": {
+          "type": "vacancy",
+          "settings": {
+            "bg_color": "#294029",
+            "url": "https:\/\/www.workstream.us\/j\/862dd7fa\/meatworks?referer_source=https%3A%2F%2Fstatics.teams.cdn.office.net%2F",
+            "title": "<p>Meatworks<br\/>of Kansas<\/p>"
+          }
+        },
+        "vacancy_Jnjcxh": {
+          "type": "vacancy",
+          "settings": {
+            "bg_color": "#294029",
+            "url": "https:\/\/www.workstream.us\/j\/862dd7fa\/booth-creek-wagyu?referer_source=https%3A%2F%2Fstatics.teams.cdn.office.net%2F",
+            "title": "<p>Retail<br\/>Store<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "vacancy_Kk6Wge",
+        "vacancy_KzCNie",
+        "vacancy_HB4L3W",
+        "vacancy_Jnjcxh"
+      ],
+      "settings": {
+        "bg_color": "",
+        "title": "<p>If you’re ready to join the future of American Wagyu<br\/>production, <strong>apply today!<\/strong><\/p>"
+      }
+    },
+    "mlb_icons_QbgMmz": {
+      "type": "mlb-icons",
+      "blocks": {
+        "icon_mxEwVQ": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Vector.svg",
+            "title": "<p>Employee<br\/>assistance<br\/>program<\/p>"
+          }
+        },
+        "icon_HWKQCG": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/401k.svg",
+            "title": "<p>With 5%<br\/>match<\/p>"
+          }
+        },
+        "icon_hHHtMc": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Group-2.svg",
+            "title": "<p>Next<br\/>day pay<\/p>"
+          }
+        },
+        "icon_zM8bzW": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Group-1.svg",
+            "title": "<p>Paid<br\/>time off<\/p>"
+          }
+        },
+        "icon_3freTw": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Group.svg",
+            "title": "<p>Discounts on<br\/>Booth Creek<br\/>Wagyu beef<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon_mxEwVQ",
+        "icon_HWKQCG",
+        "icon_hHHtMc",
+        "icon_zM8bzW",
+        "icon_3freTw"
+      ],
+      "settings": {
+        "bg_color": ""
+      }
+    }
+  },
+  "order": [
+    "page-sections-1",
+    "image_banner_MCFF6Q",
+    "hero_rich_text_bCXNXA",
+    "vacancies_J8ij7j",
+    "mlb_icons_QbgMmz"
+  ]
+}

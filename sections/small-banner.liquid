@@ -1,0 +1,191 @@
+<style>
+	#shopify-section-{{ section.id }} .small-banner {
+		min-height: {{ section.settings.height }}px;
+		margin-top: {{ section.settings.margin_top }}px;
+		margin-bottom: {{ section.settings.margin_bottom }}px;
+		background-color: {{ section.settings.bg_color }};
+		background-image: url({{ section.settings.img | image_url: height: section.settings.height }});
+	}
+
+	@media screen and (max-width: 768px) {
+		#shopify-section-{{ section.id }} .small-banner {
+			min-height: {{ section.settings.mobile_height }}px;
+			margin-top: calc({{ section.settings.margin_top }}px * 0.6);
+			margin-bottom: calc({{ section.settings.margin_bottom }}px * 0.6);
+			background-image: url({{ section.settings.img_mob | image_url: height: section.settings.mobile_height }});
+		}
+	}
+</style>
+
+<link rel="stylesheet" href="{{ 'small-banner.css' | asset_url }}">
+
+<div class="small-banner">
+	<div class="container">
+		{%- for block in section.blocks -%}
+			{% case block.type %}
+				{%- when 'title' -%}
+					<h3 class="title" {{ block.shopify_attributes }} style="color: {{ block.settings.text_color }}">
+						{{ block.settings.title }}
+					</h3>
+				{%- when 'button' -%}
+					<a
+                            href="{{ block.settings.url }}"
+                            class="button"
+                            style="background-color: {{ block.settings.bg_color }};color: {{ block.settings.text_color }};"
+                            {{ block.shopify_attributes }}
+                    >
+						{{ block.settings.title }}
+					</a>
+				{%- when 'stars' -%}
+					<div class="stars" {{ block.shopify_attributes }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="310" height="47" viewBox="0 0 310 47" fill="none">
+                        <path d="M24.5 0L30.2251 17.6201L48.7519 17.6201L33.7634 28.5099L39.4885 46.1299L24.5 35.2401L9.51147 46.1299L15.2366 28.5099L0.248047 17.6201L18.7749 17.6201L24.5 0Z" fill="#2A2A2A"/>
+                        <path d="M89.7803 0L95.5054 17.6201L114.032 17.6201L99.0437 28.5099L104.769 46.1299L89.7803 35.2401L74.7917 46.1299L80.5169 28.5099L65.5283 17.6201L84.0552 17.6201L89.7803 0Z" fill="#2A2A2A"/>
+                        <path d="M155.053 0L160.778 17.6201L179.305 17.6201L164.316 28.5099L170.041 46.1299L155.053 35.2401L140.064 46.1299L145.789 28.5099L130.801 17.6201L149.328 17.6201L155.053 0Z" fill="#2A2A2A"/>
+                        <path d="M220.333 0L226.058 17.6201L244.585 17.6201L229.597 28.5099L235.322 46.1299L220.333 35.2401L205.345 46.1299L211.07 28.5099L196.081 17.6201L214.608 17.6201L220.333 0Z" fill="#2A2A2A"/>
+                        <path d="M285.621 0L291.346 17.6201L309.873 17.6201L294.885 28.5099L300.61 46.1299L285.621 35.2401L270.633 46.1299L276.358 28.5099L261.369 17.6201L279.896 17.6201L285.621 0Z" fill="#2A2A2A"/>
+                      </svg>
+                    </div>
+			{% endcase %}
+		{% endfor %}
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "Small Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section styles"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_mob",
+      "label": "Mobile Background image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "header",
+      "content": "Section Height"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Section Desktop Height",
+      "unit": "px",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Section Mobile Height",
+      "unit": "px",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "default": 240
+    },
+    {
+      "type": "header",
+      "content": "Section Margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Section top margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Section bottom margin",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stars",
+      "name": "Stars",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Button Title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Button Url"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Small Banner",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+<div class="grid-icons" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="grid-icons__wrapper">
+      {% for block in section.blocks %}
+        <div class="grid-icons__item">
+          {% if block.settings.icon != blank %}
+            <div class="grid-icons__item-img">
+              <img
+                src="{{ block.settings.icon | img_url: 'master' }}"
+                alt="{{ block.settings.icon.alt }}"
+                loading="lazy">
+            </div>
+          {% endif %}
+          {% if block.settings.title != blank %}
+            <div class="grid-icons__item-title">{{ block.settings.title }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Grid icons",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "icon",
+        "name": "Icon",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Grid icons"
+      }
+    ]
+  }
+{% endschema %}
