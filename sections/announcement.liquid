@@ -2,6 +2,7 @@
     {% if section.settings.message_show %}
     .announcement {
         background-color: {{ section.settings.message_color_bg }};
+        margin: {{section.settings.message_margin}};
     }
     .announcement__text,
     .announcement__text.rte a {
@@ -11,6 +12,17 @@
         border-color: {{ section.settings.message_color_text }};
     }
     {% endif %}
+    @media (max-width: 347px) {
+        .announcement {
+            margin: 50px 0 -50px 0;
+        }
+    }
+    @media (min-width: 348px) and (max-width: 767px) {
+    .announcement {
+        margin: 32px 0 -34px 0;
+    }
+}
+}
 </style> 
 
 {% if section.settings.message_show %}
@@ -60,6 +72,11 @@
             "id": "message_color_bg",
             "label": "Background color",
             "default": "#222"
+        },
+        {
+            "type": "text",
+            "id": "message_margin",
+            "label": "Margin"
         },
         {
             "type": "color",
